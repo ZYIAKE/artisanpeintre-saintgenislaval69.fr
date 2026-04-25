@@ -172,6 +172,19 @@ section{padding:4rem 0}
 .zone-city-link:hover{background:#fff;border-color:var(--amber);transform:translateY(-2px);box-shadow:0 6px 16px rgba(212,144,69,.18)}
 .zone-city-name{font-weight:700;font-size:.92rem;color:var(--brown);line-height:1.2}
 .zone-city-meta{font-size:.72rem;color:var(--text-mid);font-weight:500}
+/* ── Force colors sur les liens villes (anti :visited browser override) ── */
+.zone-city-link,
+.zone-city-link:link,
+.zone-city-link:visited,
+.zone-city-link:hover,
+.zone-city-link:active,
+.zone-city-link:focus{color:var(--brown)!important;text-decoration:none!important}
+.zone-city-link .zone-city-name,
+.zone-city-link:visited .zone-city-name,
+.zone-city-link:hover .zone-city-name{color:var(--brown)!important}
+.zone-city-link .zone-city-meta,
+.zone-city-link:visited .zone-city-meta,
+.zone-city-link:hover .zone-city-meta{color:var(--text-mid)!important}
 .zone-cta{display:inline-flex;align-items:center;gap:.55rem;margin-top:.5rem}
 @media(max-width:900px){.zone-cities-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.zone-cities-grid{grid-template-columns:1fr}}
