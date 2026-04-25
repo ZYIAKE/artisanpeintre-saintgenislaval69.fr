@@ -1,25 +1,15 @@
-# URLs propres villes
-/peintre-saint-genis-laval  /villes/saint-genis-laval.html  200
-/peintre-oullins  /villes/oullins.html  200
-/peintre-pierre-benite  /villes/pierre-benite.html  200
-/peintre-brignais  /villes/brignais.html  200
-/peintre-vourles  /villes/vourles.html  200
-/peintre-charly  /villes/charly.html  200
-/peintre-chaponost  /villes/chaponost.html  200
-/peintre-francheville  /villes/francheville.html  200
-/peintre-venissieux  /villes/venissieux.html  200
-/peintre-lyon  /villes/lyon.html  200
+# URLs propres villes (slug -> fichier dans /villes/)
+/peintre-saint-genis-laval  /villes/saint-genis-laval  200
+/peintre-oullins  /villes/oullins  200
+/peintre-pierre-benite  /villes/pierre-benite  200
+/peintre-brignais  /villes/brignais  200
+/peintre-vourles  /villes/vourles  200
+/peintre-charly  /villes/charly  200
+/peintre-chaponost  /villes/chaponost  200
+/peintre-francheville  /villes/francheville  200
+/peintre-venissieux  /villes/venissieux  200
+/peintre-lyon  /villes/lyon  200
 
-# Pages aliases
-/apropos  /about.html  200
-/contact  /contact.html  200
-/zone-intervention  /zone.html  200
-/prestations  /prestations.html  200
-/realisations  /realisations.html  200
-/avis  /avis.html  200
-/mentions-legales  /mentions-legales.html  200
-/politique-confidentialite  /politique-confidentialite.html  200
-/plan-du-site  /plan-du-site.html  200
-
-# Trailing slash
-/index.html  /  301
+# Aliases pour pages dont le slug diffère du nom de fichier
+/apropos  /about  200
+/zone-intervention  /zone  200
