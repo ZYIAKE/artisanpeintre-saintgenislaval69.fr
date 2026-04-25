@@ -1,0 +1,12 @@
+# ═══════════════════════════════════════════════════════════════
+# _redirects — Cloudflare Pages redirects
+# TD PEINTURE RENOVATION — artisanpeintre-saintgenislaval69.fr
+# ═══════════════════════════════════════════════════════════════
+
+# Redirections utiles
+/peinture-interieure      /services/peinture-interieure  301
+/peinture-exterieure      /services/peinture-exterieure  301
+/ravalement-facade        /services/ravalement-facade    301
+/enduit-decoratif         /services/enduit-decoratif     301
+/pose-papier-peint        /services/pose-papier-peint    301
+/renovation-supports      /services/renovation-supports  301

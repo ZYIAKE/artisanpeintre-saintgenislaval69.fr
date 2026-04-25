@@ -1,0 +1,16 @@
+/* ═══════════════════════════════════════════════════════════════
+   PALETTE-PEINTRE.CSS — Couleurs métier Artisan Peintre
+   ═══════════════════════════════════════════════════════════════
+   À charger APRÈS tokens.css pour override les 3 couleurs primaires.
+   Source : §4 GUIDE_SITE_PARTENAIRE_v2.md
+
+   Palette peintre : bleu ciel (sky blue)
+   → Évoque : ciel dégagé, clarté, fraîcheur d'un mur repeint,
+     professionnalisme, propreté, précision.
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  --color-primary:       #0EA5E9;  /* Sky blue — CTAs, boutons, liens actifs */
+  --color-primary-dark:  #075985;  /* Deep sky blue — H1, H2, titres, footer */
+  --color-primary-light: #E0F2FE;  /* Très clair — badges, fonds doux, hover */
+}
