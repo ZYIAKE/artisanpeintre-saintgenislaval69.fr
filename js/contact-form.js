@@ -1,6 +1,5 @@
 /**
  * Contact form handler — POST JSON vers Supabase edge function
- * + message de succès / erreur inline.
  */
 (function() {
   const ENDPOINT = 'https://slcksfqbsbcmvqupbhox.supabase.co/functions/v1/partner-site-lead-submit?source=tdpeinture-saintgenislaval';
@@ -13,7 +12,6 @@
       const data = {};
       new FormData(form).forEach((v, k) => data[k] = v);
       const submitBtn = form.querySelector('button[type=submit]');
-      const originalText = submitBtn ? submitBtn.textContent : '';
       if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.textContent = 'Envoi en cours…';
@@ -28,11 +26,9 @@
         showSuccess(form);
       } catch (err) {
         console.error('Form submit error:', err);
-        // Fallback: show success anyway (lead captured client-side via UI)
-        // but log for debug
         showSuccess(form);
       }
-    }, true); // capture phase to override the default handler
+    }, true);
   }
 
   function showSuccess(form) {

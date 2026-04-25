@@ -1,11 +1,13 @@
 /**
  * Google Reviews Widget — TD PEINTURE RENOVATION
  * Fetch + render avis Google via edge function Supabase.
- * Aucune note hardcodée — tout vient de l'API GBP en temps réel.
+ * NB: l'edge function attend ?domain= (pas ?place_id=).
+ *     Le lookup domain → client_id → place_id est fait côté serveur.
  */
 (function() {
   const PLACE_ID = 'ChIJc8u4JvKCDogRurf-P2grNjE';
-  const ENDPOINT = 'https://slcksfqbsbcmvqupbhox.supabase.co/functions/v1/site-google-reviews?place_id=' + PLACE_ID;
+  const DOMAIN = 'artisanpeintre-saintgenislaval69.fr';
+  const ENDPOINT = 'https://slcksfqbsbcmvqupbhox.supabase.co/functions/v1/site-google-reviews?domain=' + DOMAIN;
   const WRITE_REVIEW_URL = 'https://search.google.com/local/writereview?placeid=' + PLACE_ID;
 
   function relativeDate(timestamp) {
@@ -79,7 +81,6 @@
     }).join('');
     container.innerHTML = html;
 
-    // Init carousel nav
     const slides = container.querySelectorAll('.avis-slide');
     let cur = 0;
     function showSlide(n) {
@@ -132,15 +133,10 @@
         return r.json();
       })
       .then(data => {
-        // data structure: { rating, user_ratings_total, reviews: [...] } or similar
         const reviews = data.reviews || data.result?.reviews || [];
-        // Summary on index page
         renderSummary(data, document.getElementById('reviews-rating'), document.getElementById('reviews-count'));
-        // Summary on avis page
         renderSummary(data, document.getElementById('reviews-rating-full'), document.getElementById('reviews-count-full'));
-        // Carousel on index
         renderCarousel(reviews, document.getElementById('reviews-carousel'));
-        // Full list on /avis
         renderFullList(reviews, document.getElementById('reviews-list-full'));
       })
       .catch(err => {
@@ -150,9 +146,9 @@
         if (ratingEl) ratingEl.textContent = '—';
         if (countEl) countEl.textContent = 'Avis disponibles sur Google';
         const carousel = document.getElementById('reviews-carousel');
-        if (carousel) carousel.innerHTML = '<div style="text-align:center;opacity:.7;"><a href="https://search.google.com/local/writereview?placeid=' + PLACE_ID + '" target="_blank" rel="noopener" style="color:#F59E0B;">Voir les avis sur Google</a></div>';
+        if (carousel) carousel.innerHTML = '<div style="text-align:center;opacity:.7;"><a href="' + WRITE_REVIEW_URL + '" target="_blank" rel="noopener" style="color:#F59E0B;">Voir les avis sur Google</a></div>';
         const list = document.getElementById('reviews-list-full');
-        if (list) list.innerHTML = '<div style="text-align:center;opacity:.7;"><a href="https://search.google.com/local/writereview?placeid=' + PLACE_ID + '" target="_blank" rel="noopener" style="color:#F59E0B;">Voir les avis sur Google</a></div>';
+        if (list) list.innerHTML = '<div style="text-align:center;opacity:.7;"><a href="' + WRITE_REVIEW_URL + '" target="_blank" rel="noopener" style="color:#F59E0B;">Voir les avis sur Google</a></div>';
       });
   }
 
