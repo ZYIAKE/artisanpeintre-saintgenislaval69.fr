@@ -1,34 +1,251 @@
 <!DOCTYPE html>
+<!--
+  ═══════════════════════════════════════════════════════════════════
+  PAGE — /plan-du-site (sitemap HTML human-readable)
+  ═══════════════════════════════════════════════════════════════════
+  Plan du site lisible pour utilisateurs et moteurs.
+  Complément du sitemap.xml (qui lui est machine-readable).
+
+  Le contenu est généré dynamiquement par l'agent depuis la liste
+  des pages effectivement créées.
+  ═══════════════════════════════════════════════════════════════════
+-->
 <html lang="fr">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Plan du site TD PEINTURE RENOVATION — toutes nos pages structurées par catégorie.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Plan du site TD PEINTURE RENOVATION — toutes nos pages structurées par catégorie pour une navigation simple.">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://www.artisanpeintre-saintgenislaval69.fr/plan-du-site">
+  <link rel="canonical" href="https://artisanpeintre-saintgenislaval69.fr/plan-du-site">
+
   <title>Plan du site | TD PEINTURE RENOVATION</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/tokens.css"><link rel="stylesheet" href="/css/palette-peintre.css"><link rel="stylesheet" href="/css/base.css"><link rel="stylesheet" href="/css/components.css">
+
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/palette-peintre.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+
   <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
-  <style>.sitemap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--space-xl)}.sitemap-section{padding:var(--space-lg);background:white;border:1px solid var(--color-border);border-radius:var(--radius-lg)}.sitemap-section h2{font-size:var(--font-size-h4);margin-bottom:var(--space-md);color:var(--color-primary-dark);padding-bottom:var(--space-sm);border-bottom:2px solid var(--color-primary)}.sitemap-list{display:flex;flex-direction:column;gap:var(--space-xs)}.sitemap-list li{padding:6px 0}.sitemap-list a{color:var(--color-text-body);font-size:var(--font-size-small);transition:color var(--transition-fast)}.sitemap-list a:hover{color:var(--color-primary)}.sitemap-list a::before{content:'→ ';color:var(--color-primary);font-weight:700}</style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://artisanpeintre-saintgenislaval69.fr/" },
+      { "@type": "ListItem", "position": 2, "name": "Plan du site", "item": "https://artisanpeintre-saintgenislaval69.fr/plan-du-site" }
+    ]
+  }
+  </script>
+
+  <style>
+    .sitemap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-xl);
+    }
+    .sitemap-section {
+      padding: var(--space-lg);
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+    }
+    .sitemap-section h2 {
+      font-size: var(--font-size-h4);
+      margin-bottom: var(--space-md);
+      color: var(--color-primary-dark);
+      padding-bottom: var(--space-sm);
+      border-bottom: 2px solid var(--color-primary);
+    }
+    .sitemap-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .sitemap-list li {
+      padding: 6px 0;
+    }
+    .sitemap-list a {
+      color: var(--color-text-body);
+      font-size: var(--font-size-small);
+      transition: color var(--transition-fast);
+    }
+    .sitemap-list a:hover {
+      color: var(--color-primary);
+    }
+    .sitemap-list a::before {
+      content: '→ ';
+      color: var(--color-primary);
+      font-weight: var(--font-weight-bold);
+    }
+  </style>
 </head>
 <body>
+
 <a href="#main" class="skip-to-main">Aller au contenu principal</a>
-<header class="header"><div class="container header-inner"><a href="/" class="logo"><span class="logo-letter" aria-hidden="true">T</span><span>TD Peinture</span></a><nav class="nav"><ul class="nav-list" id="navList"><li><a href="/#services" class="nav-link">Services</a></li><li><a href="/contact" class="nav-link">Contact</a></li><li><a href="/devis" class="btn btn-primary btn-sm">Devis gratuit</a></li></ul><button class="nav-toggle" id="navToggle" aria-label="Menu" aria-controls="navList" aria-expanded="false"><span></span><span></span><span></span></button></nav></div></header>
-<main id="main">
-<div class="container"><nav class="breadcrumb"><a href="/">Accueil</a><span class="breadcrumb-separator">/</span><span class="current">Plan du site</span></nav></div>
-<section style="padding-top:var(--space-lg)"><div class="container">
-  <div class="section-title"><h1>Plan du site</h1><p>Toutes les pages de artisanpeintre-saintgenislaval69.fr structurées par thématique.</p></div>
-  <div class="sitemap-grid">
-    <div class="sitemap-section"><h2>Pages principales</h2><ul class="sitemap-list"><li><a href="/">Accueil</a></li><li><a href="/a-propos">À propos</a></li><li><a href="/realisations">Nos réalisations</a></li><li><a href="/avis">Avis clients</a></li><li><a href="/faq">FAQ</a></li><li><a href="/contact">Contact</a></li><li><a href="/devis">Demander un devis</a></li><li><a href="/zone-intervention">Zone d'intervention</a></li></ul></div>
-    <div class="sitemap-section"><h2>Nos services</h2><ul class="sitemap-list"><li><a href="/services/peinture-interieure">Peinture intérieure</a></li><li><a href="/services/peinture-exterieure">Peinture extérieure</a></li><li><a href="/services/ravalement-facade">Ravalement de façade</a></li><li><a href="/services/enduit-decoratif">Enduit décoratif</a></li><li><a href="/services/pose-papier-peint">Pose de papier peint</a></li><li><a href="/services/renovation-supports">Rénovation de supports</a></li></ul></div>
-    <div class="sitemap-section"><h2>Villes desservies</h2><ul class="sitemap-list"><li><a href="/peintre-saint-genis-laval">Saint-Genis-Laval</a></li><li><a href="/peintre-lyon">Lyon</a></li><li><a href="/peintre-oullins">Oullins</a></li><li><a href="/peintre-pierre-benite">Pierre-Bénite</a></li><li><a href="/peintre-francheville">Francheville</a></li><li><a href="/peintre-chaponost">Chaponost</a></li><li><a href="/peintre-brignais">Brignais</a></li><li><a href="/peintre-irigny">Irigny</a></li><li><a href="/peintre-sainte-foy-les-lyon">Sainte-Foy-lès-Lyon</a></li><li><a href="/peintre-la-mulatiere">La Mulatière</a></li><li><a href="/peintre-vourles">Vourles</a></li><li><a href="/peintre-charly">Charly</a></li></ul></div>
-    <div class="sitemap-section"><h2>Réalisations récentes</h2><ul class="sitemap-list"><li><a href="/realisations/peinture-salon-saint-genis-laval-mars-2026">Peinture salon &mdash; Saint-Genis-Laval</a></li><li><a href="/realisations/ravalement-facade-oullins-fevrier-2026">Ravalement façade &mdash; Oullins</a></li><li><a href="/realisations/renovation-appartement-lyon-7-janvier-2026">Rénovation appartement &mdash; Lyon 7e</a></li><li><a href="/realisations/peinture-exterieure-brignais-novembre-2025">Peinture extérieure &mdash; Brignais</a></li><li><a href="/realisations/enduit-decoratif-francheville-octobre-2025">Enduit décoratif &mdash; Francheville</a></li><li><a href="/realisations/remise-en-etat-irigny-septembre-2025">Remise en état &mdash; Irigny</a></li></ul></div>
-    <div class="sitemap-section"><h2>Informations légales</h2><ul class="sitemap-list"><li><a href="/mentions-legales">Mentions légales</a></li><li><a href="/cgv">Conditions Générales de Vente</a></li><li><a href="/confidentialite">Politique de confidentialité</a></li></ul></div>
+
+<header class="header">
+  <div class="container header-inner">
+    <a href="/" class="logo" aria-label="Accueil TD PEINTURE RENOVATION">
+      <span class="logo-letter" aria-hidden="true">T</span>
+      <span>TD Peinture</span>
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      <ul class="nav-list" id="navList">
+        <li><a href="/#services" class="nav-link">Services</a></li>
+        <li><a href="/realisations" class="nav-link">Réalisations</a></li>
+        <li><a href="/avis" class="nav-link">Avis</a></li>
+        <li><a href="/a-propos" class="nav-link">À propos</a></li>
+        <li><a href="/faq" class="nav-link">FAQ</a></li>
+        <li><a href="/contact" class="nav-link">Contact</a></li>
+        <li><a href="/devis" class="btn btn-primary btn-sm">Devis gratuit</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-controls="navList" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
   </div>
-  <div class="text-center mt-xl" style="padding:var(--space-lg);background:var(--color-bg-secondary);border-radius:var(--radius-lg)"><p style="font-size:var(--font-size-small);color:var(--color-text-muted)">Sitemap XML pour les moteurs de recherche : <a href="/sitemap.xml" style="color:var(--color-primary)">sitemap.xml</a></p></div>
-</div></section>
+</header>
+
+<main id="main">
+
+<div class="container">
+  <nav class="breadcrumb" aria-label="Fil d'Ariane">
+    <a href="/">Accueil</a>
+    <span class="breadcrumb-separator">/</span>
+    <span class="current">Plan du site</span>
+  </nav>
+</div>
+
+<section style="padding-top: var(--space-lg);">
+  <div class="container">
+    <div class="section-title">
+      <h1>Plan du site</h1>
+      <p>Toutes les pages de artisanpeintre-saintgenislaval69.fr structurées par thématique.</p>
+    </div>
+
+    <div class="sitemap-grid">
+
+      <div class="sitemap-section">
+        <h2>Pages principales</h2>
+        <ul class="sitemap-list">
+          <li><a href="/">Accueil</a></li>
+          <li><a href="/a-propos">À propos</a></li>
+          <li><a href="/realisations">Nos réalisations</a></li>
+          <li><a href="/avis">Avis clients</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/devis">Demander un devis</a></li>
+          <li><a href="/zone-intervention">Zone d'intervention</a></li>
+        </ul>
+      </div>
+
+      <div class="sitemap-section">
+        <h2>Nos services</h2>
+        <ul class="sitemap-list">
+          <li><a href="/services/peinture-interieure">Peinture intérieure</a></li><li><a href="/services/peinture-exterieure">Peinture extérieure</a></li><li><a href="/services/ravalement-facade">Ravalement de façade</a></li><li><a href="/services/enduit-decoratif">Enduit décoratif</a></li><li><a href="/services/pose-papier-peint">Pose de papier peint</a></li><li><a href="/services/renovation-supports">Rénovation des supports</a></li>
+          <!-- ex:
+          <li><a href="/elagage">Élagage d'arbre</a></li>
+          <li><a href="/abattage">Abattage d'arbre</a></li>
+          <li><a href="/dessouchage">Dessouchage</a></li>
+          -->
+        </ul>
+      </div>
+
+      <div class="sitemap-section">
+        <h2>Villes desservies</h2>
+        <ul class="sitemap-list">
+          <li><a href="/peintre-saint-genis-laval">Saint-Genis-Laval</a></li><li><a href="/peintre-oullins">Oullins</a></li><li><a href="/peintre-pierre-benite">Pierre-Bénite</a></li><li><a href="/peintre-la-mulatiere">La Mulatière</a></li><li><a href="/peintre-francheville">Francheville</a></li><li><a href="/peintre-sainte-foy-les-lyon">Sainte-Foy-lès-Lyon</a></li><li><a href="/peintre-brignais">Brignais</a></li><li><a href="/peintre-charly">Charly</a></li><li><a href="/peintre-vourles">Vourles</a></li><li><a href="/peintre-irigny">Irigny</a></li><li><a href="/peintre-chaponost">Chaponost</a></li><li><a href="/peintre-lyon">Lyon</a></li><li><a href="/peintre-tassin-la-demi-lune">Tassin-la-Demi-Lune</a></li><li><a href="/peintre-caluire-et-cuire">Caluire-et-Cuire</a></li><li><a href="/peintre-feyzin">Feyzin</a></li><li><a href="/peintre-venissieux">Vénissieux</a></li><li><a href="/peintre-bron">Bron</a></li><li><a href="/peintre-villeurbanne">Villeurbanne</a></li><li><a href="/peintre-saint-priest">Saint-Priest</a></li><li><a href="/peintre-corbas">Corbas</a></li><li><a href="/peintre-mions">Mions</a></li><li><a href="/peintre-givors">Givors</a></li><li><a href="/peintre-mornant">Mornant</a></li><li><a href="/peintre-vaulx-en-velin">Vaulx-en-Velin</a></li><li><a href="/peintre-decines-charpieu">Décines-Charpieu</a></li>
+          <!-- ex:
+          <li><a href="/elagueur-toulouse">Toulouse</a></li>
+          <li><a href="/elagueur-blagnac">Blagnac</a></li>
+          <li><a href="/elagueur-colomiers">Colomiers</a></li>
+          -->
+        </ul>
+      </div>
+
+      <div class="sitemap-section">
+        <h2>Chantiers récents</h2>
+        <ul class="sitemap-list">
+          <li><a href="/realisations/peinture-salon-saint-genis-laval-mars-2026">Peinture complète d'un salon à Saint-Genis-Laval — Saint-Genis-Laval, Mars 2026</a></li><li><a href="/realisations/ravalement-facade-oullins-fevrier-2026">Ravalement de façade d'une maison à Oullins — Oullins, Février 2026</a></li><li><a href="/realisations/enduit-decoratif-francheville-octobre-2025">Enduit décoratif béton ciré à Francheville — Francheville, Octobre 2025</a></li><li><a href="/realisations/peinture-exterieure-brignais-novembre-2025">Peinture des volets et portails à Brignais — Brignais, Novembre 2025</a></li><li><a href="/realisations/remise-en-etat-irigny-septembre-2025">Remise en état complète d'un appartement à Irigny — Irigny, Septembre 2025</a></li><li><a href="/realisations/renovation-appartement-lyon-7-janvier-2026">Rénovation complète d'un appartement à Lyon 7 — Lyon, Janvier 2026</a></li>
+          <!-- ex:
+          <li><a href="/realisations/elagage-chene-blagnac-2026-04">Élagage chêne à Blagnac</a></li>
+          <li><a href="/realisations/abattage-peuplier-toulouse-2026-03">Abattage peuplier à Toulouse</a></li>
+          -->
+        </ul>
+      </div>
+
+      <div class="sitemap-section">
+        <h2>Informations légales</h2>
+        <ul class="sitemap-list">
+          <li><a href="/mentions-legales">Mentions légales</a></li>
+          <li><a href="/cgv">Conditions Générales de Vente</a></li>
+          <li><a href="/confidentialite">Politique de confidentialité</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-xl" style="padding: var(--space-lg); background: var(--color-bg-secondary); border-radius: var(--radius-lg);">
+      <p style="font-size: var(--font-size-small); color: var(--color-text-muted);">
+        Ce plan est généré automatiquement. Pour le sitemap XML destiné aux moteurs de recherche,
+        voir <a href="/sitemap.xml" style="color: var(--color-primary);">sitemap.xml</a>.
+      </p>
+    </div>
+  </div>
+</section>
+
 </main>
-<footer class="footer"><div class="container"><div class="footer-bottom"><div>&copy; 2026 TD PEINTURE RENOVATION</div><div><a href="/mentions-legales">Mentions légales</a> &middot; <a href="/cgv">CGV</a> &middot; <a href="/confidentialite">Confidentialité</a></div></div></div></footer>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo mb-md">
+          <span class="logo-letter" aria-hidden="true">T</span>
+          <span>TD Peinture</span>
+        </div>
+        <p style="font-size: 14px;">Artisan peintre à Saint-Genis-Laval — Peinture intérieure, extérieure, ravalement, enduit décoratif. Devis gratuit sous 48h.</p>
+      </div>
+      <div>
+        <h3 class="footer-title">Services</h3>
+        <ul class="footer-list"><li><a href="/services/peinture-interieure">Peinture intérieure</a></li><li><a href="/services/peinture-exterieure">Peinture extérieure</a></li><li><a href="/services/ravalement-facade">Ravalement de façade</a></li><li><a href="/services/enduit-decoratif">Enduit décoratif</a></li><li><a href="/services/pose-papier-peint">Pose de papier peint</a></li><li><a href="/services/renovation-supports">Rénovation des supports</a></li></ul>
+      </div>
+      <div>
+        <h3 class="footer-title">Entreprise</h3>
+        <ul class="footer-list">
+          <li><a href="/a-propos">À propos</a></li>
+          <li><a href="/realisations">Nos réalisations</a></li>
+          <li><a href="/avis">Avis clients</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/zone-intervention">Zone d'intervention</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-title">Contact</h3>
+        <ul class="footer-list">
+          <li><a href="tel:+33481918432">📞 04 81 91 84 32</a></li>
+          <li><a href="mailto:contact@artisanpeintre-saintgenislaval69.fr">✉️ contact@artisanpeintre-saintgenislaval69.fr</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 TD PEINTURE RENOVATION · Tous droits réservés</div>
+      <div>
+        <a href="/mentions-legales">Mentions légales</a> ·
+        <a href="/cgv">CGV</a> ·
+        <a href="/confidentialite">Confidentialité</a> ·
+        <a href="/plan-du-site">Plan du site</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
 <script src="/js/main.js" defer></script>
-</body></html>
+</body>
+</html>

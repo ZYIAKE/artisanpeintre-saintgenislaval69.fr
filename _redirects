@@ -1,12 +1,39 @@
 # ═══════════════════════════════════════════════════════════════
-# _redirects — Cloudflare Pages redirects
+# _redirects — Cloudflare Pages
 # TD PEINTURE RENOVATION — artisanpeintre-saintgenislaval69.fr
 # ═══════════════════════════════════════════════════════════════
 
-# Redirections utiles
-/peinture-interieure      /services/peinture-interieure  301
-/peinture-exterieure      /services/peinture-exterieure  301
-/ravalement-facade        /services/ravalement-facade    301
-/enduit-decoratif         /services/enduit-decoratif     301
-/pose-papier-peint        /services/pose-papier-peint    301
-/renovation-supports      /services/renovation-supports  301
+# Service shortcuts
+/peinture-interieure      /services/peinture-interieure    301
+/peinture-exterieure      /services/peinture-exterieure    301
+/ravalement-facade      /services/ravalement-facade    301
+/enduit-decoratif      /services/enduit-decoratif    301
+/pose-papier-peint      /services/pose-papier-peint    301
+/renovation-supports      /services/renovation-supports    301
+
+# Ville URLs (short pattern → file)
+/peintre-saint-genis-laval    /villes/saint-genis-laval.html    200
+/peintre-oullins    /villes/oullins.html    200
+/peintre-pierre-benite    /villes/pierre-benite.html    200
+/peintre-la-mulatiere    /villes/la-mulatiere.html    200
+/peintre-francheville    /villes/francheville.html    200
+/peintre-sainte-foy-les-lyon    /villes/sainte-foy-les-lyon.html    200
+/peintre-brignais    /villes/brignais.html    200
+/peintre-charly    /villes/charly.html    200
+/peintre-vourles    /villes/vourles.html    200
+/peintre-irigny    /villes/irigny.html    200
+/peintre-chaponost    /villes/chaponost.html    200
+/peintre-lyon    /villes/lyon.html    200
+/peintre-tassin-la-demi-lune    /villes/tassin-la-demi-lune.html    200
+/peintre-caluire-et-cuire    /villes/caluire-et-cuire.html    200
+/peintre-feyzin    /villes/feyzin.html    200
+/peintre-venissieux    /villes/venissieux.html    200
+/peintre-bron    /villes/bron.html    200
+/peintre-villeurbanne    /villes/villeurbanne.html    200
+/peintre-saint-priest    /villes/saint-priest.html    200
+/peintre-corbas    /villes/corbas.html    200
+/peintre-mions    /villes/mions.html    200
+/peintre-givors    /villes/givors.html    200
+/peintre-mornant    /villes/mornant.html    200
+/peintre-vaulx-en-velin    /villes/vaulx-en-velin.html    200
+/peintre-decines-charpieu    /villes/decines-charpieu.html    200

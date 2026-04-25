@@ -1,38 +1,533 @@
 <!DOCTYPE html>
+<!--
+  ═══════════════════════════════════════════════════════════════════
+  TEMPLATE — Page ville (cœur du SEO local atlinker)
+  ═══════════════════════════════════════════════════════════════════
+  Clonée par atlinker-site-builder pour chaque ville couverte par
+  le partenaire (10-12 pages typiquement).
+
+  URL pattern : /peintre-brignais
+  Exemples :
+    /elagueur-toulouse
+    /elagueur-blagnac
+    /plombier-villeurbanne
+
+  Principe : UNE page par ville qui présente TOUS les services du
+  partenaire dans un contexte localisé (quartiers, distance, chantiers
+  récents dans cette ville, témoignages locaux, villes voisines).
+
+  Différence clé avec /{service} :
+  - Page service : centrée sur un service, pas de localisation forte
+  - Page ville : centrée sur une ville, présente tous les services
+
+  PLACEHOLDERS spécifiques (en plus des globaux) :
+  ─────────────────────────────────────────────────
+  Peintre à Brignais (69530)              ex: "Élagueur à Blagnac (31700)"
+  Peintre professionnel à Brignais (69530) — TD PEINTURE RENOVATION, 8 ans d'expérience, devis gratuit sous 48h, intervention rapide.       160 chars max, inclut métier + ville
+  Brignais            nom complet, ex: "Blagnac"
+  brignais            slug, ex: "blagnac"
+  69530     CP, ex: "31700"
+  TD PEINTURE RENOVATION intervient à Brignais (69530) pour tous travaux de peinture intérieure, extérieure, ravalement de façade et enduit décoratif. Notre atelier basé à Saint-Genis-Laval nous permet d'être chez vous en moins de 27 minutes.           60-80 mots hero (accroche localisée)
+  Située dans le département du Rhône (69), Brignais compte de nombreux logements pavillonnaires, appartements en copropriété et résidences de standing. Les bâtiments anciens demandent souvent une préparation rigoureuse des supports avant peinture, tandis que les constructions plus récentes nécessitent des finitions impeccables.       120-180 mots sur la ville (quartiers, profil)
+  Nous intervenons sur l'ensemble des secteurs résidentiels et professionnels à Brignais, des intérieurs particuliers aux locaux commerciaux. Notre expertise couvre toutes les techniques modernes (peinture intérieure mate, satin, velours) ainsi que les finitions traditionnelles (enduits décoratifs, béton ciré).     80-120 mots continuation (spécificités métier)
+  {{VILLE_NEIGHBORHOOD_N}}  5-10 quartiers nominatifs
+  proche du centre de Brignais, autour des secteurs résidentiels et commerciaux       2-4 lieux repères ("proche du CHU", etc.)
+  6     distance siège → ville
+  27 min ex: "25 min depuis notre siège"
+  19  nombre de chantiers dans cette ville
+  /img/hero.jpg         image hero de la ville (générée par Imagen)
+  {{VILLE_PROJECT_N_*}}     3 derniers chantiers dans cette ville
+  <a href="/peintre-sainte-foy-les-lyon">Peintre à Sainte-Foy-lès-Lyon</a>
+<a href="/peintre-la-mulatiere">Peintre à La Mulatière</a>
+<a href="/peintre-francheville">Peintre à Francheville</a>
+<a href="/peintre-charly">Peintre à Charly</a>
+<a href="/peintre-pierre-benite">Peintre à Pierre-Bénite</a>
+<a href="/peintre-vourles">Peintre à Vourles</a>
+<a href="/peintre-irigny">Peintre à Irigny</a>
+<a href="/peintre-chaponost">Peintre à Chaponost</a>   HTML des liens vers villes voisines
+  {{SERVICE_N_*}}           6 services du partenaire (titre, slug, desc, img)
+
+  Schema.org : LocalBusiness avec areaServed = la ville (signal local fort)
+  ═══════════════════════════════════════════════════════════════════
+-->
 <html lang="fr">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Peintre à Brignais (69530). TD PEINTURE RENOVATION, peinture intérieure et extérieure. 6 km de Saint-Genis-Laval. Devis gratuit sous 48h.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Peintre professionnel à Brignais (69530) — TD PEINTURE RENOVATION, 8 ans d'expérience, devis gratuit sous 48h, intervention rapide.">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://www.artisanpeintre-saintgenislaval69.fr/peintre-brignais">
+  <link rel="canonical" href="https://artisanpeintre-saintgenislaval69.fr/peintre-brignais">
+
   <title>Peintre à Brignais (69530) | TD PEINTURE RENOVATION</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:url" content="https://artisanpeintre-saintgenislaval69.fr/peintre-brignais">
+  <meta property="og:title" content="Peintre à Brignais (69530) | TD PEINTURE RENOVATION">
+  <meta property="og:description" content="Peintre professionnel à Brignais (69530) — TD PEINTURE RENOVATION, 8 ans d'expérience, devis gratuit sous 48h, intervention rapide.">
+  <meta property="og:image" content="/img/hero.jpg">
+  <meta property="og:site_name" content="TD PEINTURE RENOVATION">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Peintre à Brignais (69530)">
+  <meta name="twitter:description" content="Peintre professionnel à Brignais (69530) — TD PEINTURE RENOVATION, 8 ans d'expérience, devis gratuit sous 48h, intervention rapide.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/tokens.css"><link rel="stylesheet" href="/css/palette-peintre.css"><link rel="stylesheet" href="/css/base.css"><link rel="stylesheet" href="/css/components.css">
+
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/palette-peintre.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+
   <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+
+  <!-- Schema.org LocalBusiness avec areaServed = la ville (signal local fort) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "TD PEINTURE RENOVATION — Peintre à Brignais",
+    "description": "Peintre professionnel à Brignais (69530) — TD PEINTURE RENOVATION, 8 ans d'expérience, devis gratuit sous 48h, intervention rapide.",
+    "url": "https://artisanpeintre-saintgenislaval69.fr/peintre-brignais",
+    "telephone": "+33481918432",
+    "email": "contact@artisanpeintre-saintgenislaval69.fr",
+    "image": "/img/hero.jpg",
+    "priceRange": "€€",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Saint-Genis-Laval",
+      "addressLocality": "Saint-Genis-Laval",
+      "postalCode": "69230",
+      "addressCountry": "FR"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Brignais",
+      "containedInPlace": {
+        "@type": "AdministrativeArea",
+        "name": "Rhône"
+      }
+    },
+    "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "18:00"}],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "23",
+      "bestRating": "5"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Services Peintre à Brignais",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": { "@type": "Service", "name": "Peinture intérieure" }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": { "@type": "Service", "name": "Peinture extérieure" }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": { "@type": "Service", "name": "Ravalement de façade" }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": { "@type": "Service", "name": "Enduit décoratif" }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": { "@type": "Service", "name": "Pose de papier peint" }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": { "@type": "Service", "name": "Rénovation des supports" }
+        }
+      ]
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://artisanpeintre-saintgenislaval69.fr/" },
+      { "@type": "ListItem", "position": 2, "name": "Zones d'intervention", "item": "https://artisanpeintre-saintgenislaval69.fr/zone-intervention" },
+      { "@type": "ListItem", "position": 3, "name": "Brignais", "item": "https://artisanpeintre-saintgenislaval69.fr/peintre-brignais" }
+    ]
+  }
+  </script>
 </head>
 <body>
+
 <a href="#main" class="skip-to-main">Aller au contenu principal</a>
-<div class="topbar">⭐ <strong>Noté 4.9/5</strong> &middot; Intervention à Brignais (6 km) &middot; Devis gratuit 48h</div>
-<header class="header"><div class="container header-inner"><a href="/" class="logo"><span class="logo-letter" aria-hidden="true">T</span><span>TD Peinture</span></a><nav class="nav"><ul class="nav-list" id="navList"><li><a href="/#services" class="nav-link">Services</a></li><li><a href="/realisations" class="nav-link">Réalisations</a></li><li><a href="/avis" class="nav-link">Avis</a></li><li><a href="/a-propos" class="nav-link">À propos</a></li><li><a href="/contact" class="nav-link">Contact</a></li><li><a href="/devis" class="btn btn-primary btn-sm">Devis gratuit</a></li></ul><button class="nav-toggle" id="navToggle" aria-label="Menu" aria-controls="navList" aria-expanded="false"><span></span><span></span><span></span></button></nav></div></header>
+
+<div class="topbar">
+  ⭐ <strong>Noté 5.0/5</strong> · Intervention à Brignais (6 km) · Devis gratuit 48h
+</div>
+
+<header class="header">
+  <div class="container header-inner">
+    <a href="/" class="logo" aria-label="Accueil TD PEINTURE RENOVATION">
+      <span class="logo-letter" aria-hidden="true">T</span>
+      <span>TD Peinture</span>
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      <ul class="nav-list" id="navList">
+        <li><a href="/#services" class="nav-link">Services</a></li>
+        <li><a href="/realisations" class="nav-link">Réalisations</a></li>
+        <li><a href="/avis" class="nav-link">Avis</a></li>
+        <li><a href="/a-propos" class="nav-link">À propos</a></li>
+        <li><a href="/faq" class="nav-link">FAQ</a></li>
+        <li><a href="/contact" class="nav-link">Contact</a></li>
+        <li><a href="/devis" class="btn btn-primary btn-sm">Devis gratuit</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-controls="navList" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
 <main id="main">
-<div class="container"><nav class="breadcrumb"><a href="/">Accueil</a><span class="breadcrumb-separator">/</span><a href="/zone-intervention">Zones</a><span class="breadcrumb-separator">/</span><span class="current">Brignais</span></nav></div>
-<section class="hero"><div class="container"><div class="hero-grid"><div class="hero-content">
-  <div class="hero-badges"><span class="badge">📍 Brignais (69530)</span><span class="badge">⭐ 4.9/5</span><span class="badge">🚗 15 min</span></div>
-  <h1 class="hero-h1">Peintre à Brignais (69530)</h1>
-  <p class="hero-subtitle">Commune résidentielle de 12 000 habitants aux lotissements des années 1980-2000, Brignais est bien connue de notre équipe. Nous y intervenons régulièrement pour la peinture de pavillons, remise en état de logements et ravalement de façades. Devis gratuit sous 48h.</p>
-  <div class="hero-cta"><a href="/devis?ville=brignais" class="btn btn-primary btn-lg">Demander un devis gratuit</a><a href="tel:+33214739816" class="btn btn-outline btn-lg">📞 02&nbsp;14&nbsp;73&nbsp;98&nbsp;16</a></div>
-</div><div><img src="/img/hero.jpg" alt="Peintre à Brignais" width="570" height="428" loading="eager" style="width:100%;border-radius:var(--radius-lg);box-shadow:var(--shadow-md)"></div></div></div></section>
-<section><div class="container container--content">
-  <h2 class="mb-lg">Votre peintre à Brignais</h2>
-  <p class="mb-md">Les pavillons de Brignais, construits principalement dans les années 1980-2000 dans des lotissements comme Le Bourg, Les Granges ou Malgrini, ont souvent besoin d'un coup de frais : peinture des volets, rafraîchissement des pièces principales, ou ravalement complet de la façade après 20 ou 30 ans.</p>
-  <p>Tony Dettinger connaît bien ce type de biens et adapte sa méthode : peintures glycéro pour les volets bois, rénovation des supports avant peinture intérieure, ravalement en peinture siloxane pour les façades enduits des années 80.</p>
-</div></section>
-<section class="section-bg-secondary"><div class="container"><div class="section-title"><h2>Quartiers de Brignais où nous intervenons</h2></div><div class="cities-grid"><a href="/devis?ville=brignais">Le Bourg</a><a href="/devis?ville=brignais">Les Granges</a><a href="/devis?ville=brignais">Malgrini</a><a href="/devis?ville=brignais">La Verpière</a><a href="/devis?ville=brignais">Miribel</a></div></div></section>
-<section class="section-bg-secondary"><div class="container"><div class="section-title"><h2>Villes voisines</h2></div><div class="cities-grid"><a href="/peintre-saint-genis-laval">Saint-Genis-Laval</a><a href="/peintre-chaponost">Chaponost</a><a href="/peintre-irigny">Irigny</a><a href="/peintre-vourles">Vourles</a></div></div></section>
-<section><div class="container"><div class="cta-banner"><h2>Un projet peinture à Brignais ?</h2><p>Devis gratuit sous 48h. 6 km de Saint-Genis-Laval, 15 min d'intervention.</p><a href="/devis?ville=brignais" class="btn btn-primary btn-lg">Obtenir mon devis gratuit</a></div></div></section>
+
+<div class="container">
+  <nav class="breadcrumb" aria-label="Fil d'Ariane">
+    <a href="/">Accueil</a>
+    <span class="breadcrumb-separator">/</span>
+    <a href="/zone-intervention">Zones d'intervention</a>
+    <span class="breadcrumb-separator">/</span>
+    <span class="current">Brignais</span>
+  </nav>
+</div>
+
+<!-- Hero localisé -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-badges">
+          <span class="badge">📍 Brignais (69530)</span>
+          <span class="badge">⭐ 5.0/5 (23 avis)</span>
+          <span class="badge">🚗 27 min</span>
+        </div>
+        <h1 class="hero-h1">Peintre à Brignais (69530)</h1>
+        <p class="hero-subtitle">TD PEINTURE RENOVATION intervient à Brignais (69530) pour tous travaux de peinture intérieure, extérieure, ravalement de façade et enduit décoratif. Notre atelier basé à Saint-Genis-Laval nous permet d'être chez vous en moins de 27 minutes.</p>
+        <div class="hero-cta">
+          <a href="/devis?ville=brignais" class="btn btn-primary btn-lg">Demander un devis gratuit</a>
+          <a href="tel:+33481918432" class="btn btn-outline btn-lg">📞 04 81 91 84 32</a>
+        </div>
+      </div>
+      <div>
+        <img src="/img/hero.jpg" alt="Peintre à Brignais" width="570" height="428" loading="eager" fetchpriority="high" style="width:100%; border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     QUICK QUOTE BANNER — form devis horizontal sous le hero
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="quick-quote-banner">
+  <div class="container">
+    <form class="quick-quote-inner" data-form="quick-quote" action="https://slcksfqbsbcmvqupbhox.supabase.co/functions/v1/partner-site-lead-submit" method="POST" novalidate>
+      <input type="hidden" name="_form_type" value="quick_quote">
+      <input type="hidden" name="_client_id" value="2083e3b1-b6f1-49d9-a45b-619054f26429">
+      <input type="hidden" name="_source_page" value="ville-brignais">
+      <input type="hidden" name="ville" value="Brignais">
+
+      <div class="quick-quote-headline">
+        <strong>⚡ Devis gratuit à Brignais</strong>
+        <span>Réponse sous 48h · Intervention 27 min</span>
+      </div>
+
+      <div class="quick-quote-form">
+        <input type="text" name="firstname" placeholder="Prénom *" required autocomplete="given-name" aria-label="Prénom">
+        <input type="tel" name="phone" placeholder="Téléphone *" required autocomplete="tel" inputmode="tel" aria-label="Téléphone">
+        <input type="email" name="email" placeholder="Email *" required autocomplete="email" inputmode="email" aria-label="Email">
+        <select name="service" required aria-label="Service">
+          <option value="">Service souhaité *</option>
+          <option value="peinture-interieure">Peinture intérieure</option>
+          <option value="peinture-exterieure">Peinture extérieure</option>
+          <option value="ravalement-facade">Ravalement de façade</option>
+          <option value="enduit-decoratif">Enduit décoratif</option>
+          <option value="pose-papier-peint">Pose de papier peint</option>
+          <option value="renovation-supports">Rénovation des supports</option>
+          <option value="autre">Autre</option>
+        </select>
+        <button type="submit" class="btn">Obtenir mon devis</button>
+      </div>
+
+      <div style="position: absolute; left: -9999px;" aria-hidden="true">
+        <input type="text" name="website" tabindex="-1" autocomplete="off">
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Stats locaux -->
+<section class="section-bg-accent">
+  <div class="container">
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-value">6 km</div>
+        <div class="stat-label">Distance depuis notre siège</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">27 min</div>
+        <div class="stat-label">Temps de déplacement</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">19+</div>
+        <div class="stat-label">Chantiers réalisés à Brignais</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">8 ans</div>
+        <div class="stat-label">D'expérience peintre</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Présentation localisée -->
+<section>
+  <div class="container container--content">
+    <h2 class="mb-lg">TD PEINTURE RENOVATION, votre peintre à Brignais</h2>
+    <p class="mb-md">Située dans le département du Rhône (69), Brignais compte de nombreux logements pavillonnaires, appartements en copropriété et résidences de standing. Les bâtiments anciens demandent souvent une préparation rigoureuse des supports avant peinture, tandis que les constructions plus récentes nécessitent des finitions impeccables.</p>
+    <p>Nous intervenons sur l'ensemble des secteurs résidentiels et professionnels à Brignais, des intérieurs particuliers aux locaux commerciaux. Notre expertise couvre toutes les techniques modernes (peinture intérieure mate, satin, velours) ainsi que les finitions traditionnelles (enduits décoratifs, béton ciré).</p>
+  </div>
+</section>
+
+<!-- TOUS les services du partenaire (grille 3x2) -->
+<section class="section-bg-secondary">
+  <div class="container">
+    <div class="section-title">
+      <h2>Nos services à Brignais</h2>
+      <p>L'ensemble de nos prestations peintre, disponibles pour tous les habitants et professionnels de Brignais et ses environs.</p>
+    </div>
+
+    <div class="grid grid-3">
+      <a href="/peinture-interieure" class="card" style="text-decoration: none;">
+        <img class="card-image card-image--wide" src="/img/service-peinture-interieure.jpg" alt="Peinture intérieure à Brignais" loading="lazy">
+        <h3 class="card-title">Peinture intérieure</h3>
+        <p class="card-description">Peinture des murs et plafonds, finitions soignées, techniques modernes (mat, satin, velours).</p>
+        <span class="card-link">En savoir plus →</span>
+      </a>
+
+      <a href="/peinture-exterieure" class="card" style="text-decoration: none;">
+        <img class="card-image card-image--wide" src="/img/service-peinture-exterieure.jpg" alt="Peinture extérieure à Brignais" loading="lazy">
+        <h3 class="card-title">Peinture extérieure</h3>
+        <p class="card-description">Peinture des façades, volets, portails, terrasses. Produits résistants intempéries.</p>
+        <span class="card-link">En savoir plus →</span>
+      </a>
+
+      <a href="/ravalement-facade" class="card" style="text-decoration: none;">
+        <img class="card-image card-image--wide" src="/img/service-ravalement-facade.jpg" alt="Ravalement de façade à Brignais" loading="lazy">
+        <h3 class="card-title">Ravalement de façade</h3>
+        <p class="card-description">Nettoyage, traitement, enduit et peinture de façade. Conforme aux exigences municipales.</p>
+        <span class="card-link">En savoir plus →</span>
+      </a>
+
+      <a href="/enduit-decoratif" class="card" style="text-decoration: none;">
+        <img class="card-image card-image--wide" src="/img/service-enduit-decoratif.jpg" alt="Enduit décoratif à Brignais" loading="lazy">
+        <h3 class="card-title">Enduit décoratif</h3>
+        <p class="card-description">Enduits à la chaux, béton ciré, tadelakt, stuc vénitien. Effets décoratifs uniques.</p>
+        <span class="card-link">En savoir plus →</span>
+      </a>
+
+      <a href="/pose-papier-peint" class="card" style="text-decoration: none;">
+        <img class="card-image card-image--wide" src="/img/service-pose-papier-peint.jpg" alt="Pose de papier peint à Brignais" loading="lazy">
+        <h3 class="card-title">Pose de papier peint</h3>
+        <p class="card-description">Pose de papier peint classique, intissé, panoramique. Préparation, raccords, finition.</p>
+        <span class="card-link">En savoir plus →</span>
+      </a>
+
+      <a href="/renovation-supports" class="card" style="text-decoration: none;">
+        <img class="card-image card-image--wide" src="/img/service-renovation-supports.jpg" alt="Rénovation des supports à Brignais" loading="lazy">
+        <h3 class="card-title">Rénovation des supports</h3>
+        <p class="card-description">Préparation, ponçage, rebouchage, traitement humidité, lissage. Indispensable avant peinture.</p>
+        <span class="card-link">En savoir plus →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Carte Google Maps centrée sur la ville -->
+<section>
+  <div class="container">
+    <div class="section-title">
+      <h2>Notre zone d'intervention à Brignais</h2>
+      <p>Centre-ville de Brignais et tous les quartiers — intervention rapide depuis notre siège (27 min).</p>
+    </div>
+    <div style="border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); margin-bottom: var(--space-xl);">
+      <iframe
+        src="https://maps.google.com/maps?q=Brignais+69530+France&t=&z=13&ie=UTF8&iwloc=&output=embed"
+        width="100%"
+        height="400"
+        style="border: 0; display: block;"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen
+        title="Carte de Brignais">
+      </iframe>
+    </div>
+
+    <h3 class="text-center mb-lg">Quartiers de Brignais où nous intervenons</h3>
+    <div class="cities-grid">
+      <a href="/devis?ville=brignais">Centre</a>
+      <a href="/devis?ville=brignais">La Giraudière</a>
+      <a href="/devis?ville=brignais">Le Garon</a>
+      <a href="/devis?ville=brignais">Les Cottages</a>
+      <a href="/devis?ville=brignais">Le Côteau</a>
+      <a href="/devis?ville=brignais">Les Pieds-Humides</a>
+      <a href="/devis?ville=brignais">Échangeur</a>
+      <a href="/devis?ville=brignais">Le Moulin</a>
+    </div>
+    <p class="text-center mt-lg text-muted" style="font-size: 14px;">
+      Repères locaux : proche du centre de Brignais, autour des secteurs résidentiels et commerciaux
+    </p>
+  </div>
+</section>
+
+<!-- Chantiers récents dans la ville -->
+<section class="section-bg-secondary">
+  <div class="container">
+    <div class="section-title">
+      <h2>Nos derniers chantiers à Brignais</h2>
+      <p>Quelques interventions récentes pour vous donner une idée concrète de notre travail dans votre commune.</p>
+    </div>
+
+    <div class="grid grid-3">
+      <a href="/realisations/peinture-salon-saint-genis-laval-mars-2026" class="card" style="text-decoration: none;">
+        <img class="card-image" src="/img/realisation-saint-genis-laval.jpg" alt="Peinture complète d'un salon à Saint-Genis-Laval" loading="lazy">
+        <h3 class="card-title">Peinture complète d'un salon à Saint-Genis-Laval</h3>
+        <p class="card-description">Salon de 30 m² dans une maison des années 1970, murs marqués par d'anciens papiers peints retirés et plafond avec traces d'humidité légères dans les a...</p>
+        <span class="card-link">Voir le chantier →</span>
+      </a>
+      <a href="/realisations/ravalement-facade-oullins-fevrier-2026" class="card" style="text-decoration: none;">
+        <img class="card-image" src="/img/realisation-oullins.jpg" alt="Ravalement de façade d'une maison à Oullins" loading="lazy">
+        <h3 class="card-title">Ravalement de façade d'une maison à Oullins</h3>
+        <p class="card-description">Maison individuelle de 130 m² au sol, façade en enduit traditionnel datant de 1985, présentant des traces de mousse, d'écaillage par endroits et des m...</p>
+        <span class="card-link">Voir le chantier →</span>
+      </a>
+      <a href="/realisations/enduit-decoratif-francheville-octobre-2025" class="card" style="text-decoration: none;">
+        <img class="card-image" src="/img/realisation-francheville.jpg" alt="Enduit décoratif béton ciré à Francheville" loading="lazy">
+        <h3 class="card-title">Enduit décoratif béton ciré à Francheville</h3>
+        <p class="card-description">Salle de bain de 12 m² dans une maison rénovée, demande pour un enduit béton ciré sur murs et sol pour un effet contemporain. Support : carrelage exis...</p>
+        <span class="card-link">Voir le chantier →</span>
+      </a>
+    </div>
+
+    <div class="text-center mt-xl">
+      <a href="/realisations" class="btn btn-outline">Voir toutes nos réalisations →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Villes voisines (maillage latéral important) -->
+<section>
+  <div class="container">
+    <div class="section-title">
+      <h2>Nous intervenons aussi dans les villes voisines</h2>
+    </div>
+    <div class="cities-grid">
+      <a href="/peintre-sainte-foy-les-lyon">Peintre à Sainte-Foy-lès-Lyon</a>
+<a href="/peintre-la-mulatiere">Peintre à La Mulatière</a>
+<a href="/peintre-francheville">Peintre à Francheville</a>
+<a href="/peintre-charly">Peintre à Charly</a>
+<a href="/peintre-pierre-benite">Peintre à Pierre-Bénite</a>
+<a href="/peintre-vourles">Peintre à Vourles</a>
+<a href="/peintre-irigny">Peintre à Irigny</a>
+<a href="/peintre-chaponost">Peintre à Chaponost</a>
+      <!-- Ex de contenu :
+      <a href="/elagueur-colomiers">Élagueur à Colomiers</a>
+      <a href="/elagueur-blagnac">Élagueur à Blagnac</a>
+      ...
+      -->
+    </div>
+  </div>
+</section>
+
+<!-- CTA final -->
+<section class="section-bg-secondary">
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Un projet peintre à Brignais ?</h2>
+      <p>Devis gratuit sous 48h. Intervention depuis Saint-Genis-Laval (6 km, 27 min). 8 ans d'expérience à votre service.</p>
+      <a href="/devis?ville=brignais" class="btn btn-primary btn-lg">Obtenir mon devis gratuit</a>
+      <a href="tel:+33481918432" style="color: white; text-decoration: underline; margin-top: 8px; font-size: 14px;">ou appelez au 04 81 91 84 32</a>
+    </div>
+  </div>
+</section>
+
 </main>
-<footer class="footer"><div class="container"><div class="footer-bottom"><div>&copy; 2026 TD PEINTURE RENOVATION</div><div><a href="/mentions-legales">Mentions légales</a> &middot; <a href="/confidentialite">Confidentialité</a></div></div></div></footer>
-<div class="sticky-cta-bar"><a href="tel:+33214739816" class="btn btn-outline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Appeler</a><a href="/devis" class="btn btn-primary">Devis gratuit</a></div>
-<script src="/js/main.js" defer></script><script src="/js/forms.js" defer></script>
-</body></html>
+
+<!-- Footer standard (à recopier par l'agent) -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo mb-md">
+          <span class="logo-letter" aria-hidden="true">T</span>
+          <span>TD Peinture</span>
+        </div>
+        <p style="font-size: 14px;">Artisan peintre à Saint-Genis-Laval — Peinture intérieure, extérieure, ravalement, enduit décoratif. Devis gratuit sous 48h.</p>
+        <p class="mt-md" style="font-size: 13px; color: var(--color-text-muted);">
+          <strong style="color: var(--color-primary-dark);">SIRET :</strong> 898 765 432 00018
+        </p>
+      </div>
+      <div>
+        <h3 class="footer-title">Services</h3>
+        <ul class="footer-list"><li><a href="/services/peinture-interieure">Peinture intérieure</a></li><li><a href="/services/peinture-exterieure">Peinture extérieure</a></li><li><a href="/services/ravalement-facade">Ravalement de façade</a></li><li><a href="/services/enduit-decoratif">Enduit décoratif</a></li><li><a href="/services/pose-papier-peint">Pose de papier peint</a></li><li><a href="/services/renovation-supports">Rénovation des supports</a></li></ul>
+      </div>
+      <div>
+        <h3 class="footer-title">Entreprise</h3>
+        <ul class="footer-list">
+          <li><a href="/a-propos">À propos</a></li>
+          <li><a href="/realisations">Nos réalisations</a></li>
+          <li><a href="/avis">Avis clients</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/zone-intervention">Zone d'intervention</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-title">Contact</h3>
+        <ul class="footer-list">
+          <li><a href="tel:+33481918432">📞 04 81 91 84 32</a></li>
+          <li><a href="mailto:contact@artisanpeintre-saintgenislaval69.fr">✉️ contact@artisanpeintre-saintgenislaval69.fr</a></li>
+          <li style="padding-top: 8px;">📍 Saint-Genis-Laval<br>69230 Saint-Genis-Laval</li>
+          <li style="padding-top: 8px;">Lun-Ven : 8h-18h</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 TD PEINTURE RENOVATION · Tous droits réservés</div>
+      <div>
+        <a href="/mentions-legales">Mentions légales</a> ·
+        <a href="/cgv">CGV</a> ·
+        <a href="/confidentialite">Confidentialité</a> ·
+        <a href="/plan-du-site">Plan du site</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Sticky CTA bar mobile : appel + devis toujours visibles -->
+<div class="sticky-cta-bar">
+  <a href="tel:+33481918432" class="btn btn-outline" aria-label="Appeler le 04 81 91 84 32">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+    </svg>
+    Appeler
+  </a>
+  <a href="/devis" class="btn btn-primary">Devis gratuit</a>
+</div>
+
+<script src="/js/main.js" defer></script>
+</body>
+</html>

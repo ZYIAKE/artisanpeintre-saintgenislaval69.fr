@@ -3,17 +3,21 @@
    ═══════════════════════════════════════════════════════════════
 
    Ce fichier est IDENTIQUE pour TOUS les partenaires.
-   Seules les couleurs primaires sont overridées
+   Seules les couleurs primaires (lignes 10-12) sont overridées
    par le fichier palette-{metier}.css chargé APRÈS tokens.css.
+
+   Référence visuelle : https://www.elagueurs-toulousains.fr/
+   Audit complet : DESIGN_REFERENCE.md à la racine du projet
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
   /* ════════════════════════════════════════
      COULEURS PRIMAIRES (overridées par métier)
+     Défaut : palette élagueur (référence)
      ════════════════════════════════════════ */
-  --color-primary:       #2BA31A;
-  --color-primary-dark:  #055511;
-  --color-primary-light: #D1FFC9;
+  --color-primary:       #2BA31A;  /* CTAs, boutons principaux */
+  --color-primary-dark:  #055511;  /* H1, H2, titres */
+  --color-primary-light: #D1FFC9;  /* Accents, badges, backgrounds doux */
 
   /* ════════════════════════════════════════
      COULEURS NEUTRES (identiques tous métiers)
@@ -41,6 +45,7 @@
   --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-body:    'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
+  /* Tailles (desktop) — overridées en mobile plus bas */
   --font-size-h1:    55px;
   --font-size-h2:    40px;
   --font-size-h3:    24px;
@@ -75,10 +80,10 @@
      ════════════════════════════════════════ */
   --radius-sm:   8px;
   --radius-md:   12px;
-  --radius-lg:   15px;
+  --radius-lg:   15px;    /* cards */
   --radius-xl:   20px;
-  --radius-full: 24px;
-  --radius-round: 50%;
+  --radius-full: 24px;    /* boutons (pill) */
+  --radius-round: 50%;    /* avatars, cercles */
 
   /* ════════════════════════════════════════
      SHADOWS
@@ -99,12 +104,17 @@
      LAYOUT
      ════════════════════════════════════════ */
   --max-width-primary: 1280px;
-  --max-width-content: 960px;
-  --max-width-narrow:  720px;
+  --max-width-content: 960px;   /* articles, pages de texte */
+  --max-width-narrow:  720px;   /* blog posts, pages légales */
   --container-padding: clamp(16px, 4vw, 32px);
 
-  --header-height:        80px;
+  --header-height:     80px;
   --header-height-mobile: 64px;
+
+  --breakpoint-mobile:  480px;
+  --breakpoint-tablet:  768px;
+  --breakpoint-desktop: 1024px;
+  --breakpoint-wide:    1280px;
 
   /* ════════════════════════════════════════
      Z-INDEX
@@ -117,18 +127,21 @@
   --z-tooltip:   2000;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   Responsive font sizing — mobile d'abord
+   ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
   :root {
-    --font-size-h1: 36px;
-    --font-size-h2: 28px;
-    --font-size-h3: 20px;
-    --font-size-h4: 16px;
+    --font-size-h1:    36px;
+    --font-size-h2:    28px;
+    --font-size-h3:    20px;
+    --font-size-h4:    16px;
   }
 }
 
 @media (max-width: 480px) {
   :root {
-    --font-size-h1: 32px;
-    --font-size-h2: 24px;
+    --font-size-h1:    32px;
+    --font-size-h2:    24px;
   }
 }

@@ -1,57 +1,370 @@
 <!DOCTYPE html>
+<!--
+  ═══════════════════════════════════════════════════════════════════
+  PAGE — /zone-intervention (hub vers les pages villes)
+  ═══════════════════════════════════════════════════════════════════
+  Carte Google Maps + liste des villes desservies, groupées par
+  département si plusieurs. Chaque ville → lien vers sa page dédiée
+  /{metier-slug}-{ville-slug}.
+
+  PLACEHOLDERS :
+  - https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d44600.0!2d4.7944!3d45.6964!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zU2FpbnQtR2VuaXMtTGF2YWw!5e0!3m2!1sfr!2sfr!4v1700000000001          iframe Google Maps centré sur la zone
+  - 30           rayon intervention (ex: 30)
+  - {{CITIES_BY_DEPT}}           dict { "31 — Haute-Garonne": [villes...], ... }
+  - {{VILLE_N_NAME}}             nom ville
+  - {{VILLE_N_SLUG}}             slug ville
+  - {{VILLE_N_POSTAL_CODE}}      CP
+  - {{VILLE_N_DISTANCE_KM}}      distance depuis siège
+  ═══════════════════════════════════════════════════════════════════
+-->
 <html lang="fr">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TD PEINTURE RENOVATION intervient dans toute la région Saint-Genis-Laval — 12 communes desservies dans un rayon de 30 km. Trouvez votre ville.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TD PEINTURE RENOVATION intervient dans toute la région Saint-Genis-Laval — 25 communes desservies dans un rayon de 30 km. Trouvez votre ville.">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://www.artisanpeintre-saintgenislaval69.fr/zone-intervention">
-  <title>Zone d'intervention &mdash; TD PEINTURE RENOVATION | Peintre Saint-Genis-Laval</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="canonical" href="https://artisanpeintre-saintgenislaval69.fr/zone-intervention">
+
+  <title>Zone d'intervention — TD PEINTURE RENOVATION | peintre à Saint-Genis-Laval</title>
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://artisanpeintre-saintgenislaval69.fr/zone-intervention">
+  <meta property="og:title" content="Zone d'intervention — TD PEINTURE RENOVATION">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/tokens.css"><link rel="stylesheet" href="/css/palette-peintre.css"><link rel="stylesheet" href="/css/base.css"><link rel="stylesheet" href="/css/components.css">
+
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/palette-peintre.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+
   <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"TD PEINTURE RENOVATION","url":"https://www.artisanpeintre-saintgenislaval69.fr","telephone":"+33214739816","areaServed":{"@type":"GeoCircle","geoMidpoint":{"@type":"GeoCoordinates","latitude":"45.6944","longitude":"4.7917"},"geoRadius":"30000"}}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://www.artisanpeintre-saintgenislaval69.fr/"},{"@type":"ListItem","position":2,"name":"Zone d'intervention","item":"https://www.artisanpeintre-saintgenislaval69.fr/zone-intervention"}]}</script>
-  <style>.zone-map-big{margin:var(--space-xl) 0 var(--space-2xl);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md)}.zone-map-big iframe{width:100%;height:500px;border:0;display:block}.dept-section{margin-bottom:var(--space-2xl)}.dept-title{display:flex;align-items:center;gap:var(--space-md);padding-bottom:var(--space-sm);margin-bottom:var(--space-lg);border-bottom:2px solid var(--color-primary)}.dept-badge{background:var(--color-primary-dark);color:white;font-size:var(--font-size-xs);padding:4px 10px;border-radius:var(--radius-sm);font-weight:700}.villes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--space-sm)}.ville-card{display:block;padding:var(--space-md);background:white;border:1px solid var(--color-border);border-radius:var(--radius-md);text-decoration:none;transition:all var(--transition-base)}.ville-card:hover{border-color:var(--color-primary);background:var(--color-primary-light);transform:translateY(-2px);box-shadow:var(--shadow-md)}.ville-name{font-weight:600;color:var(--color-primary-dark);display:block;margin-bottom:2px}.ville-meta{display:flex;justify-content:space-between;font-size:var(--font-size-xs);color:var(--color-text-muted)}@media(max-width:768px){.villes-grid{grid-template-columns:repeat(2,1fr);gap:var(--space-xs)}.ville-card{padding:var(--space-sm)}.ville-name{font-size:var(--font-size-small)}}</style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "TD PEINTURE RENOVATION",
+    "url": "https://artisanpeintre-saintgenislaval69.fr",
+    "telephone": "+33481918432",
+    "areaServed": {
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": "45.6964",
+        "longitude": "4.7944"
+      },
+      "geoRadius": "30000"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://artisanpeintre-saintgenislaval69.fr/" },
+      { "@type": "ListItem", "position": 2, "name": "Zone d'intervention", "item": "https://artisanpeintre-saintgenislaval69.fr/zone-intervention" }
+    ]
+  }
+  </script>
+
+  <style>
+    .zone-map-big {
+      margin: var(--space-xl) 0 var(--space-2xl);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+    .zone-map-big iframe {
+      width: 100%;
+      height: 500px;
+      border: 0;
+      display: block;
+    }
+    .dept-section {
+      margin-bottom: var(--space-2xl);
+    }
+    .dept-title {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding-bottom: var(--space-sm);
+      margin-bottom: var(--space-lg);
+      border-bottom: 2px solid var(--color-primary);
+    }
+    .dept-badge {
+      background: var(--color-primary-dark);
+      color: white;
+      font-size: var(--font-size-xs);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      font-weight: var(--font-weight-bold);
+    }
+    .villes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-sm);
+    }
+    .ville-card {
+      display: block;
+      padding: var(--space-md);
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      transition: all var(--transition-base);
+    }
+    .ville-card:hover {
+      border-color: var(--color-primary);
+      background: var(--color-primary-light);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .ville-name {
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-primary-dark);
+      display: block;
+      margin-bottom: 2px;
+    }
+    .ville-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+    }
+    /* Mobile : 2 colonnes de cards compactes */
+    @media (max-width: 768px) {
+      .villes-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-xs);
+      }
+      .ville-card {
+        padding: var(--space-sm);
+      }
+      .ville-name {
+        font-size: var(--font-size-small);
+      }
+      .ville-meta {
+        flex-direction: column;
+        gap: 2px;
+      }
+    }
+  </style>
 </head>
 <body>
+
 <a href="#main" class="skip-to-main">Aller au contenu principal</a>
-<div class="topbar">⭐ <strong>Noté 4.9/5</strong> &middot; Intervention dans un rayon de <strong>30 km</strong> autour de Saint-Genis-Laval</div>
-<header class="header"><div class="container header-inner"><a href="/" class="logo"><span class="logo-letter" aria-hidden="true">T</span><span>TD Peinture</span></a><nav class="nav"><ul class="nav-list" id="navList"><li><a href="/#services" class="nav-link">Services</a></li><li><a href="/realisations" class="nav-link">Réalisations</a></li><li><a href="/avis" class="nav-link">Avis</a></li><li><a href="/a-propos" class="nav-link">À propos</a></li><li><a href="/faq" class="nav-link">FAQ</a></li><li><a href="/contact" class="nav-link">Contact</a></li><li><a href="/devis" class="btn btn-primary btn-sm">Devis gratuit</a></li></ul><button class="nav-toggle" id="navToggle" aria-label="Menu" aria-controls="navList" aria-expanded="false"><span></span><span></span><span></span></button></nav></div></header>
+
+<div class="topbar">
+  ⭐ <strong>Noté 5.0/5</strong> · Intervention dans un rayon de <strong>30 km</strong> autour de Saint-Genis-Laval
+</div>
+
+<header class="header">
+  <div class="container header-inner">
+    <a href="/" class="logo" aria-label="Accueil TD PEINTURE RENOVATION">
+      <span class="logo-letter" aria-hidden="true">T</span>
+      <span>TD Peinture</span>
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      <ul class="nav-list" id="navList">
+        <li><a href="/#services" class="nav-link">Services</a></li>
+        <li><a href="/realisations" class="nav-link">Réalisations</a></li>
+        <li><a href="/avis" class="nav-link">Avis</a></li>
+        <li><a href="/a-propos" class="nav-link">À propos</a></li>
+        <li><a href="/faq" class="nav-link">FAQ</a></li>
+        <li><a href="/contact" class="nav-link">Contact</a></li>
+        <li><a href="/devis" class="btn btn-primary btn-sm">Devis gratuit</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-controls="navList" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
 <main id="main">
-<div class="container"><nav class="breadcrumb"><a href="/">Accueil</a><span class="breadcrumb-separator">/</span><span class="current">Zone d'intervention</span></nav></div>
-<section style="padding-top:var(--space-lg)"><div class="container">
-  <div class="section-title"><h1>Où intervenons-nous ?</h1><p>TD PEINTURE RENOVATION couvre Saint-Genis-Laval et ses environs dans un rayon de <strong>30 km</strong>, soit <strong>12 communes</strong> desservies. Cliquez sur votre ville pour voir notre offre dédiée.</p></div>
-  <div class="zone-map-big">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d90199.04!2d4.7917!3d45.6944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f4ea2857ea65c9%3A0x405f9c6d6843e46a!2sSaint-Genis-Laval!5e0!3m2!1sfr!2sfr!4v1714038000001" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen title="Zone d'intervention de TD PEINTURE RENOVATION"></iframe>
-  </div>
-  <div class="stats mb-2xl">
-    <div class="stat"><div class="stat-value">12</div><div class="stat-label">Villes desservies</div></div>
-    <div class="stat"><div class="stat-value">30 km</div><div class="stat-label">Rayon d'intervention</div></div>
-    <div class="stat"><div class="stat-value">1</div><div class="stat-label">Département (Rhône)</div></div>
-  </div>
-  <div class="dept-section">
-    <h2 class="dept-title"><span class="dept-badge">69</span>Rhône</h2>
-    <div class="villes-grid">
-      <a href="/peintre-saint-genis-laval" class="ville-card"><span class="ville-name">Saint-Genis-Laval</span><div class="ville-meta"><span>69230</span><span>0 km</span></div></a>
-      <a href="/peintre-oullins" class="ville-card"><span class="ville-name">Oullins</span><div class="ville-meta"><span>69600</span><span>3 km</span></div></a>
-      <a href="/peintre-pierre-benite" class="ville-card"><span class="ville-name">Pierre-Bénite</span><div class="ville-meta"><span>69310</span><span>4 km</span></div></a>
-      <a href="/peintre-irigny" class="ville-card"><span class="ville-name">Irigny</span><div class="ville-meta"><span>69540</span><span>5 km</span></div></a>
-      <a href="/peintre-la-mulatiere" class="ville-card"><span class="ville-name">La Mulatière</span><div class="ville-meta"><span>69350</span><span>6 km</span></div></a>
-      <a href="/peintre-brignais" class="ville-card"><span class="ville-name">Brignais</span><div class="ville-meta"><span>69530</span><span>6 km</span></div></a>
-      <a href="/peintre-francheville" class="ville-card"><span class="ville-name">Francheville</span><div class="ville-meta"><span>69340</span><span>7 km</span></div></a>
-      <a href="/peintre-chaponost" class="ville-card"><span class="ville-name">Chaponost</span><div class="ville-meta"><span>69630</span><span>8 km</span></div></a>
-      <a href="/peintre-charly" class="ville-card"><span class="ville-name">Charly</span><div class="ville-meta"><span>69390</span><span>8 km</span></div></a>
-      <a href="/peintre-sainte-foy-les-lyon" class="ville-card"><span class="ville-name">Sainte-Foy-lès-Lyon</span><div class="ville-meta"><span>69110</span><span>9 km</span></div></a>
-      <a href="/peintre-vourles" class="ville-card"><span class="ville-name">Vourles</span><div class="ville-meta"><span>69390</span><span>10 km</span></div></a>
-      <a href="/peintre-lyon" class="ville-card"><span class="ville-name">Lyon</span><div class="ville-meta"><span>69000</span><span>10 km</span></div></a>
+
+<div class="container">
+  <nav class="breadcrumb" aria-label="Fil d'Ariane">
+    <a href="/">Accueil</a>
+    <span class="breadcrumb-separator">/</span>
+    <span class="current">Zone d'intervention</span>
+  </nav>
+</div>
+
+<section style="padding-top: var(--space-lg);">
+  <div class="container">
+    <div class="section-title">
+      <h1>Où intervenons-nous ?</h1>
+      <p>
+        TD PEINTURE RENOVATION couvre Saint-Genis-Laval et ses environs dans un rayon de <strong>30 km</strong>, soit <strong>25 communes</strong> desservies.
+        Cliquez sur votre ville pour voir notre offre dédiée.
+      </p>
+    </div>
+
+    <!-- Carte centrée sur la zone -->
+    <div class="zone-map-big">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d44600.0!2d4.7944!3d45.6964!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zU2FpbnQtR2VuaXMtTGF2YWw!5e0!3m2!1sfr!2sfr!4v1700000000001"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen
+        title="Zone d'intervention de TD PEINTURE RENOVATION">
+      </iframe>
+    </div>
+
+    <div class="stats mb-2xl">
+      <div class="stat">
+        <div class="stat-value">25</div>
+        <div class="stat-label">Villes desservies</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">30 km</div>
+        <div class="stat-label">Rayon d'intervention</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">1</div>
+        <div class="stat-label">Départements</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         Villes regroupées par département
+         ═══════════════════════════════════════════════════════════════
+         ⚠️ OBLIGATOIRE : l'agent doit lister TOUTES les villes couvertes
+         par le partenaire, sans exception. Pas de "top 10" ni de limitation
+         arbitraire — afficher la liste complète, classée alphabétiquement
+         dans chaque département.
+
+         Créer UN bloc `.dept-section` par département couvert.
+         Pour chaque ville : une `.ville-card` avec nom + CP + distance.
+         Format d'une card ville :
+
+           <a href="/peintre-{{VILLE_SLUG}}" class="ville-card">
+             <span class="ville-name">{{VILLE_NAME}}</span>
+             <div class="ville-meta">
+               <span>{{VILLE_POSTAL_CODE}}</span>
+               <span>{{VILLE_DISTANCE_KM}} km</span>
+             </div>
+           </a>
+
+         Exemple de sortie attendue avec 40 villes :
+           ┌─ Département 31 — Haute-Garonne (30 villes)
+           │   Toulouse · Colomiers · Blagnac · Muret · Tournefeuille · ...
+           │   (liste alphabétique exhaustive)
+           └─ Département 82 — Tarn-et-Garonne (10 villes)
+               Montauban · Castelsarrasin · ...
+         ═══════════════════════════════════════════════════════════════ -->
+
+    <div class="dept-section">
+      <h2 class="dept-title">
+        <span class="dept-badge">69</span>
+        Rhône
+      </h2>
+      <div class="villes-grid">
+        <a href="/peintre-saint-genis-laval" class="ville-card"><span class="ville-name">Saint-Genis-Laval</span><div class="ville-meta"><span>69230</span><span>0 km</span></div></a><a href="/peintre-oullins" class="ville-card"><span class="ville-name">Oullins</span><div class="ville-meta"><span>69600</span><span>3 km</span></div></a><a href="/peintre-pierre-benite" class="ville-card"><span class="ville-name">Pierre-Bénite</span><div class="ville-meta"><span>69310</span><span>4 km</span></div></a><a href="/peintre-la-mulatiere" class="ville-card"><span class="ville-name">La Mulatière</span><div class="ville-meta"><span>69350</span><span>5 km</span></div></a><a href="/peintre-francheville" class="ville-card"><span class="ville-name">Francheville</span><div class="ville-meta"><span>69340</span><span>5 km</span></div></a><a href="/peintre-sainte-foy-les-lyon" class="ville-card"><span class="ville-name">Sainte-Foy-lès-Lyon</span><div class="ville-meta"><span>69110</span><span>6 km</span></div></a><a href="/peintre-brignais" class="ville-card"><span class="ville-name">Brignais</span><div class="ville-meta"><span>69530</span><span>6 km</span></div></a><a href="/peintre-charly" class="ville-card"><span class="ville-name">Charly</span><div class="ville-meta"><span>69390</span><span>7 km</span></div></a><a href="/peintre-vourles" class="ville-card"><span class="ville-name">Vourles</span><div class="ville-meta"><span>69390</span><span>8 km</span></div></a><a href="/peintre-irigny" class="ville-card"><span class="ville-name">Irigny</span><div class="ville-meta"><span>69540</span><span>8 km</span></div></a><a href="/peintre-chaponost" class="ville-card"><span class="ville-name">Chaponost</span><div class="ville-meta"><span>69630</span><span>8 km</span></div></a><a href="/peintre-lyon" class="ville-card"><span class="ville-name">Lyon</span><div class="ville-meta"><span>69001</span><span>8 km</span></div></a><a href="/peintre-tassin-la-demi-lune" class="ville-card"><span class="ville-name">Tassin-la-Demi-Lune</span><div class="ville-meta"><span>69160</span><span>10 km</span></div></a><a href="/peintre-caluire-et-cuire" class="ville-card"><span class="ville-name">Caluire-et-Cuire</span><div class="ville-meta"><span>69300</span><span>11 km</span></div></a><a href="/peintre-feyzin" class="ville-card"><span class="ville-name">Feyzin</span><div class="ville-meta"><span>69320</span><span>11 km</span></div></a><a href="/peintre-venissieux" class="ville-card"><span class="ville-name">Vénissieux</span><div class="ville-meta"><span>69200</span><span>11 km</span></div></a><a href="/peintre-bron" class="ville-card"><span class="ville-name">Bron</span><div class="ville-meta"><span>69500</span><span>12 km</span></div></a><a href="/peintre-villeurbanne" class="ville-card"><span class="ville-name">Villeurbanne</span><div class="ville-meta"><span>69100</span><span>12 km</span></div></a><a href="/peintre-saint-priest" class="ville-card"><span class="ville-name">Saint-Priest</span><div class="ville-meta"><span>69800</span><span>13 km</span></div></a><a href="/peintre-corbas" class="ville-card"><span class="ville-name">Corbas</span><div class="ville-meta"><span>69960</span><span>14 km</span></div></a><a href="/peintre-mions" class="ville-card"><span class="ville-name">Mions</span><div class="ville-meta"><span>69780</span><span>14 km</span></div></a><a href="/peintre-givors" class="ville-card"><span class="ville-name">Givors</span><div class="ville-meta"><span>69700</span><span>14 km</span></div></a><a href="/peintre-mornant" class="ville-card"><span class="ville-name">Mornant</span><div class="ville-meta"><span>69440</span><span>15 km</span></div></a><a href="/peintre-vaulx-en-velin" class="ville-card"><span class="ville-name">Vaulx-en-Velin</span><div class="ville-meta"><span>69120</span><span>15 km</span></div></a><a href="/peintre-decines-charpieu" class="ville-card"><span class="ville-name">Décines-Charpieu</span><div class="ville-meta"><span>69150</span><span>17 km</span></div></a>
+      </div>
+    </div>
+
+    <!-- Blocs additionnels si plusieurs départements couverts :
+    <div class="dept-section">
+      <h2 class="dept-title">
+        <span class="dept-badge">{{DEPT_N_CODE}}</span>
+        {{DEPT_N_NAME}}
+      </h2>
+      <div class="villes-grid">
+        {{DEPT_N_VILLES_LIST}}
+      </div>
+    </div>
+    -->
+
+    <!-- CTA si votre ville n'y est pas -->
+    <div class="text-center mt-xl" style="padding: var(--space-xl); background: var(--color-bg-secondary); border-radius: var(--radius-lg);">
+      <h3 style="margin-bottom: var(--space-md);">Votre ville n'y est pas ?</h3>
+      <p class="mb-md">Nous acceptons les chantiers exceptionnels en dehors de notre zone, selon faisabilité.</p>
+      <a href="/contact" class="btn btn-primary">Nous contacter</a>
     </div>
   </div>
-  <div class="text-center mt-xl" style="padding:var(--space-xl);background:var(--color-bg-secondary);border-radius:var(--radius-lg)"><h3 style="margin-bottom:var(--space-md)">Votre ville n'y est pas ?</h3><p class="mb-md">Nous acceptons les chantiers exceptionnels en dehors de notre zone, selon faisabilité.</p><a href="/contact" class="btn btn-primary">Nous contacter</a></div>
-</div></section>
-<section class="section-bg-secondary"><div class="container"><div class="cta-banner"><h2>Une intervention dans votre commune ?</h2><p>Devis gratuit sous 48h. Déplacement sur site possible pour une estimation précise.</p><a href="/devis" class="btn btn-primary btn-lg">Demander mon devis gratuit</a></div></div></section>
+</section>
+
+<!-- CTA -->
+<section class="section-bg-secondary">
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Une intervention dans votre commune ?</h2>
+      <p>Devis gratuit sous 48h. Déplacement sur site possible pour une estimation précise.</p>
+      <a href="/devis" class="btn btn-primary btn-lg">Demander mon devis gratuit</a>
+    </div>
+  </div>
+</section>
+
 </main>
-<footer class="footer"><div class="container"><div class="footer-grid"><div><div class="logo mb-md"><span class="logo-letter" aria-hidden="true">T</span><span>TD Peinture</span></div><p style="font-size:14px">Artisan peintre à Saint-Genis-Laval.</p><p class="mt-md" style="font-size:13px;color:var(--color-text-muted)"><strong style="color:var(--color-primary-dark)">SIRET :</strong> 987 356 284 00016</p></div><div><h3 class="footer-title">Services</h3><ul class="footer-list"><li><a href="/services/peinture-interieure">Peinture intérieure</a></li><li><a href="/services/peinture-exterieure">Peinture extérieure</a></li><li><a href="/services/ravalement-facade">Ravalement de façade</a></li><li><a href="/services/enduit-decoratif">Enduit décoratif</a></li><li><a href="/services/pose-papier-peint">Pose de papier peint</a></li><li><a href="/services/renovation-supports">Rénovation de supports</a></li></ul></div><div><h3 class="footer-title">Entreprise</h3><ul class="footer-list"><li><a href="/a-propos">À propos</a></li><li><a href="/realisations">Nos réalisations</a></li><li><a href="/avis">Avis clients</a></li><li><a href="/faq">FAQ</a></li><li><a href="/zone-intervention">Zone d'intervention</a></li><li><a href="/contact">Contact</a></li></ul></div><div><h3 class="footer-title">Contact</h3><ul class="footer-list"><li><a href="tel:+33214739816">📞 02&nbsp;14&nbsp;73&nbsp;98&nbsp;16</a></li><li><a href="mailto:contact@artisanpeintre-saintgenislaval69.fr">✉️ contact@...</a></li><li style="padding-top:8px">📍 69230 Saint-Genis-Laval</li></ul></div></div><div class="footer-bottom"><div>&copy; 2026 TD PEINTURE RENOVATION</div><div><a href="/mentions-legales">Mentions légales</a> &middot; <a href="/cgv">CGV</a> &middot; <a href="/confidentialite">Confidentialité</a> &middot; <a href="/plan-du-site">Plan du site</a></div></div></div></footer>
-<div class="sticky-cta-bar"><a href="tel:+33214739816" class="btn btn-outline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Appeler</a><a href="/devis" class="btn btn-primary">Devis gratuit</a></div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo mb-md">
+          <span class="logo-letter" aria-hidden="true">T</span>
+          <span>TD Peinture</span>
+        </div>
+        <p style="font-size: 14px;">Artisan peintre à Saint-Genis-Laval — Peinture intérieure, extérieure, ravalement, enduit décoratif. Devis gratuit sous 48h.</p>
+        <p class="mt-md" style="font-size: 13px; color: var(--color-text-muted);">
+          <strong style="color: var(--color-primary-dark);">SIRET :</strong> 898 765 432 00018
+        </p>
+      </div>
+      <div>
+        <h3 class="footer-title">Services</h3>
+        <ul class="footer-list"><li><a href="/services/peinture-interieure">Peinture intérieure</a></li><li><a href="/services/peinture-exterieure">Peinture extérieure</a></li><li><a href="/services/ravalement-facade">Ravalement de façade</a></li><li><a href="/services/enduit-decoratif">Enduit décoratif</a></li><li><a href="/services/pose-papier-peint">Pose de papier peint</a></li><li><a href="/services/renovation-supports">Rénovation des supports</a></li></ul>
+      </div>
+      <div>
+        <h3 class="footer-title">Entreprise</h3>
+        <ul class="footer-list">
+          <li><a href="/a-propos">À propos</a></li>
+          <li><a href="/realisations">Nos réalisations</a></li>
+          <li><a href="/avis">Avis clients</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/zone-intervention">Zone d'intervention</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-title">Contact</h3>
+        <ul class="footer-list">
+          <li><a href="tel:+33481918432">📞 04 81 91 84 32</a></li>
+          <li><a href="mailto:contact@artisanpeintre-saintgenislaval69.fr">✉️ contact@artisanpeintre-saintgenislaval69.fr</a></li>
+          <li style="padding-top: 8px;">📍 Saint-Genis-Laval<br>69230 Saint-Genis-Laval</li>
+          <li style="padding-top: 8px;">Lun-Ven : 8h-18h</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 TD PEINTURE RENOVATION · Tous droits réservés</div>
+      <div>
+        <a href="/mentions-legales">Mentions légales</a> ·
+        <a href="/cgv">CGV</a> ·
+        <a href="/confidentialite">Confidentialité</a> ·
+        <a href="/plan-du-site">Plan du site</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Sticky CTA bar mobile : appel + devis toujours visibles -->
+<div class="sticky-cta-bar">
+  <a href="tel:+33481918432" class="btn btn-outline" aria-label="Appeler le 04 81 91 84 32">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+    </svg>
+    Appeler
+  </a>
+  <a href="/devis" class="btn btn-primary">Devis gratuit</a>
+</div>
+
 <script src="/js/main.js" defer></script>
-</body></html>
+</body>
+</html>

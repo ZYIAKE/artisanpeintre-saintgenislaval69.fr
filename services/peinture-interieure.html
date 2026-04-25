@@ -1,44 +1,495 @@
 <!DOCTYPE html>
+<!--
+  ═══════════════════════════════════════════════════════════════════
+  TEMPLATE — Page service individuelle
+  ═══════════════════════════════════════════════════════════════════
+  Clonée par atlinker-site-builder pour chaque service du partenaire.
+  URL pattern : /peinture-interieure  (ex: /elagage, /abattage, /plomberie-depannage)
+
+  PLACEHOLDERS (valeurs d'exemple en commentaire) :
+  ─────────────────────────────────────────────────
+  Peinture intérieure          ex: "Élagage d'arbre"
+  peinture-interieure           ex: "elagage"
+  Peinture intérieure à Saint-Genis-Laval et le Sud-Ouest lyonnais             ex: "Élagage d'arbre à Toulouse"
+  Peinture intérieure à Saint-Genis-Laval par TD PEINTURE RENOVATION — Peinture des murs et plafonds, finitions soignées, techniques modernes (mat, satin, velours).      ex: "Élagueur pro à Toulouse — taille..."
+  Spécialiste de la peinture intérieure à Saint-Genis-Laval, nous prenons en charge tous vos projets : appartement, maison, bureaux. Préparation des supports, choix des produits, application soignée.          paragraphe 60-80 mots d'introduction
+  {{SERVICE_WHY_US_*}}       3 arguments "pourquoi nous"
+  {{SERVICE_METHOD_STEP_*}}  4-6 étapes de la méthode
+  {{SERVICE_PRICE_MIN/MAX}}  fourchette de prix indicative
+  Prix au m² indicatif, peut varier selon état des supports et finition.     précision sur le pricing
+  1 à 15 jours selon ampleur       ex: "de 2h à 2 jours selon l'ampleur"
+  {{SERVICE_GUARANTEES_*}}   3-4 garanties
+  {{SERVICE_FAQ_Q/A_*}}      5-6 Q/R spécifiques au service
+  {{SERVICE_IMG_*_URL}}      URLs images Supabase Storage
+  {{SERVICE_RELATED_*}}      prestations complémentaires
+
+  + les placeholders globaux partagés (COMPANY_NAME, PHONE, CITY, etc.)
+  cf. README.md pour liste complète
+  ═══════════════════════════════════════════════════════════════════
+-->
 <html lang="fr">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Artisan peintre pour travaux de peinture intérieure à Saint-Genis-Laval (69230). Tony Dettinger. Plafonds, murs, boiseries. Devis gratuit sous 48h.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Peinture intérieure à Saint-Genis-Laval par TD PEINTURE RENOVATION — Peinture des murs et plafonds, finitions soignées, techniques modernes (mat, satin, velours).">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://www.artisanpeintre-saintgenislaval69.fr/services/peinture-interieure">
-  <title>Peinture intérieure à Saint-Genis-Laval | TD PEINTURE RENOVATION</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="canonical" href="https://artisanpeintre-saintgenislaval69.fr/peinture-interieure">
+
+  <title>Peinture intérieure à Saint-Genis-Laval et le Sud-Ouest lyonnais | TD PEINTURE RENOVATION</title>
+
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:url" content="https://artisanpeintre-saintgenislaval69.fr/peinture-interieure">
+  <meta property="og:title" content="Peinture intérieure à Saint-Genis-Laval et le Sud-Ouest lyonnais | TD PEINTURE RENOVATION">
+  <meta property="og:description" content="Peinture intérieure à Saint-Genis-Laval par TD PEINTURE RENOVATION — Peinture des murs et plafonds, finitions soignées, techniques modernes (mat, satin, velours).">
+  <meta property="og:image" content="/img/service-peinture-interieure.jpg">
+  <meta property="og:site_name" content="TD PEINTURE RENOVATION">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/tokens.css"><link rel="stylesheet" href="/css/palette-peintre.css"><link rel="stylesheet" href="/css/base.css"><link rel="stylesheet" href="/css/components.css">
+
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/palette-peintre.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+
   <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Peinture intérieure","description":"Travaux de peinture intérieure à Saint-Genis-Laval et Grand Lyon Sud. Plafonds, murs et boiseries.","url":"https://www.artisanpeintre-saintgenislaval69.fr/services/peinture-interieure","provider":{"@type":"LocalBusiness","name":"TD PEINTURE RENOVATION","telephone":"+33214739816","address":{"@type":"PostalAddress","streetAddress":"88 Chemin des Collines","addressLocality":"Saint-Genis-Laval","postalCode":"69230","addressCountry":"FR"}},"areaServed":{"@type":"City","name":"Saint-Genis-Laval"},"offers":{"@type":"Offer","priceSpecification":{"@type":"PriceSpecification","minPrice":"15","maxPrice":"35","priceCurrency":"EUR","unitText":"m²"}}}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quel est le prix d'une peinture intérieure ?","acceptedAnswer":{"@type":"Answer","text":"Entre 15 et 35 €/m² selon l'état des supports, le nombre de couches et la hauteur sous plafond. Devis gratuit sur place."}},{"@type":"Question","name":"Combien de couches de peinture appliquez-vous ?","acceptedAnswer":{"@type":"Answer","text":"Minimum 2 couches de finition, précédées d'une sous-couche d'accrochage si nécessaire. La première couche scelle le support, la seconde donne le rendu final."}},{"@type":"Question","name":"Pouvez-vous peindre des murs en mauvais état ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Traitement des fissures, enduit de lissage, rebouchage : nous remettons les supports en état avant toute application de peinture."}},{"@type":"Question","name":"Quelle peinture utilisez-vous pour l'intérieur ?","acceptedAnswer":{"@type":"Answer","text":"Peintures acryliques professionnelles Tollens, Zolpan ou Sikkens. Finitions mate, satinée ou brillante selon votre souhait."}},{"@type":"Question","name":"Les sols et meubles sont-ils protégés ?","acceptedAnswer":{"@type":"Answer","text":"Oui, toujours. Bâches de protection sur les sols et le mobilier avant toute intervention."}}]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://www.artisanpeintre-saintgenislaval69.fr/"},{"@type":"ListItem","position":2,"name":"Services","item":"https://www.artisanpeintre-saintgenislaval69.fr/#services"},{"@type":"ListItem","position":3,"name":"Peinture intérieure","item":"https://www.artisanpeintre-saintgenislaval69.fr/services/peinture-interieure"}]}</script>
+
+  <!-- Schema.org Service -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Peinture intérieure",
+    "description": "Peinture intérieure à Saint-Genis-Laval par TD PEINTURE RENOVATION — Peinture des murs et plafonds, finitions soignées, techniques modernes (mat, satin, velours).",
+    "url": "https://artisanpeintre-saintgenislaval69.fr/peinture-interieure",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "TD PEINTURE RENOVATION",
+      "telephone": "+33481918432",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Saint-Genis-Laval",
+        "addressLocality": "Saint-Genis-Laval",
+        "postalCode": "69230",
+        "addressCountry": "FR"
+      }
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Saint-Genis-Laval"
+    },
+    "offers": {
+      "@type": "Offer",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "minPrice": "25",
+        "maxPrice": "60",
+        "priceCurrency": "EUR"
+      },
+      "availability": "https://schema.org/InStock"
+    }
+  }
+  </script>
+
+  <!-- Schema.org BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://artisanpeintre-saintgenislaval69.fr/" },
+      { "@type": "ListItem", "position": 2, "name": "Nos services", "item": "https://artisanpeintre-saintgenislaval69.fr/#services" },
+      { "@type": "ListItem", "position": 3, "name": "Peinture intérieure", "item": "https://artisanpeintre-saintgenislaval69.fr/peinture-interieure" }
+    ]
+  }
+  </script>
+
+  <!-- Schema.org FAQPage pour les FAQ spécifiques du service -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"Combien coûte peinture intérieure ?","acceptedAnswer":{"@type":"Answer","text":"Le prix d'une peinture intérieure varie de 25 à 60€/m² selon l'état des supports et la finition. Devis gratuit sous 48h."}},
+      {"@type":"Question","name":"Quelle est la durée d'intervention ?","acceptedAnswer":{"@type":"Answer","text":"Entre 1 et 15 jours selon le chantier. Estimation précise au devis."}},
+      {"@type":"Question","name":"Intervenez-vous en urgence ?","acceptedAnswer":{"@type":"Answer","text":"Oui, sous 48-72h pour les urgences (dégât des eaux, location à remettre)."}},
+      {"@type":"Question","name":"Protégez-vous mon mobilier ?","acceptedAnswer":{"@type":"Answer","text":"Oui, toujours. Bâches, papier de protection, ruban de masquage : c'est inclus."}},
+      {"@type":"Question","name":"Êtes-vous assurés ?","acceptedAnswer":{"@type":"Answer","text":"Assurance décennale MAAF Pro, responsabilité civile. Attestation fournie sur demande."}}
+    ]
+  }
+  </script>
 </head>
 <body>
+
 <a href="#main" class="skip-to-main">Aller au contenu principal</a>
-<div class="topbar">⭐ <strong>Noté 4.9/5</strong> &middot; <strong>2 ans d'expérience</strong> &middot; Devis gratuit sous 48h</div>
-<header class="header"><div class="container header-inner"><a href="/" class="logo"><span class="logo-letter" aria-hidden="true">T</span><span>TD Peinture</span></a><nav class="nav"><ul class="nav-list" id="navList"><li><a href="/#services" class="nav-link active">Services</a></li><li><a href="/realisations" class="nav-link">Réalisations</a></li><li><a href="/avis" class="nav-link">Avis</a></li><li><a href="/a-propos" class="nav-link">À propos</a></li><li><a href="/faq" class="nav-link">FAQ</a></li><li><a href="/contact" class="nav-link">Contact</a></li><li><a href="/devis" class="btn btn-primary btn-sm">Devis gratuit</a></li></ul><button class="nav-toggle" id="navToggle" aria-label="Menu" aria-controls="navList" aria-expanded="false"><span></span><span></span><span></span></button></nav></div></header>
-<main id="main">
-<div class="container"><nav class="breadcrumb"><a href="/">Accueil</a><span class="breadcrumb-separator">/</span><a href="/#services">Services</a><span class="breadcrumb-separator">/</span><span class="current">Peinture intérieure</span></nav></div>
-<section class="hero"><div class="container"><div class="hero-grid">
-  <div class="hero-content">
-    <div class="hero-badges"><span class="badge">⭐ 4.9/5 (23 avis)</span><span class="badge">Devis gratuit 48h</span></div>
-    <h1 class="hero-h1">Peinture intérieure à Saint-Genis-Laval</h1>
-    <p class="hero-subtitle">Spécialiste de la peinture intérieure à Saint-Genis-Laval, Tony Dettinger réalise vos travaux avec soin et précision. Plafonds, murs et boiseries traités avec les meilleurs produits professionnels. Devis gratuit sous 48h.</p>
-    <div class="hero-cta"><a href="/devis?service=peinture-interieure" class="btn btn-primary btn-lg">Demander un devis gratuit</a><a href="tel:+33214739816" class="btn btn-outline btn-lg">📞 02&nbsp;14&nbsp;73&nbsp;98&nbsp;16</a></div>
+
+<div class="topbar">
+  ⭐ <strong>Noté 5.0/5</strong> · <strong>8 ans d'expérience</strong> · Devis gratuit sous 48h
+</div>
+
+<!-- Header (identique à index.html — à inclure via include ou recopie) -->
+<header class="header">
+  <div class="container header-inner">
+    <a href="/" class="logo" aria-label="Accueil TD PEINTURE RENOVATION">
+      <span class="logo-letter" aria-hidden="true">T</span>
+      <span>TD Peinture</span>
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      <ul class="nav-list" id="navList">
+        <li><a href="/#services" class="nav-link">Services</a></li>
+        <li><a href="/realisations" class="nav-link">Réalisations</a></li>
+        <li><a href="/avis" class="nav-link">Avis</a></li>
+        <li><a href="/a-propos" class="nav-link">À propos</a></li>
+        <li><a href="/faq" class="nav-link">FAQ</a></li>
+        <li><a href="/contact" class="nav-link">Contact</a></li>
+        <li><a href="/devis" class="btn btn-primary btn-sm">Devis gratuit</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-controls="navList" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
   </div>
-  <div><img src="/img/service-peinture-interieure.jpg" alt="Peintre appliquant de la peinture intérieure à Saint-Genis-Laval" width="570" height="428" loading="eager" fetchpriority="high" style="width:100%;border-radius:var(--radius-lg);box-shadow:var(--shadow-md)"></div>
-</div></div></section>
-<section class="quick-quote-banner"><div class="container"><form class="quick-quote-inner" data-form="quick-quote" action="https://slcksfqbsbcmvqupbhox.supabase.co/functions/v1/partner-site-lead-submit" method="POST" novalidate><input type="hidden" name="_form_type" value="quick_quote"><input type="hidden" name="_client_id" value="2083e3b1-b6f1-49d9-a45b-619054f26429"><input type="hidden" name="_source_page" value="service-peinture-interieure"><input type="hidden" name="service" value="peinture-interieure"><div class="quick-quote-headline"><strong>⚡ Devis peinture intérieure</strong><span>Réponse sous 48h &middot; Sans engagement</span></div><div class="quick-quote-form"><input type="text" name="firstname" placeholder="Prénom *" required><input type="tel" name="phone" placeholder="Téléphone *" required><input type="email" name="email" placeholder="Email *" required><input type="text" name="ville" placeholder="Ville du chantier *" required><button type="submit" class="btn">Obtenir mon devis</button></div><div style="position:absolute;left:-9999px" aria-hidden="true"><input type="text" name="website" tabindex="-1"></div></form></div></section>
-<section class="section-bg-secondary"><div class="container"><div class="section-title"><h2>Pourquoi choisir TD PEINTURE RENOVATION pour votre peinture intérieure ?</h2><p>Trois raisons concrètes qui font la différence sur chaque chantier à Saint-Genis-Laval.</p></div><div class="grid grid-3"><article class="card"><h3 class="card-title">Préparation professionnelle</h3><p class="card-description">Avant toute application, nous préparons soigneusement les surfaces : ponçage, enduit de rebouchage, sous-couche adaptée. La durabilité de la peinture dépend de cette étape essentielle.</p></article><article class="card"><h3 class="card-title">Peintures de marque</h3><p class="card-description">Nous utilisons exclusivement des peintures professionnelles Tollens, Zolpan et Sikkens, offrant des finitions mate, satinée ou brillante durables et esthétiques.</p></article><article class="card"><h3 class="card-title">Propreté chantier</h3><p class="card-description">Protection des sols, meubles et boiseries avant chaque intervention. Nettoyage complet après le chantier. Vous récupérez votre logement impeccable.</p></article></div></div></section>
-<section><div class="container container--content"><div class="section-title"><h2>Notre méthode pour la peinture intérieure</h2><p>Un processus éprouvé en 4 étapes, du premier contact à la finition.</p></div><ol style="display:flex;flex-direction:column;gap:var(--space-lg);counter-reset:step"><li style="display:flex;gap:var(--space-lg);align-items:flex-start"><div class="logo-letter" style="flex-shrink:0;background:var(--color-primary);width:48px;height:48px;font-size:20px">1</div><div><h3 style="margin-bottom:var(--space-xs);font-size:var(--font-size-h4)">Visite et devis gratuit</h3><p>Déplacement à Saint-Genis-Laval pour évaluer l'état des supports, les surfaces à peindre et vos préférences. Devis détaillé remis sous 48h.</p></div></li><li style="display:flex;gap:var(--space-lg);align-items:flex-start"><div class="logo-letter" style="flex-shrink:0;background:var(--color-primary);width:48px;height:48px;font-size:20px">2</div><div><h3 style="margin-bottom:var(--space-xs);font-size:var(--font-size-h4)">Préparation des supports</h3><p>Ponçage, rebouchage des fissures, enduit de lissage si nécessaire, sous-couche d'accrochage. Protection complète des surfaces non peindre.</p></div></li><li style="display:flex;gap:var(--space-lg);align-items:flex-start"><div class="logo-letter" style="flex-shrink:0;background:var(--color-primary);width:48px;height:48px;font-size:20px">3</div><div><h3 style="margin-bottom:var(--space-xs);font-size:var(--font-size-h4)">Application 2 couches minimum</h3><p>Première couche de fond, séchage complet, ponçage léger si nécessaire, seconde couche de finition. Résultat homogène et durable.</p></div></li><li style="display:flex;gap:var(--space-lg);align-items:flex-start"><div class="logo-letter" style="flex-shrink:0;background:var(--color-primary);width:48px;height:48px;font-size:20px">4</div><div><h3 style="margin-bottom:var(--space-xs);font-size:var(--font-size-h4)">Contrôle et livraison</h3><p>Vérification avec vous avant livraison. Retouches incluses si nécessaire. Nettoyage complet du chantier. Vous êtes satisfait ou nous revenons.</p></div></li></ol></div></section>
-<section class="section-bg-accent"><div class="container"><div class="section-title"><h2>Tarifs indicatifs et durée</h2><p>Le prix exact dépend de votre chantier. Devis gratuit et détaillé sous 48h.</p></div><div class="metrics-grid"><article class="metric-card"><div class="metric-icon">💶</div><div class="metric-label">À partir de</div><div class="metric-value">15<span class="unit">€</span><span class="separator">&ndash;</span>35<span class="unit">€/m²</span></div><p class="metric-note">Selon état des supports, nombre de couches et accessibilité</p></article><article class="metric-card"><div class="metric-icon">⏱️</div><div class="metric-label">Durée</div><div class="metric-value" style="font-size:24px">1 j. &ndash; 1 sem.</div><p class="metric-note">Une chambre en 1 jour, un appartement T3 en 3 à 5 jours</p></article></div></div></section>
-<section><div class="container"><div class="section-title"><h2>Nos garanties</h2></div><div class="grid grid-auto"><div class="card"><h3 class="card-title">Garantie 1 an</h3><p class="card-description">Garantie de parfait achèvement : tout défaut constaté dans l'année suivant la livraison est repris à nos frais.</p></div><div class="card"><h3 class="card-title">Prix fixé au devis</h3><p class="card-description">Le prix annoncé dans notre devis est le prix final. Aucun frais caché, aucune mauvaise surprise.</p></div><div class="card"><h3 class="card-title">Assurance RC pro</h3><p class="card-description">TD PEINTURE RENOVATION est couvert par une assurance responsabilité civile professionnelle. Attestation disponible sur demande.</p></div></div></div></section>
-<section class="section-bg-secondary" id="faq"><div class="container container--content"><div class="section-title"><h2>Questions fréquentes sur la peinture intérieure</h2></div><div><div class="faq-item"><div class="faq-question" role="button" tabindex="0" aria-expanded="false">Quel est le prix d'une peinture intérieure ?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer"><p>Entre 15 et 35 €/m² selon l'état des supports, le nombre de couches et la hauteur sous plafond. Pour un salon de 25 m² avec préparation complète, comptez environ 500 à 900 €. Devis gratuit sur place.</p></div></div><div class="faq-item"><div class="faq-question" role="button" tabindex="0" aria-expanded="false">Combien de couches de peinture appliquez-vous ?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer"><p>Minimum 2 couches de finition, précédées d'une sous-couche d'accrochage si nécessaire. La première couche scelle le support, la seconde donne le rendu final esthétique et durable.</p></div></div><div class="faq-item"><div class="faq-question" role="button" tabindex="0" aria-expanded="false">Pouvez-vous peindre des murs en mauvais état ?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer"><p>Oui. Traitement des fissures, enduit de lissage, rebouchage : nous remettons les supports en état avant toute application de peinture. C'est l'une de nos spécialités.</p></div></div><div class="faq-item"><div class="faq-question" role="button" tabindex="0" aria-expanded="false">Quelle peinture utilisez-vous pour l'intérieur ?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer"><p>Peintures acryliques professionnelles Tollens, Zolpan ou Sikkens. Finitions mate, satinée ou brillante selon votre souhait. Toutes conformes aux normes REACH pour la santé intérieure.</p></div></div><div class="faq-item"><div class="faq-question" role="button" tabindex="0" aria-expanded="false">Les sols et meubles sont-ils protégés ?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer"><p>Oui, toujours. Bâches de protection sur les sols et le mobilier avant toute intervention. Nettoyage complet après le chantier.</p></div></div></div></div></section>
-<section><div class="container"><div class="section-title"><h2>Nos autres services</h2><p>Nous intervenons sur l'ensemble de vos besoins liés à un peintre.</p></div><div class="grid grid-3"><a href="/services/peinture-exterieure" class="card" style="text-decoration:none"><img class="card-image" src="/img/service-peinture-exterieure.jpg" alt="Peinture extérieure" loading="lazy"><h3 class="card-title">Peinture extérieure</h3><p class="card-description">Volets, bardages et façades. Protéger et embellir l'extérieur de votre maison.</p><span class="card-link">En savoir plus &rarr;</span></a><a href="/services/ravalement-facade" class="card" style="text-decoration:none"><img class="card-image" src="/img/service-ravalement-facade.jpg" alt="Ravalement façade" loading="lazy"><h3 class="card-title">Ravalement de façade</h3><p class="card-description">Remise en état complète de votre façade avec peinture siloxane ou pliolite.</p><span class="card-link">En savoir plus &rarr;</span></a><a href="/services/renovation-supports" class="card" style="text-decoration:none"><img class="card-image" src="/img/service-renovation-supports.jpg" alt="Rénovation supports" loading="lazy"><h3 class="card-title">Rénovation de supports</h3><p class="card-description">Enduits de lissage et traitement des supports avant peinture.</p><span class="card-link">En savoir plus &rarr;</span></a></div></div></section>
-<section class="section-bg-secondary"><div class="container"><div class="cta-banner"><h2>Besoin d'une peinture intérieure à Saint-Genis-Laval ?</h2><p>Contactez TD PEINTURE RENOVATION pour un devis gratuit sous 48h. 2 ans d'expérience au service de votre projet.</p><a href="/devis?service=peinture-interieure" class="btn btn-primary btn-lg">Obtenir mon devis gratuit</a><a href="tel:+33214739816" style="color:white;text-decoration:underline;margin-top:8px;font-size:14px">ou appelez au 02&nbsp;14&nbsp;73&nbsp;98&nbsp;16</a></div></div></section>
+</header>
+
+<main id="main">
+
+<!-- Breadcrumb -->
+<div class="container">
+  <nav class="breadcrumb" aria-label="Fil d'Ariane">
+    <a href="/">Accueil</a>
+    <span class="breadcrumb-separator">/</span>
+    <a href="/#services">Services</a>
+    <span class="breadcrumb-separator">/</span>
+    <span class="current">Peinture intérieure</span>
+  </nav>
+</div>
+
+<!-- Hero service -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-badges">
+          <span class="badge">⭐ 5.0/5 (23 avis)</span>
+          <span class="badge">Devis gratuit 48h</span>
+        </div>
+        <h1 class="hero-h1">Peinture intérieure à Saint-Genis-Laval et le Sud-Ouest lyonnais</h1>
+        <p class="hero-subtitle">Spécialiste de la peinture intérieure à Saint-Genis-Laval, nous prenons en charge tous vos projets : appartement, maison, bureaux. Préparation des supports, choix des produits, application soignée.</p>
+        <div class="hero-cta">
+          <a href="/devis?service=peinture-interieure" class="btn btn-primary btn-lg">Demander un devis gratuit</a>
+          <a href="tel:+33481918432" class="btn btn-outline btn-lg">📞 04 81 91 84 32</a>
+        </div>
+      </div>
+      <div>
+        <img src="/img/service-peinture-interieure.jpg" alt="Peinture intérieure réalisé par TD PEINTURE RENOVATION" width="570" height="428" loading="eager" fetchpriority="high" style="width:100%; border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     QUICK QUOTE BANNER — form devis horizontal sous le hero
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="quick-quote-banner">
+  <div class="container">
+    <form class="quick-quote-inner" data-form="quick-quote" action="https://slcksfqbsbcmvqupbhox.supabase.co/functions/v1/partner-site-lead-submit" method="POST" novalidate>
+      <input type="hidden" name="_form_type" value="quick_quote">
+      <input type="hidden" name="_client_id" value="2083e3b1-b6f1-49d9-a45b-619054f26429">
+      <input type="hidden" name="_source_page" value="service-peinture-interieure">
+      <input type="hidden" name="service" value="peinture-interieure">
+
+      <div class="quick-quote-headline">
+        <strong>⚡ Devis gratuit peinture intérieure</strong>
+        <span>Réponse sous 48h · Sans engagement</span>
+      </div>
+
+      <div class="quick-quote-form">
+        <input type="text" name="firstname" placeholder="Prénom *" required autocomplete="given-name" aria-label="Prénom">
+        <input type="tel" name="phone" placeholder="Téléphone *" required autocomplete="tel" inputmode="tel" aria-label="Téléphone">
+        <input type="email" name="email" placeholder="Email *" required autocomplete="email" inputmode="email" aria-label="Email">
+        <input type="text" name="ville" placeholder="Ville du chantier *" required aria-label="Ville">
+        <button type="submit" class="btn">Obtenir mon devis</button>
+      </div>
+
+      <div style="position: absolute; left: -9999px;" aria-hidden="true">
+        <input type="text" name="website" tabindex="-1" autocomplete="off">
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Pourquoi nous -->
+<section class="section-bg-secondary">
+  <div class="container">
+    <div class="section-title">
+      <h2>Pourquoi choisir TD PEINTURE RENOVATION pour votre peinture intérieure ?</h2>
+      <p>Trois raisons concrètes qui font la différence sur chaque chantier à Saint-Genis-Laval.</p>
+    </div>
+    <div class="grid grid-3">
+      <article class="card">
+        <h3 class="card-title">Expertise reconnue</h3>
+        <p class="card-description">8 ans d'expérience, formation continue, plus de 150 chantiers réalisés.</p>
+      </article>
+      <article class="card">
+        <h3 class="card-title">Devis 48h gratuit</h3>
+        <p class="card-description">Réponse rapide avec devis détaillé, sans engagement, prix transparent.</p>
+      </article>
+      <article class="card">
+        <h3 class="card-title">Assurance décennale</h3>
+        <p class="card-description">MAAF Pro — Vous êtes couverts pour tout dommage éventuel.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Notre méthode -->
+<section>
+  <div class="container container--content">
+    <div class="section-title">
+      <h2>Notre méthode pour peinture intérieure</h2>
+      <p>Un process éprouvé en 4 étapes, du premier contact à la finition.</p>
+    </div>
+    <ol style="display: flex; flex-direction: column; gap: var(--space-lg); counter-reset: step;">
+      <li style="display: flex; gap: var(--space-lg); align-items: flex-start;">
+        <div class="logo-letter" style="flex-shrink: 0; background: var(--color-primary); width: 48px; height: 48px; font-size: 20px;">1</div>
+        <div>
+          <h3 style="margin-bottom: var(--space-xs); font-size: var(--font-size-h4);">Diagnostic sur site</h3>
+          <p>Nous nous déplaçons pour évaluer précisément votre besoin et les contraintes.</p>
+        </div>
+      </li>
+      <li style="display: flex; gap: var(--space-lg); align-items: flex-start;">
+        <div class="logo-letter" style="flex-shrink: 0; background: var(--color-primary); width: 48px; height: 48px; font-size: 20px;">2</div>
+        <div>
+          <h3 style="margin-bottom: var(--space-xs); font-size: var(--font-size-h4);">Devis détaillé sous 48h</h3>
+          <p>Devis clair incluant tout (main-d'œuvre, produits, déplacement, nettoyage).</p>
+        </div>
+      </li>
+      <li style="display: flex; gap: var(--space-lg); align-items: flex-start;">
+        <div class="logo-letter" style="flex-shrink: 0; background: var(--color-primary); width: 48px; height: 48px; font-size: 20px;">3</div>
+        <div>
+          <h3 style="margin-bottom: var(--space-xs); font-size: var(--font-size-h4);">Intervention planifiée</h3>
+          <p>Date convenue ensemble, équipement préparé, protection des meubles et sols.</p>
+        </div>
+      </li>
+      <li style="display: flex; gap: var(--space-lg); align-items: flex-start;">
+        <div class="logo-letter" style="flex-shrink: 0; background: var(--color-primary); width: 48px; height: 48px; font-size: 20px;">4</div>
+        <div>
+          <h3 style="margin-bottom: var(--space-xs); font-size: var(--font-size-h4);">Finitions et nettoyage</h3>
+          <p>Vérification finale avec vous, retouches si nécessaire, nettoyage complet.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- Prix + durée (metric cards élégantes) -->
+<section class="section-bg-accent">
+  <div class="container">
+    <div class="section-title">
+      <h2>Tarifs indicatifs et durée</h2>
+      <p>Le prix exact dépend de votre chantier. Devis gratuit et détaillé sous 48h.</p>
+    </div>
+    <div class="metrics-grid">
+      <article class="metric-card">
+        <div class="metric-icon" aria-hidden="true">💶</div>
+        <div class="metric-label">À partir de</div>
+        <div class="metric-value">
+          25<span class="unit">€</span>
+          <span class="separator">–</span>
+          60<span class="unit">€</span>
+        </div>
+        <p class="metric-note">Prix au m² indicatif, peut varier selon état des supports et finition.</p>
+      </article>
+      <article class="metric-card">
+        <div class="metric-icon" aria-hidden="true">⏱️</div>
+        <div class="metric-label">Durée d'intervention</div>
+        <div class="metric-value">1-15j</div>
+        <p class="metric-note">Selon ampleur du chantier, durée annoncée au devis.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Garanties -->
+<section>
+  <div class="container">
+    <div class="section-title">
+      <h2>Nos garanties</h2>
+    </div>
+    <div class="grid grid-auto">
+      <div class="card">
+        <h3 class="card-title">Satisfait ou repris</h3>
+        <p class="card-description">Finition non conforme au devis ? Nous revenons gratuitement jusqu'à satisfaction.</p>
+      </div>
+      <div class="card">
+        <h3 class="card-title">Délai garanti</h3>
+        <p class="card-description">Date de fin annoncée respectée. Sinon, dédommagement convenu.</p>
+      </div>
+      <div class="card">
+        <h3 class="card-title">Propreté garantie</h3>
+        <p class="card-description">Bâches, masquage, nettoyage complet en fin de chantier. Aucune trace.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ spécifique service -->
+<section class="section-bg-secondary" id="faq">
+  <div class="container container--content">
+    <div class="section-title">
+      <h2>Questions fréquentes sur peinture intérieure</h2>
+    </div>
+    <div>
+      <div class="faq-item">
+        <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+          Combien coûte peinture intérieure ?
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-answer"><p>Le prix d'une peinture intérieure varie de 25 à 60€/m² selon l'état des supports et la finition. Devis gratuit sous 48h.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+          Quelle est la durée d'intervention ?
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-answer"><p>Entre 1 et 15 jours selon le chantier. Estimation précise au devis.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+          Intervenez-vous en urgence ?
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-answer"><p>Oui, sous 48-72h pour les urgences (dégât des eaux, location à remettre).</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+          Protégez-vous mon mobilier ?
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-answer"><p>Oui, toujours. Bâches, papier de protection, ruban de masquage : c'est inclus.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+          Êtes-vous assurés ?
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-answer"><p>Assurance décennale MAAF Pro, responsabilité civile. Attestation fournie sur demande.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Nos autres services (sticky maillage interne) -->
+<section>
+  <div class="container">
+    <div class="section-title">
+      <h2>Nos autres services</h2>
+      <p>Nous intervenons sur l'ensemble de vos besoins liés à un peintre.</p>
+    </div>
+    <div class="grid grid-3">
+      <a href="/peinture-exterieure" class="card" style="text-decoration: none;">
+        <img class="card-image" src="/img/service-peinture-exterieure.jpg" alt="Peinture extérieure" loading="lazy">
+        <h3 class="card-title">Peinture extérieure</h3>
+        <p class="card-description">Peinture des façades, volets, portails, terrasses. Produits résistants intempéries.</p>
+        <span class="card-link">En savoir plus →</span>
+      </a>
+      <a href="/ravalement-facade" class="card" style="text-decoration: none;">
+        <img class="card-image" src="/img/service-ravalement-facade.jpg" alt="Ravalement de façade" loading="lazy">
+        <h3 class="card-title">Ravalement de façade</h3>
+        <p class="card-description">Nettoyage, traitement, enduit et peinture de façade. Conforme aux exigences municipales.</p>
+        <span class="card-link">En savoir plus →</span>
+      </a>
+      <a href="/enduit-decoratif" class="card" style="text-decoration: none;">
+        <img class="card-image" src="/img/service-enduit-decoratif.jpg" alt="Enduit décoratif" loading="lazy">
+        <h3 class="card-title">Enduit décoratif</h3>
+        <p class="card-description">Enduits à la chaux, béton ciré, tadelakt, stuc vénitien. Effets décoratifs uniques.</p>
+        <span class="card-link">En savoir plus →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA final -->
+<section class="section-bg-secondary">
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Besoin d'un peinture intérieure à Saint-Genis-Laval ?</h2>
+      <p>Contactez TD PEINTURE RENOVATION pour un devis gratuit sous 48h. 8 ans d'expérience au service de votre projet.</p>
+      <a href="/devis?service=peinture-interieure" class="btn btn-primary btn-lg">Obtenir mon devis gratuit</a>
+      <a href="tel:+33481918432" style="color: white; text-decoration: underline; margin-top: 8px; font-size: 14px;">ou appelez au 04 81 91 84 32</a>
+    </div>
+  </div>
+</section>
+
 </main>
-<footer class="footer"><div class="container"><div class="footer-grid"><div><div class="logo mb-md"><span class="logo-letter" aria-hidden="true">T</span><span>TD Peinture</span></div><p style="font-size:14px">Artisan peintre à Saint-Genis-Laval.</p><p class="mt-md" style="font-size:13px;color:var(--color-text-muted)"><strong style="color:var(--color-primary-dark)">SIRET :</strong> 987 356 284 00016</p></div><div><h3 class="footer-title">Services</h3><ul class="footer-list"><li><a href="/services/peinture-interieure">Peinture intérieure</a></li><li><a href="/services/peinture-exterieure">Peinture extérieure</a></li><li><a href="/services/ravalement-facade">Ravalement de façade</a></li><li><a href="/services/enduit-decoratif">Enduit décoratif</a></li><li><a href="/services/pose-papier-peint">Pose de papier peint</a></li><li><a href="/services/renovation-supports">Rénovation de supports</a></li></ul></div><div><h3 class="footer-title">Entreprise</h3><ul class="footer-list"><li><a href="/a-propos">À propos</a></li><li><a href="/realisations">Nos réalisations</a></li><li><a href="/avis">Avis clients</a></li><li><a href="/faq">FAQ</a></li><li><a href="/zone-intervention">Zone d'intervention</a></li><li><a href="/contact">Contact</a></li></ul></div><div><h3 class="footer-title">Contact</h3><ul class="footer-list"><li><a href="tel:+33214739816">📞 02&nbsp;14&nbsp;73&nbsp;98&nbsp;16</a></li><li><a href="mailto:contact@artisanpeintre-saintgenislaval69.fr">✉️ contact@...</a></li><li style="padding-top:8px">📍 69230 Saint-Genis-Laval</li></ul></div></div><div class="footer-bottom"><div>&copy; 2026 TD PEINTURE RENOVATION</div><div><a href="/mentions-legales">Mentions légales</a> &middot; <a href="/cgv">CGV</a> &middot; <a href="/confidentialite">Confidentialité</a></div></div></div></footer>
-<div class="sticky-cta-bar"><a href="tel:+33214739816" class="btn btn-outline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Appeler</a><a href="/devis" class="btn btn-primary">Devis gratuit</a></div>
-<script src="/js/main.js" defer></script><script src="/js/forms.js" defer></script>
-</body></html>
+
+<!-- Footer (identique à index.html — l'agent recopiera le footer standard) -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo mb-md">
+          <span class="logo-letter" aria-hidden="true">T</span>
+          <span>TD Peinture</span>
+        </div>
+        <p style="font-size: 14px;">Artisan peintre à Saint-Genis-Laval — Peinture intérieure, extérieure, ravalement, enduit décoratif. Devis gratuit sous 48h.</p>
+        <p class="mt-md" style="font-size: 13px; color: var(--color-text-muted);">
+          <strong style="color: var(--color-primary-dark);">SIRET :</strong> 898 765 432 00018
+        </p>
+      </div>
+      <div>
+        <h3 class="footer-title">Services</h3>
+        <ul class="footer-list">
+          <!-- liste générée dynamiquement par l'agent selon services du partenaire -->
+          <li><a href="/services/peinture-interieure">Peinture intérieure</a></li><li><a href="/services/peinture-exterieure">Peinture extérieure</a></li><li><a href="/services/ravalement-facade">Ravalement de façade</a></li><li><a href="/services/enduit-decoratif">Enduit décoratif</a></li><li><a href="/services/pose-papier-peint">Pose de papier peint</a></li><li><a href="/services/renovation-supports">Rénovation des supports</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-title">Entreprise</h3>
+        <ul class="footer-list">
+          <li><a href="/a-propos">À propos</a></li>
+          <li><a href="/realisations">Nos réalisations</a></li>
+          <li><a href="/avis">Avis clients</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/zone-intervention">Zone d'intervention</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-title">Contact</h3>
+        <ul class="footer-list">
+          <li><a href="tel:+33481918432">📞 04 81 91 84 32</a></li>
+          <li><a href="mailto:contact@artisanpeintre-saintgenislaval69.fr">✉️ contact@artisanpeintre-saintgenislaval69.fr</a></li>
+          <li style="padding-top: 8px;">📍 Saint-Genis-Laval<br>69230 Saint-Genis-Laval</li>
+          <li style="padding-top: 8px;">Lun-Ven : 8h-18h</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 TD PEINTURE RENOVATION · Tous droits réservés</div>
+      <div>
+        <a href="/mentions-legales">Mentions légales</a> ·
+        <a href="/cgv">CGV</a> ·
+        <a href="/confidentialite">Confidentialité</a> ·
+        <a href="/plan-du-site">Plan du site</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Sticky CTA bar mobile : appel + devis toujours visibles -->
+<div class="sticky-cta-bar">
+  <a href="tel:+33481918432" class="btn btn-outline" aria-label="Appeler le 04 81 91 84 32">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+    </svg>
+    Appeler
+  </a>
+  <a href="/devis" class="btn btn-primary">Devis gratuit</a>
+</div>
+
+<script src="/js/main.js" defer></script>
+</body>
+</html>
