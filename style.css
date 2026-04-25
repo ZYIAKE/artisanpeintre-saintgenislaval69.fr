@@ -167,9 +167,14 @@ section{padding:4rem 0}
 .zone-location{display:flex;align-items:center;gap:.35rem;font-size:.9rem;font-weight:600;margin:.8rem 0 .4rem}
 .zone-location svg{width:14px;height:14px;color:var(--amber)}
 .zone-radius{font-size:.82rem;color:rgba(255,255,255,.5);margin-bottom:1.2rem;line-height:1.7}
-.zone-list{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .7rem;margin-bottom:1.3rem}
-.zone-list-item{display:flex;align-items:center;gap:.3rem;font-size:.8rem;color:rgba(255,255,255,.6)}
-.zone-list-item svg{width:12px;height:12px;color:var(--amber);flex-shrink:0}
+.zone-cities-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:1.25rem 0 1.5rem}
+.zone-city-link{display:flex;flex-direction:column;align-items:flex-start;gap:.15rem;padding:.65rem .9rem;background:rgba(255,255,255,.92);border:1px solid rgba(212,144,69,.25);border-radius:10px;text-decoration:none;color:inherit;transition:all .25s ease}
+.zone-city-link:hover{background:#fff;border-color:var(--amber);transform:translateY(-2px);box-shadow:0 6px 16px rgba(212,144,69,.18)}
+.zone-city-name{font-weight:700;font-size:.92rem;color:var(--brown);line-height:1.2}
+.zone-city-meta{font-size:.72rem;color:var(--text-mid);font-weight:500}
+.zone-cta{display:inline-flex;align-items:center;gap:.55rem;margin-top:.5rem}
+@media(max-width:900px){.zone-cities-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.zone-cities-grid{grid-template-columns:1fr}}
 
 /* ══ FAQ — lignes épurées ══ */
 .faq-section{border-bottom:1px solid var(--border-light)}
