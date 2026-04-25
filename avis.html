@@ -429,19 +429,23 @@
     .then(data => {
       if (!data.reviews || data.reviews.length === 0) { fallbackEmpty(); return; }
 
+      // Use the API's googleMapsUrl if present, fallback to GMB_URL
+      const linkUrl = data.googleMapsUrl || GMB_URL;
+
       const headerHtml = `
         <div class="avis-header">
           <div class="avis-header-left">
             ${googleSvg}
             <div class="avis-header-info">
               <div class="avis-rating-big">${(data.rating || 5).toFixed(1)}<span class="avis-stars">${starsHtml(data.rating)}</span></div>
-              <div class="avis-rating-count">${data.total || 0} avis Google</div>
+              <div class="avis-rating-count">${data.total || data.totalReviews || 0} avis Google</div>
             </div>
           </div>
-          <a href="${GMB_URL}" target="_blank" rel="noopener" class="avis-gmb-link">Voir tous les avis ${externSvg}</a>
+          <a href="${linkUrl}" target="_blank" rel="noopener" class="avis-gmb-link">Voir tous les avis ${externSvg}</a>
         </div>`;
 
-      const reviews = data.reviews.slice(0, 9);
+      const limit = container.dataset.limit ? parseInt(container.dataset.limit, 10) : 9;
+      const reviews = data.reviews.slice(0, limit);
       const slidesHtml = reviews.map(r => `
         <div class="avis-slide">
           <article class="avis-card">
