@@ -337,40 +337,71 @@
 
 <script src="/js/main.js" defer></script>
 
+<style>
+.avis-widget { max-width: 980px; margin: 0 auto; }
+.avis-header { display: flex; justify-content: space-between; align-items: center; gap: var(--space-md); padding: var(--space-lg); background: #fff; border-radius: 12px; margin-bottom: var(--space-xl); box-shadow: 0 2px 12px rgba(0,0,0,0.06); flex-wrap: wrap; }
+.avis-header-left { display: flex; gap: var(--space-md); align-items: center; }
+.avis-google-icon { width: 48px; height: 48px; flex-shrink: 0; }
+.avis-rating-big { display: flex; align-items: center; gap: .5rem; font-size: 2rem; font-weight: 700; color: var(--color-text, #111); line-height: 1; }
+.avis-stars { color: #FFA500; font-size: 1.25rem; }
+.avis-rating-count { color: #666; font-size: .95rem; margin-top: .3rem; }
+.avis-gmb-link { display: inline-flex; align-items: center; gap: .3rem; color: var(--color-primary); font-weight: 600; text-decoration: none; padding: .6rem 1rem; border: 2px solid var(--color-primary); border-radius: 8px; transition: all .2s; }
+.avis-gmb-link:hover { background: var(--color-primary); color: #fff; }
+.avis-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: var(--space-md); }
+.avis-card { background: #fff; padding: var(--space-md); border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: flex; flex-direction: column; gap: .6rem; }
+.avis-card-header { display: flex; justify-content: space-between; align-items: center; }
+.avis-card-author { font-weight: 600; color: var(--color-text, #111); }
+.avis-card-stars { color: #FFA500; font-size: 1rem; }
+.avis-card-text { color: #444; line-height: 1.55; margin: 0; font-size: .95rem; }
+.avis-card-date { color: #999; font-size: .85rem; }
+</style>
 <script>
 (function() {
   const DOMAIN = "artisanpeintre-saintgenislaval69.fr";
   const API = "https://slcksfqbsbcmvqupbhox.supabase.co/functions/v1/site-google-reviews";
+  const ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNsY2tzZnFic2JjbXZxdXBiaG94Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI2OTk1NTksImV4cCI6MjA4ODI3NTU1OX0.Uv3yUk7s1ASmvwra0bYjZDLXTB8LRDNU9qeDfuuyk4I";
+  const GMB_URL = "https://www.google.com/maps/search/?api=1&query=artisanpeintre+saintgenislaval69.fr";
   const container = document.getElementById("google-reviews-widget");
   if (!container) return;
 
-  fetch(`${API}?domain=${encodeURIComponent(DOMAIN)}`)
+  const googleSvg = `<svg class="avis-google-icon" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 8 3l5.7-5.7C34 6 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.2-2.7-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.5 15.5 18.8 12 24 12c3.1 0 5.8 1.2 8 3l5.7-5.7C34 6 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.2-2.7-.4-3.9z"/></svg>`;
+  const stars = (n) => "★".repeat(Math.round(n || 5)) + "☆".repeat(5 - Math.round(n || 5));
+
+  fetch(`${API}?domain=${encodeURIComponent(DOMAIN)}`, {
+    headers: { "Authorization": `Bearer ${ANON}` }
+  })
     .then(r => r.json())
     .then(data => {
       if (!data.reviews || data.reviews.length === 0) {
-        container.innerHTML = '<p style="text-align:center;color:#666">Avis Google bientôt disponibles. Consultez notre fiche Google directement.</p>';
+        container.innerHTML = `<div class="avis-header" style="justify-content:center"><a href="${GMB_URL}" target="_blank" rel="noopener" class="avis-gmb-link">${googleSvg} Voir notre fiche Google</a></div>`;
         return;
       }
-      const ratingHtml = `
-        <div style="text-align:center;margin-bottom:var(--space-2xl)">
-          <div style="font-size:3rem;font-weight:700;color:var(--color-primary);line-height:1">${data.rating || "5.0"}</div>
-          <div style="font-size:1.5rem;color:#FFA500">${"★".repeat(Math.round(data.rating || 5))}</div>
-          <div style="color:#666;margin-top:.5rem">Basé sur ${data.total || 0} avis Google</div>
-        </div>`;
-      const reviewsHtml = data.reviews.slice(0, 12).map(r => `
-        <article class="review-card" style="background:#fff;padding:var(--space-lg);border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin-bottom:var(--space-md)">
-          <div style="display:flex;justify-content:space-between;margin-bottom:.5rem">
-            <strong>${(r.reviewer_name || "Anonyme")}</strong>
-            <span style="color:#FFA500">${"★".repeat(r.star_rating || 5)}</span>
+      const headerHtml = `
+        <div class="avis-header">
+          <div class="avis-header-left">
+            ${googleSvg}
+            <div>
+              <div class="avis-rating-big">${(data.rating || 5).toFixed(1)} <span class="avis-stars">${stars(data.rating)}</span></div>
+              <div class="avis-rating-count">${data.total || 0} avis Google</div>
+            </div>
           </div>
-          <p style="margin:0;color:#444;line-height:1.6">${(r.comment || "").replace(/[<>]/g, '')}</p>
-          <div style="margin-top:.5rem;color:#999;font-size:.85rem">${new Date(r.review_create_time || Date.now()).toLocaleDateString('fr-FR', {year:'numeric', month:'long'})}</div>
-        </article>`).join("");
-      container.innerHTML = ratingHtml + reviewsHtml;
+          <a href="${GMB_URL}" target="_blank" rel="noopener" class="avis-gmb-link">Voir tous les avis →</a>
+        </div>`;
+      const escape = (s) => (s || "").replace(/[<>&]/g, c => ({"<":"&lt;",">":"&gt;","&":"&amp;"})[c]);
+      const reviewsHtml = `<div class="avis-grid">${data.reviews.slice(0, 12).map(r => `
+        <article class="avis-card">
+          <div class="avis-card-header">
+            <span class="avis-card-author">${escape(r.reviewer_name || "Anonyme")}</span>
+            <span class="avis-card-stars">${stars(r.star_rating)}</span>
+          </div>
+          <p class="avis-card-text">${escape(r.comment)}</p>
+          <div class="avis-card-date">${new Date(r.review_create_time || Date.now()).toLocaleDateString('fr-FR', {year: 'numeric', month: 'long'})}</div>
+        </article>`).join("")}</div>`;
+      container.innerHTML = `<div class="avis-widget">${headerHtml}${reviewsHtml}</div>`;
     })
     .catch(err => {
-      container.innerHTML = '<p style="text-align:center;color:#666">Avis Google bientôt disponibles. Consultez notre fiche Google directement.</p>';
-      console.error("Reviews fetch error:", err);
+      container.innerHTML = `<div class="avis-header" style="justify-content:center"><a href="${GMB_URL}" target="_blank" rel="noopener" class="avis-gmb-link">${googleSvg} Voir notre fiche Google</a></div>`;
+      console.warn("Reviews fetch error:", err);
     });
 })();
 </script>
