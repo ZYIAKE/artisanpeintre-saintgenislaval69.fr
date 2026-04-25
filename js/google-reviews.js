@@ -7,7 +7,7 @@
 (function() {
   const PLACE_ID = 'ChIJc8u4JvKCDogRurf-P2grNjE';
   const DOMAIN = 'artisanpeintre-saintgenislaval69.fr';
-  const ENDPOINT = 'https://slcksfqbsbcmvqupbhox.supabase.co/functions/v1/site-google-reviews?domain=' + DOMAIN;
+  const ENDPOINT = 'https://slcksfqbsbcmvqupbhox.supabase.co/functions/v1/site-google-reviews?domain=' + window.location.hostname;
   const WRITE_REVIEW_URL = 'https://search.google.com/local/writereview?placeid=' + PLACE_ID;
 
   function relativeDate(timestamp) {

@@ -288,37 +288,63 @@ footer{background:var(--brown);color:rgba(255,255,255,.4);padding:3rem 0 1.2rem}
 }
 @media(max-width:480px){.hero-btns{flex-direction:column;align-items:center}}
 
-/* ══ BENTO CARDS CLIQUABLES + RÉALISATIONS DÉTAIL ══ */
-.bento-card-link{display:block;text-decoration:none;color:inherit;transition:transform .25s,box-shadow .25s}
-.bento-card-link:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.12)}
-.bento-card-link:hover .bento-card{box-shadow:0 12px 30px rgba(0,0,0,.12)}
-.bento-img-real{width:100%;height:240px;object-fit:cover;display:block;border-radius:8px 8px 0 0}
-.bento-card.large .bento-img-real{height:380px}
+/* ══ Cartes bento — wrapping en lien cliquable ══ */
+.bento-card-link{display:block;text-decoration:none;color:inherit;transition:transform .25s ease,box-shadow .25s ease}
+.bento-card-link:hover{transform:translateY(-4px)}
+.bento-card-link:hover .bento-card{box-shadow:0 14px 32px rgba(59,36,23,.12)}
 .bento-card{overflow:hidden;border-radius:8px}
 
-/* Page détail réalisation */
-.realisation-detail .realisation-hero{position:relative;width:100%;height:480px;overflow:hidden}
-.realisation-detail .realisation-hero img{width:100%;height:100%;object-fit:cover;display:block}
-.realisation-detail .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(0,0,0,.65) 100%);display:flex;align-items:flex-end;padding:2.5rem 0;color:#fff}
-.realisation-detail .hero-overlay h1{color:#fff;font-size:2.5rem;font-weight:800;margin:.75rem 0 0 0;line-height:1.15;max-width:900px}
-.realisation-detail .hero-tags{display:flex;gap:.5rem;flex-wrap:wrap}
-.realisation-detail .hero-tags .tag{background:rgba(255,255,255,.15);backdrop-filter:blur(8px);color:#fff;font-size:.8rem;font-weight:600;padding:.35rem .75rem;border-radius:99px;text-transform:uppercase;letter-spacing:.04em}
-.realisation-content{padding:3rem 0}
-.realisation-content .lede{font-size:1.25rem;line-height:1.55;color:var(--text-soft);margin-bottom:2rem;max-width:780px}
-.realisation-content h2{font-size:1.5rem;font-weight:700;margin:2.5rem 0 1rem 0;color:var(--text-strong)}
-.realisation-content p{font-size:1rem;line-height:1.65;margin-bottom:1rem;max-width:780px}
-.realisation-content .testimonial{margin:2.5rem 0;padding:1.75rem 2rem;background:var(--bg-soft,#FAF6F0);border-left:4px solid var(--amber);border-radius:0 12px 12px 0}
-.realisation-content .testimonial p{font-style:italic;font-size:1.1rem;color:var(--text-strong);margin-bottom:.75rem}
-.realisation-content .testimonial footer{font-size:.9rem;color:var(--text-soft);font-weight:600}
-.realisation-content .map-embed{margin:2.5rem 0;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08)}
-.realisation-content .map-embed iframe{display:block;width:100%}
-.similar-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;margin-top:1rem}
+/* ══ Image bento (réalisations avec photo) ══ */
+.bento-img-real{display:block;width:100%;height:240px;object-fit:cover;background:#f3eadf}
+.bento-card.large .bento-img-real{height:380px}
+
+@media(max-width:900px){
+  .bento-img-real{height:220px}
+  .bento-card.large .bento-img-real{height:260px}
+}
+@media(max-width:600px){
+  .bento-img-real{height:200px}
+  .bento-card.large .bento-img-real{height:220px}
+}
+
+/* ══ Pages détail chantier ══ */
+.realisation-detail{background:var(--cream-bg)}
+.realisation-hero{position:relative;height:420px;overflow:hidden}
+.realisation-hero img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:2rem;background:linear-gradient(to top,rgba(43,28,18,.85) 0%,rgba(43,28,18,.4) 50%,transparent 100%);color:#fff}
+.hero-overlay .tag{display:inline-block;background:rgba(255,255,255,.2);backdrop-filter:blur(8px);color:#fff;padding:.35rem .9rem;border-radius:999px;font-size:.78rem;font-weight:600;margin-right:.5rem;margin-bottom:.5rem}
+.hero-overlay h1{color:#fff;margin:.5rem 0 0;font-size:2rem;line-height:1.2;max-width:900px}
+
+@media(max-width:768px){
+  .realisation-hero{height:300px}
+  .hero-overlay{padding:1.25rem}
+  .hero-overlay h1{font-size:1.4rem}
+}
+
+.realisation-content{padding:3rem 0 4rem}
+.realisation-content .lede{font-size:1.15rem;color:var(--text-mid);margin-bottom:2rem;max-width:780px}
+.realisation-content h2{font-size:1.5rem;margin:2.5rem 0 1rem;color:var(--brown)}
+.realisation-content p{max-width:780px;line-height:1.75;margin-bottom:1rem}
+.realisation-content .map-embed{margin:2rem 0;border-radius:var(--r-lg);overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.realisation-content .map-embed iframe{display:block;width:100%;height:340px;border:0}
+
+/* ══ Témoignage ══ */
+.testimonial{background:var(--white);border-left:4px solid var(--amber);padding:1.5rem 2rem;margin:2rem 0;border-radius:0 var(--r-md) var(--r-md) 0;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.testimonial p{font-style:italic;font-size:1.05rem;margin-bottom:.5rem;color:var(--text-dark)}
+.testimonial footer{font-size:.9rem;color:var(--text-mid)}
+
+/* ══ Chantiers similaires ══ */
+.similar-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem;margin-top:1.5rem}
+.similar-grid a{display:block;text-decoration:none;color:inherit;background:var(--white);border-radius:var(--r-md);overflow:hidden;border:1px solid var(--border-light);transition:all .25s}
+.similar-grid a:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(59,36,23,.10)}
+.similar-grid img{width:100%;height:140px;object-fit:cover;display:block}
+.similar-grid .similar-body{padding:1rem}
+.similar-grid h4{margin:0 0 .35rem;font-size:.95rem;line-height:1.3;color:var(--brown)}
+.similar-grid .similar-meta{font-size:.78rem;color:var(--text-mid)}
+
+/* ══ Compat ancien markup .similar-card (fallback) ══ */
 .similar-card{display:flex;align-items:center;gap:.85rem;padding:.85rem;background:#fff;border:1px solid var(--border-light);border-radius:10px;text-decoration:none;color:inherit;transition:transform .2s,box-shadow .2s}
 .similar-card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.08)}
 .similar-card img{width:80px;height:60px;object-fit:cover;border-radius:6px;flex-shrink:0}
 .similar-card span{font-size:.88rem;line-height:1.4}
 .similar-card strong{display:block;font-weight:600;color:var(--text-strong);margin-bottom:.15rem}
-@media(max-width:768px){
-  .realisation-detail .realisation-hero{height:340px}
-  .realisation-detail .hero-overlay h1{font-size:1.6rem}
-}
