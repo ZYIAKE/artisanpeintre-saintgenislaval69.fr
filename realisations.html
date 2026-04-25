@@ -10,10 +10,10 @@
   - Grid de cards avec photo + titre + ville + date
   - Filtres par type de service + par ville
   - Pagination si > 12 projets
-  - Chaque card link vers /realisations/{{PROJECT_SLUG}}
+  - Chaque card link vers /realisations/
 
   PLACEHOLDERS :
-  - {{PROJECTS_JSON}}  données JSON des projets (pour le JS de filtrage)
+  -   données JSON des projets (pour le JS de filtrage)
   - {{PROJECT_N_*}}    données de chaque projet
   ═══════════════════════════════════════════════════════════════════
 -->
@@ -42,7 +42,7 @@
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/components.css">
 
-  <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="/img/favicon.svg?v=202604251704">
 
   <!-- Schema.org CollectionPage -->
   <script type="application/ld+json">
@@ -173,7 +173,7 @@
         <li><a href="/devis" class="btn btn-primary btn-sm">Devis gratuit</a></li>
       </ul>
       <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-controls="navList" aria-expanded="false">
-        <span></span><span></span><span></span>
+        
       </button>
     </nav>
   </div>
@@ -224,18 +224,18 @@
 
     <!-- Grid des projets (placeholders à répéter par l'agent) -->
     <div class="grid grid-3" id="projectsGrid">
-      <a href="/realisations/peinture-salon-saint-genis-laval-mars-2026" class="project-card" data-service="peinture-interieure" data-city="saint-genis-laval"><img src="/img/realisation-saint-genis-laval.jpg" alt="Peinture complète d'un salon à Saint-Genis-Laval" loading="lazy"><div class="project-card-body"><h3 class="card-title">Peinture complète d'un salon à Saint-Genis-Laval</h3><div class="project-card-meta"><span>📍 Saint-Genis-Laval</span><span>•</span><span>Mars 2026</span></div><p class="card-description mt-sm">Salon de 30 m² dans une maison des années 1970, murs marqués par d'anciens papiers peints retirés et plafond avec traces d'humidité légères dans les a...</p></div></a><a href="/realisations/ravalement-facade-oullins-fevrier-2026" class="project-card" data-service="ravalement-facade" data-city="oullins"><img src="/img/realisation-oullins.jpg" alt="Ravalement de façade d'une maison à Oullins" loading="lazy"><div class="project-card-body"><h3 class="card-title">Ravalement de façade d'une maison à Oullins</h3><div class="project-card-meta"><span>📍 Oullins</span><span>•</span><span>Février 2026</span></div><p class="card-description mt-sm">Maison individuelle de 130 m² au sol, façade en enduit traditionnel datant de 1985, présentant des traces de mousse, d'écaillage par endroits et des m...</p></div></a><a href="/realisations/enduit-decoratif-francheville-octobre-2025" class="project-card" data-service="enduit-decoratif" data-city="francheville"><img src="/img/realisation-francheville.jpg" alt="Enduit décoratif béton ciré à Francheville" loading="lazy"><div class="project-card-body"><h3 class="card-title">Enduit décoratif béton ciré à Francheville</h3><div class="project-card-meta"><span>📍 Francheville</span><span>•</span><span>Octobre 2025</span></div><p class="card-description mt-sm">Salle de bain de 12 m² dans une maison rénovée, demande pour un enduit béton ciré sur murs et sol pour un effet contemporain. Support : carrelage exis...</p></div></a><a href="/realisations/peinture-exterieure-brignais-novembre-2025" class="project-card" data-service="peinture-exterieure" data-city="brignais"><img src="/img/realisation-brignais.jpg" alt="Peinture des volets et portails à Brignais" loading="lazy"><div class="project-card-body"><h3 class="card-title">Peinture des volets et portails à Brignais</h3><div class="project-card-meta"><span>📍 Brignais</span><span>•</span><span>Novembre 2025</span></div><p class="card-description mt-sm">Maison ancienne avec 12 fenêtres et volets bois, plus un grand portail métallique double vantail. Volets à repeindre en gris anthracite, portail en no...</p></div></a><a href="/realisations/remise-en-etat-irigny-septembre-2025" class="project-card" data-service="renovation-supports" data-city="irigny"><img src="/img/realisation-irigny.jpg" alt="Remise en état complète d'un appartement à Irigny" loading="lazy"><div class="project-card-body"><h3 class="card-title">Remise en état complète d'un appartement à Irigny</h3><div class="project-card-meta"><span>📍 Irigny</span><span>•</span><span>Septembre 2025</span></div><p class="card-description mt-sm">Appartement T3 de 65 m² en location meublée, à remettre à neuf entre 2 locataires : murs marqués (trous de fixation, traces de meubles), plafonds jaun...</p></div></a><a href="/realisations/renovation-appartement-lyon-7-janvier-2026" class="project-card" data-service="peinture-interieure" data-city="lyon"><img src="/img/realisation-lyon.jpg" alt="Rénovation complète d'un appartement à Lyon 7" loading="lazy"><div class="project-card-body"><h3 class="card-title">Rénovation complète d'un appartement à Lyon 7</h3><div class="project-card-meta"><span>📍 Lyon</span><span>•</span><span>Janvier 2026</span></div><p class="card-description mt-sm">Appartement T4 de 95 m² dans le quartier de Gerland, achat récent par un jeune couple souhaitant tout repeindre avant l'emménagement. Couleurs choisie...</p></div></a>
+      <a href="/realisations/peinture-salon-saint-genis-laval-mars-2026" class="project-card" data-service="peinture-interieure" data-city="saint-genis-laval"><img src="/img/realisation-saint-genis-laval.jpg?v=202604251704" alt="Peinture complète d'un salon à Saint-Genis-Laval" loading="lazy"><div class="project-card-body"><h3 class="card-title">Peinture complète d'un salon à Saint-Genis-Laval</h3><div class="project-card-meta"><span>📍 Saint-Genis-Laval</span><span>•</span><span>Mars 2026</span></div><p class="card-description mt-sm">Salon de 30 m² dans une maison des années 1970, murs marqués par d'anciens papiers peints retirés et plafond avec traces d'humidité légères dans les a...</p></div></a><a href="/realisations/ravalement-facade-oullins-fevrier-2026" class="project-card" data-service="ravalement-facade" data-city="oullins"><img src="/img/realisation-oullins.jpg?v=202604251704" alt="Ravalement de façade d'une maison à Oullins" loading="lazy"><div class="project-card-body"><h3 class="card-title">Ravalement de façade d'une maison à Oullins</h3><div class="project-card-meta"><span>📍 Oullins</span><span>•</span><span>Février 2026</span></div><p class="card-description mt-sm">Maison individuelle de 130 m² au sol, façade en enduit traditionnel datant de 1985, présentant des traces de mousse, d'écaillage par endroits et des m...</p></div></a><a href="/realisations/enduit-decoratif-francheville-octobre-2025" class="project-card" data-service="enduit-decoratif" data-city="francheville"><img src="/img/realisation-francheville.jpg?v=202604251704" alt="Enduit décoratif béton ciré à Francheville" loading="lazy"><div class="project-card-body"><h3 class="card-title">Enduit décoratif béton ciré à Francheville</h3><div class="project-card-meta"><span>📍 Francheville</span><span>•</span><span>Octobre 2025</span></div><p class="card-description mt-sm">Salle de bain de 12 m² dans une maison rénovée, demande pour un enduit béton ciré sur murs et sol pour un effet contemporain. Support : carrelage exis...</p></div></a><a href="/realisations/peinture-exterieure-brignais-novembre-2025" class="project-card" data-service="peinture-exterieure" data-city="brignais"><img src="/img/realisation-brignais.jpg?v=202604251704" alt="Peinture des volets et portails à Brignais" loading="lazy"><div class="project-card-body"><h3 class="card-title">Peinture des volets et portails à Brignais</h3><div class="project-card-meta"><span>📍 Brignais</span><span>•</span><span>Novembre 2025</span></div><p class="card-description mt-sm">Maison ancienne avec 12 fenêtres et volets bois, plus un grand portail métallique double vantail. Volets à repeindre en gris anthracite, portail en no...</p></div></a><a href="/realisations/remise-en-etat-irigny-septembre-2025" class="project-card" data-service="renovation-supports" data-city="irigny"><img src="/img/realisation-irigny.jpg?v=202604251704" alt="Remise en état complète d'un appartement à Irigny" loading="lazy"><div class="project-card-body"><h3 class="card-title">Remise en état complète d'un appartement à Irigny</h3><div class="project-card-meta"><span>📍 Irigny</span><span>•</span><span>Septembre 2025</span></div><p class="card-description mt-sm">Appartement T3 de 65 m² en location meublée, à remettre à neuf entre 2 locataires : murs marqués (trous de fixation, traces de meubles), plafonds jaun...</p></div></a><a href="/realisations/renovation-appartement-lyon-7-janvier-2026" class="project-card" data-service="peinture-interieure" data-city="lyon"><img src="/img/realisation-lyon.jpg?v=202604251704" alt="Rénovation complète d'un appartement à Lyon 7" loading="lazy"><div class="project-card-body"><h3 class="card-title">Rénovation complète d'un appartement à Lyon 7</h3><div class="project-card-meta"><span>📍 Lyon</span><span>•</span><span>Janvier 2026</span></div><p class="card-description mt-sm">Appartement T4 de 95 m² dans le quartier de Gerland, achat récent par un jeune couple souhaitant tout repeindre avant l'emménagement. Couleurs choisie...</p></div></a>
       <!-- Template d'une card projet :
-      <a href="/realisations/{{PROJECT_SLUG}}" class="project-card" data-service="{{PROJECT_SERVICE}}" data-city="{{PROJECT_CITY_SLUG}}">
-        <img src="{{PROJECT_IMG_URL}}" alt="{{PROJECT_ALT}}" loading="lazy">
+      <a href="/realisations/" class="project-card" data-service="" data-city="">
+        <img src="" alt="" loading="lazy">
         <div class="project-card-body">
-          <h3 class="card-title">{{PROJECT_TITLE}}</h3>
+          <h3 class="card-title"></h3>
           <div class="project-card-meta">
-            <span>📍 {{PROJECT_CITY}}</span>
+            <span>📍 </span>
             <span>•</span>
-            <span>{{PROJECT_DATE}}</span>
+            
           </div>
-          <p class="card-description mt-sm">{{PROJECT_EXCERPT}}</p>
+          <p class="card-description mt-sm"></p>
         </div>
       </a>
       -->

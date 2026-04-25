@@ -9,9 +9,9 @@
   PLACEHOLDERS :
   - https://artisanpeintre-saintgenislaval69.fr          URL root, ex: https://elagueurs-toulousains.fr
   - 2026-04-25    Date ISO 8601, ex: 2026-04-24
-  - {{SERVICES_URLS}}     bloc <url> par service
-  - {{VILLES_URLS}}       bloc <url> par page ville
-  - {{PROJECTS_URLS}}     bloc <url> par fiche projet
+  -      bloc <url> par service
+  -        bloc <url> par page ville
+  -      bloc <url> par fiche projet
 
   Format : https://www.sitemaps.org/protocol.html
   ═══════════════════════════════════════════════════════════════════
@@ -78,25 +78,25 @@
   </url>
 
   <!-- ═══ Pages services (priorité 0.9) ═══ -->
-  {{SERVICES_URLS}}
+  
   <!-- Format par service (à répéter 6x) :
   <url>
-    <loc>https://artisanpeintre-saintgenislaval69.fr/{{SERVICE_SLUG}}</loc>
+    <loc>https://artisanpeintre-saintgenislaval69.fr/</loc>
     <lastmod>2026-04-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>{{SERVICE_IMG_URL}}</image:loc>
-      <image:title>{{SERVICE_TITLE}}</image:title>
+      <image:loc></image:loc>
+      <image:title></image:title>
     </image:image>
   </url>
   -->
 
   <!-- ═══ Pages villes (priorité 0.8, cœur SEO local) ═══ -->
-  {{VILLES_URLS}}
+  
   <!-- Format par ville (à répéter 10-12x) :
   <url>
-    <loc>https://artisanpeintre-saintgenislaval69.fr/peintre-{{VILLE_SLUG}}</loc>
+    <loc>https://artisanpeintre-saintgenislaval69.fr/peintre-</loc>
     <lastmod>2026-04-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -104,17 +104,17 @@
   -->
 
   <!-- ═══ Fiches projet (priorité 0.6) ═══ -->
-  {{PROJECTS_URLS}}
+  
   <!-- Format par projet (15-20 à l'onboarding) :
   <url>
-    <loc>https://artisanpeintre-saintgenislaval69.fr/realisations/{{PROJECT_SLUG}}</loc>
-    <lastmod>{{PROJECT_DATE_ISO}}</lastmod>
+    <loc>https://artisanpeintre-saintgenislaval69.fr/realisations/</loc>
+    <lastmod></lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
     <image:image>
-      <image:loc>{{PROJECT_COVER_URL}}</image:loc>
-      <image:title>{{PROJECT_TITLE}}</image:title>
-      <image:caption>{{PROJECT_META_DESC}}</image:caption>
+      <image:loc></image:loc>
+      <image:title></image:title>
+      <image:caption></image:caption>
     </image:image>
   </url>
   -->

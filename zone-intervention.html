@@ -10,11 +10,11 @@
   PLACEHOLDERS :
   - https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d44600.0!2d4.7944!3d45.6964!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zU2FpbnQtR2VuaXMtTGF2YWw!5e0!3m2!1sfr!2sfr!4v1700000000001          iframe Google Maps centré sur la zone
   - 30           rayon intervention (ex: 30)
-  - {{CITIES_BY_DEPT}}           dict { "31 — Haute-Garonne": [villes...], ... }
-  - {{VILLE_N_NAME}}             nom ville
-  - {{VILLE_N_SLUG}}             slug ville
-  - {{VILLE_N_POSTAL_CODE}}      CP
-  - {{VILLE_N_DISTANCE_KM}}      distance depuis siège
+  -            dict { "31 — Haute-Garonne": [villes...], ... }
+  -              nom ville
+  -              slug ville
+  -       CP
+  -       distance depuis siège
   ═══════════════════════════════════════════════════════════════════
 -->
 <html lang="fr">
@@ -40,7 +40,7 @@
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/components.css">
 
-  <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="/img/favicon.svg?v=202604251704">
 
   <script type="application/ld+json">
   {
@@ -180,7 +180,7 @@
         <li><a href="/devis" class="btn btn-primary btn-sm">Devis gratuit</a></li>
       </ul>
       <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-controls="navList" aria-expanded="false">
-        <span></span><span></span><span></span>
+        
       </button>
     </nav>
   </div>
@@ -244,11 +244,11 @@
          Pour chaque ville : une `.ville-card` avec nom + CP + distance.
          Format d'une card ville :
 
-           <a href="/peintre-{{VILLE_SLUG}}" class="ville-card">
-             <span class="ville-name">{{VILLE_NAME}}</span>
+           <a href="/peintre-" class="ville-card">
+             
              <div class="ville-meta">
-               <span>{{VILLE_POSTAL_CODE}}</span>
-               <span>{{VILLE_DISTANCE_KM}} km</span>
+               
+               <span> km</span>
              </div>
            </a>
 
@@ -273,12 +273,10 @@
     <!-- Blocs additionnels si plusieurs départements couverts :
     <div class="dept-section">
       <h2 class="dept-title">
-        <span class="dept-badge">{{DEPT_N_CODE}}</span>
-        {{DEPT_N_NAME}}
+        
+        
       </h2>
-      <div class="villes-grid">
-        {{DEPT_N_VILLES_LIST}}
-      </div>
+      
     </div>
     -->
 
