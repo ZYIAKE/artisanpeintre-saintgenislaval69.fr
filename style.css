@@ -125,12 +125,12 @@ section{padding:4rem 0}
 
 /* ══ RÉALISATIONS — bento grid ══ */
 .real-section{border-bottom:1px solid var(--border-light)}
-.bento-grid{display:grid;grid-template-columns:1.2fr .8fr;grid-template-rows:auto auto;gap:1rem;margin-top:2rem}
-.bento-card{background:var(--white);border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border-light);transition:all .3s}
+.bento-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2rem}
+.bento-card{background:var(--white);border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border-light);transition:all .3s;display:flex;flex-direction:column}
 .bento-card:hover{box-shadow:0 8px 28px rgba(59,36,23,.08);transform:translateY(-2px)}
-.bento-card.large{grid-row:span 2}
-.bento-img{min-height:160px;background:var(--cream-dark);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;color:var(--text-soft);font-size:.78rem}
-.bento-card.large .bento-img{min-height:100%;flex:1}
+.bento-card.large{grid-row:auto}
+.bento-img{min-height:220px;background:var(--cream-dark);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;color:var(--text-soft);font-size:.78rem}
+.bento-card.large .bento-img{min-height:220px;flex:none}
 .bento-img svg{opacity:.3}
 .bento-body{padding:1.2rem 1.3rem}
 .bento-body h3{font-size:.92rem;font-weight:700;color:var(--brown);margin-bottom:.4rem}
@@ -260,7 +260,6 @@ footer{background:var(--brown);color:rgba(255,255,255,.4);padding:3rem 0 1.2rem}
 /* ══ RESPONSIVE ══ */
 @media(max-width:900px){
   .svc-list{grid-template-columns:1fr}.svc-item{border-right:none;border-bottom:1px solid var(--border-light)}.svc-item:last-child{border-bottom:none}
-  .bento-grid{grid-template-columns:1fr}.bento-card.large{grid-row:span 1}
   .zone-grid{grid-template-columns:1fr}
   .faq-grid{grid-template-columns:1fr}
   .contact-split{grid-template-columns:1fr}
@@ -295,16 +294,17 @@ footer{background:var(--brown);color:rgba(255,255,255,.4);padding:3rem 0 1.2rem}
 .bento-card{overflow:hidden;border-radius:8px}
 
 /* ══ Image bento (réalisations avec photo) ══ */
-.bento-img-real{display:block;width:100%;height:240px;object-fit:cover;background:#f3eadf}
-.bento-card.large .bento-img-real{height:380px}
+.bento-img-real{display:block;width:100%;height:220px;object-fit:cover;background:#f3eadf}
+.bento-card.large .bento-img-real{height:220px}
+.bento-body{flex:1;display:flex;flex-direction:column}
 
-@media(max-width:900px){
-  .bento-img-real{height:220px}
-  .bento-card.large .bento-img-real{height:260px}
+@media(max-width:980px){
+  .bento-grid{grid-template-columns:repeat(2,1fr)}
+  .bento-img-real,.bento-card.large .bento-img-real{height:200px}
 }
 @media(max-width:600px){
-  .bento-img-real{height:200px}
-  .bento-card.large .bento-img-real{height:220px}
+  .bento-grid{grid-template-columns:1fr}
+  .bento-img-real,.bento-card.large .bento-img-real{height:200px}
 }
 
 /* ══ Pages détail chantier ══ */
