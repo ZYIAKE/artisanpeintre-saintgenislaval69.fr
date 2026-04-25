@@ -1,26 +1,3 @@
-# ═══════════════════════════════════════════════════════════════
-# robots.txt — Instructions pour les crawlers
-# ═══════════════════════════════════════════════════════════════
-
 User-agent: *
 Allow: /
-
-# Ne pas indexer les pages transitoires
-Disallow: /merci
-Disallow: /merci?*
-Disallow: /devis?*
-
-# Ne pas gaspiller le crawl budget sur les params
-Disallow: /*?service=
-Disallow: /*?ville=
-Disallow: /*?utm_*
-
-# Ressources accessibles aux crawlers (important pour le rendu + CWV)
-Allow: /css/
-Allow: /js/
-Allow: /img/
-Allow: /*.css
-Allow: /*.js
-
-# Sitemap
 Sitemap: https://artisanpeintre-saintgenislaval69.fr/sitemap.xml

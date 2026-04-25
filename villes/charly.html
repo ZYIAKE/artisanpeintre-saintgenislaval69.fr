@@ -1,533 +1,192 @@
 <!DOCTYPE html>
-<!--
-  ═══════════════════════════════════════════════════════════════════
-  TEMPLATE — Page ville (cœur du SEO local atlinker)
-  ═══════════════════════════════════════════════════════════════════
-  Clonée par atlinker-site-builder pour chaque ville couverte par
-  le partenaire (10-12 pages typiquement).
-
-  URL pattern : /peintre-charly
-  Exemples :
-    /elagueur-toulouse
-    /elagueur-blagnac
-    /plombier-villeurbanne
-
-  Principe : UNE page par ville qui présente TOUS les services du
-  partenaire dans un contexte localisé (quartiers, distance, chantiers
-  récents dans cette ville, témoignages locaux, villes voisines).
-
-  Différence clé avec /{service} :
-  - Page service : centrée sur un service, pas de localisation forte
-  - Page ville : centrée sur une ville, présente tous les services
-
-  PLACEHOLDERS spécifiques (en plus des globaux) :
-  ─────────────────────────────────────────────────
-  Peintre à Charly (69390)              ex: "Élagueur à Blagnac (31700)"
-  Peintre professionnel à Charly (69390) — TD PEINTURE RENOVATION, 8 ans d'expérience, devis gratuit sous 48h, intervention rapide.       160 chars max, inclut métier + ville
-  Charly            nom complet, ex: "Blagnac"
-  charly            slug, ex: "blagnac"
-  69390     CP, ex: "31700"
-  TD PEINTURE RENOVATION intervient à Charly (69390) pour tous travaux de peinture intérieure, extérieure, ravalement de façade et enduit décoratif. Notre atelier basé à Saint-Genis-Laval nous permet d'être chez vous en moins de 29 minutes.           60-80 mots hero (accroche localisée)
-  Située dans le département du Rhône (69), Charly compte de nombreux logements pavillonnaires, appartements en copropriété et résidences de standing. Les bâtiments anciens demandent souvent une préparation rigoureuse des supports avant peinture, tandis que les constructions plus récentes nécessitent des finitions impeccables.       120-180 mots sur la ville (quartiers, profil)
-  Nous intervenons sur l'ensemble des secteurs résidentiels et professionnels à Charly, des intérieurs particuliers aux locaux commerciaux. Notre expertise couvre toutes les techniques modernes (peinture intérieure mate, satin, velours) ainsi que les finitions traditionnelles (enduits décoratifs, béton ciré).     80-120 mots continuation (spécificités métier)
-    5-10 quartiers nominatifs
-  proche du centre de Charly, autour des secteurs résidentiels et commerciaux       2-4 lieux repères ("proche du CHU", etc.)
-  7     distance siège → ville
-  29 min ex: "25 min depuis notre siège"
-  18  nombre de chantiers dans cette ville
-  /img/hero.jpg         image hero de la ville (générée par Imagen)
-  {{VILLE_PROJECT_N_*}}     3 derniers chantiers dans cette ville
-  <a href="/peintre-sainte-foy-les-lyon">Peintre à Sainte-Foy-lès-Lyon</a>
-<a href="/peintre-brignais">Peintre à Brignais</a>
-<a href="/peintre-vourles">Peintre à Vourles</a>
-<a href="/peintre-irigny">Peintre à Irigny</a>
-<a href="/peintre-chaponost">Peintre à Chaponost</a>
-<a href="/peintre-lyon">Peintre à Lyon</a>
-<a href="/peintre-la-mulatiere">Peintre à La Mulatière</a>
-<a href="/peintre-francheville">Peintre à Francheville</a>   HTML des liens vers villes voisines
-  {{SERVICE_N_*}}           6 services du partenaire (titre, slug, desc, img)
-
-  Schema.org : LocalBusiness avec areaServed = la ville (signal local fort)
-  ═══════════════════════════════════════════════════════════════════
--->
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Peintre professionnel à Charly (69390) — TD PEINTURE RENOVATION, 8 ans d'expérience, devis gratuit sous 48h, intervention rapide.">
+  <meta name="description" content="Peintre artisan à Charly. Peinture intérieure, extérieure, rénovation, décoration. Devis gratuit sous 24h, intervention sous 1 semaine.">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://artisanpeintre-saintgenislaval69.fr/peintre-charly">
-
-  <title>Peintre à Charly (69390) | TD PEINTURE RENOVATION</title>
-
+  <meta property="og:title" content="Peintre Charly (69 Rhône) | Devis Gratuit 24h">
+  <meta property="og:description" content="Peintre artisan à Charly. Peinture intérieure, extérieure, rénovation, décoration. Devis gratuit sous 24h, intervention sous 1 semaine.">
   <meta property="og:type" content="website">
-  <meta property="og:locale" content="fr_FR">
-  <meta property="og:url" content="https://artisanpeintre-saintgenislaval69.fr/peintre-charly">
-  <meta property="og:title" content="Peintre à Charly (69390) | TD PEINTURE RENOVATION">
-  <meta property="og:description" content="Peintre professionnel à Charly (69390) — TD PEINTURE RENOVATION, 8 ans d'expérience, devis gratuit sous 48h, intervention rapide.">
-  <meta property="og:image" content="/img/hero.jpg?v=202604251704">
-  <meta property="og:site_name" content="TD PEINTURE RENOVATION">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Peintre à Charly (69390)">
-  <meta name="twitter:description" content="Peintre professionnel à Charly (69390) — TD PEINTURE RENOVATION, 8 ans d'expérience, devis gratuit sous 48h, intervention rapide.">
-
+  <title>Peintre Charly (69 Rhône) | Devis Gratuit 24h</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="/css/tokens.css">
-  <link rel="stylesheet" href="/css/palette-peintre.css">
-  <link rel="stylesheet" href="/css/base.css">
-  <link rel="stylesheet" href="/css/components.css">
-
-  <link rel="icon" type="image/svg+xml" href="/img/favicon.svg?v=202604251704">
-
-  <!-- Schema.org LocalBusiness avec areaServed = la ville (signal local fort) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "TD PEINTURE RENOVATION — Peintre à Charly",
-    "description": "Peintre professionnel à Charly (69390) — TD PEINTURE RENOVATION, 8 ans d'expérience, devis gratuit sous 48h, intervention rapide.",
-    "url": "https://artisanpeintre-saintgenislaval69.fr/peintre-charly",
-    "telephone": "+33786502364",
-    "email": "td.peinture.renovation@outlook.fr",
-    "image": "/img/hero.jpg",
-    "priceRange": "€€",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "88 Chemin des Collines",
-      "addressLocality": "Saint-Genis-Laval",
-      "postalCode": "69230",
-      "addressCountry": "FR"
-    },
-    "areaServed": {
-      "@type": "City",
-      "name": "Charly",
-      "containedInPlace": {
-        "@type": "AdministrativeArea",
-        "name": "Rhône"
-      }
-    },
-    "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "18:00"}],
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "reviewCount": "4",
-      "bestRating": "5"
-    },
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Services Peintre à Charly",
-      "itemListElement": [
-        {
-          "@type": "Offer",
-          "itemOffered": { "@type": "Service", "name": "Peinture intérieure" }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": { "@type": "Service", "name": "Peinture extérieure" }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": { "@type": "Service", "name": "Ravalement de façade" }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": { "@type": "Service", "name": "Enduit décoratif" }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": { "@type": "Service", "name": "Pose de papier peint" }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": { "@type": "Service", "name": "Rénovation des supports" }
-        }
-      ]
-    }
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://artisanpeintre-saintgenislaval69.fr/" },
-      { "@type": "ListItem", "position": 2, "name": "Zones d'intervention", "item": "https://artisanpeintre-saintgenislaval69.fr/zone-intervention" },
-      { "@type": "ListItem", "position": 3, "name": "Charly", "item": "https://artisanpeintre-saintgenislaval69.fr/peintre-charly" }
-    ]
-  }
-  </script>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="canonical" href="https://artisanpeintre-saintgenislaval69.fr/peintre-charly">
+  <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"TD PEINTURE RENOVATION","telephone":"+33786502364","email":"td.peinture.renovation@outlook.fr","address":{"@type":"PostalAddress","streetAddress":"88 Chemin des Collines","addressLocality":"Saint-Genis-Laval","postalCode":"69230","addressCountry":"FR"},"areaServed":{"@type":"City","name":"Charly"},"priceRange":"€€"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://artisanpeintre-saintgenislaval69.fr/"},{"@type":"ListItem","position":2,"name":"Zone d'intervention","item":"https://artisanpeintre-saintgenislaval69.fr/zone-intervention"},{"@type":"ListItem","position":3,"name":"Peintre Charly","item":"https://artisanpeintre-saintgenislaval69.fr/peintre-charly"}]}</script>
 </head>
 <body>
 
-<a href="#main" class="skip-to-main">Aller au contenu principal</a>
-
-<div class="topbar">
-  ⭐ <strong>Noté 4.8/5</strong> · Intervention à Charly (7 km) · Devis gratuit 48h
-</div>
-
-<header class="header">
-  <div class="container header-inner">
-    <a href="/" class="logo" aria-label="Accueil TD PEINTURE RENOVATION">
-      <span class="logo-letter" aria-hidden="true">D</span>
-      <span>TD PEINTURE RENOVATION</span>
-    </a>
-    <nav class="nav" aria-label="Navigation principale">
-      <ul class="nav-list" id="navList">
-        <li><a href="/#services" class="nav-link">Services</a></li>
-        <li><a href="/realisations" class="nav-link">Réalisations</a></li>
-        <li><a href="/avis" class="nav-link">Avis</a></li>
-        <li><a href="/a-propos" class="nav-link">À propos</a></li>
-        <li><a href="/faq" class="nav-link">FAQ</a></li>
-        <li><a href="/contact" class="nav-link">Contact</a></li>
-        <li><a href="/devis" class="btn btn-primary btn-sm">Devis gratuit</a></li>
+  <!-- ══ NAV ══ -->
+  <nav role="navigation" aria-label="Navigation principale"><div class="container"><div class="nav-inner">
+    <a href="/" class="logo" aria-label="Accueil"><div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><span class="logo-name">TD PEINTURE</span></a>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <div class="nav-group">
+      <ul class="nav-links">
+        <li><a href="/prestations">Prestations</a></li>
+        <li><a href="/realisations">Réalisations</a></li>
+        <li><a href="/avis">Avis</a></li>
+        <li><a href="/zone-intervention">Zones</a></li>
+        <li><a href="/#faq">FAQ</a></li>
       </ul>
-      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-controls="navList" aria-expanded="false">
-        
-      </button>
-    </nav>
-  </div>
-</header>
-
-<main id="main">
-
-<div class="container">
-  <nav class="breadcrumb" aria-label="Fil d'Ariane">
-    <a href="/">Accueil</a>
-    <span class="breadcrumb-separator">/</span>
-    <a href="/zone-intervention">Zones d'intervention</a>
-    <span class="breadcrumb-separator">/</span>
-    <span class="current">Charly</span>
-  </nav>
-</div>
-
-<!-- Hero localisé -->
-<section class="hero">
-  <div class="container">
-    <div class="hero-grid">
-      <div class="hero-content">
-        <div class="hero-badges">
-          <span class="badge">📍 Charly (69390)</span>
-          <span class="badge">⭐ 4.8/5 (4 avis)</span>
-          <span class="badge">🚗 29 min</span>
-        </div>
-        <h1 class="hero-h1">Peintre à Charly (69390)</h1>
-        <p class="hero-subtitle">TD PEINTURE RENOVATION intervient à Charly (69390) pour tous travaux de peinture intérieure, extérieure, ravalement de façade et enduit décoratif. Notre atelier basé à Saint-Genis-Laval nous permet d'être chez vous en moins de 29 minutes.</p>
-        <div class="hero-cta">
-          <a href="/devis?ville=charly" class="btn btn-primary btn-lg">Demander un devis gratuit</a>
-          <a href="tel:+33786502364" class="btn btn-outline btn-lg">📞 07 86 50 23 64</a>
-        </div>
-      </div>
-      <div>
-        <img src="/img/hero.jpg?v=202604251704" alt="Peintre à Charly" width="570" height="428" loading="eager" fetchpriority="high" style="width:100%; border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
-      </div>
+      <a href="tel:+33786502364" class="nav-phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>07 86 50 23 64</a>
+      <a href="/contact" class="nav-cta">Devis gratuit</a>
     </div>
-  </div>
-</section>
+  </div></div></nav>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     QUICK QUOTE BANNER — form devis horizontal sous le hero
-     ═══════════════════════════════════════════════════════════════ -->
-<section class="quick-quote-banner">
-  <div class="container">
-    <form class="quick-quote-inner" data-form="quick-quote" action="https://slcksfqbsbcmvqupbhox.supabase.co/functions/v1/partner-site-lead-submit" method="POST" novalidate>
-      <input type="hidden" name="_form_type" value="quick_quote">
-      <input type="hidden" name="_client_id" value="2083e3b1-b6f1-49d9-a45b-619054f26429">
-      <input type="hidden" name="_source_page" value="ville-charly">
-      <input type="hidden" name="ville" value="Charly">
+  <!-- ══ HERO ══ -->
+  <header class="hero" role="banner"><div class="container">
+    <div class="hero-tag reveal">Peintre à Charly</div>
+    <h1 class="reveal">Peintre à Charly — Intervention professionnelle</h1>
+    <p class="hero-desc reveal">Peintre artisan intervenant à Charly (69390) et alentours. Peinture intérieure, extérieure, rénovation et décoration. Devis gratuit sous 24h.</p>
+    <div class="hero-btns reveal">
+      <a href="tel:+33786502364" class="btn btn-outline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="15" height="15"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>07 86 50 23 64</a>
+      <a href="/contact" class="btn btn-amber">Demander un devis gratuit</a>
+    </div>
+  </div></header>
 
-      <div class="quick-quote-headline">
-        <strong>⚡ Devis gratuit à Charly</strong>
-        <span>Réponse sous 48h · Intervention 29 min</span>
+  <!-- ══ FORMULAIRE DEVIS (juste après la bannière) ══ -->
+  <div class="form-section"><div class="container">
+    <form class="form-card reveal" action="https://slcksfqbsbcmvqupbhox.supabase.co/functions/v1/partner-site-lead-submit?source=tdpeinture-saintgenislaval" method="POST" aria-label="Demande de devis rapide" data-contact-form>
+      <h3>Devis gratuit pour Charly</h3>
+      <p class="form-sub">Réponse sous 24h — Sans engagement</p>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-bottom:.6rem;">
+        <div><label for="hf-nom">Nom</label><input type="text" id="hf-nom" name="nom" placeholder="Votre nom" required></div>
+        <div><label for="hf-email">Email</label><input type="email" id="hf-email" name="email" placeholder="Votre email" required></div>
+        <div><label for="hf-tel">Téléphone</label><input type="tel" id="hf-tel" name="telephone" placeholder="Votre téléphone" required></div>
+        <div><label for="hf-besoin">Besoin</label><select id="hf-besoin" name="besoin"><option value="peinture-interieure">Peinture intérieure</option><option value="peinture-exterieure">Peinture extérieure</option><option value="renovation">Rénovation</option><option value="decoration">Décoration</option><option value="autre">Autre</option></select></div>
       </div>
-
-      <div class="quick-quote-form">
-        <input type="text" name="firstname" placeholder="Prénom *" required autocomplete="given-name" aria-label="Prénom">
-        <input type="tel" name="phone" placeholder="Téléphone *" required autocomplete="tel" inputmode="tel" aria-label="Téléphone">
-        <input type="email" name="email" placeholder="Email *" required autocomplete="email" inputmode="email" aria-label="Email">
-        <select name="service" required aria-label="Service">
-          <option value="">Service souhaité *</option>
-          <option value="peinture-interieure">Peinture intérieure</option>
-          <option value="peinture-exterieure">Peinture extérieure</option>
-          <option value="ravalement-facade">Ravalement de façade</option>
-          <option value="enduit-decoratif">Enduit décoratif</option>
-          <option value="pose-papier-peint">Pose de papier peint</option>
-          <option value="renovation-supports">Rénovation des supports</option>
-          <option value="autre">Autre</option>
-        </select>
-        <button type="submit" class="btn">Obtenir mon devis</button>
+      <div style="display:grid;grid-template-columns:3fr auto;gap:.6rem;align-items:end;">
+        <div><label for="hf-description">Description</label><textarea id="hf-description" name="description" placeholder="Décrivez votre projet..." rows="2"></textarea></div>
+        <div><button type="submit" class="btn btn-amber" style="margin-top:1rem;width:100%;">Envoyer ma demande</button></div>
       </div>
-
-      <div style="position: absolute; left: -9999px;" aria-hidden="true">
-        <input type="text" name="website" tabindex="-1" autocomplete="off">
-      </div>
+      <p class="form-trust"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Données sécurisées et confidentielles</p>
     </form>
-  </div>
-</section>
+  </div></div>
 
-<!-- Stats locaux -->
-<section class="section-bg-accent">
-  <div class="container">
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-value">7 km</div>
-        <div class="stat-label">Distance depuis notre siège</div>
+  <!-- ══ BREADCRUMBS ══ -->
+  <div style="padding:0.8rem 0;border-bottom:1px solid var(--border-light);"><div class="container">
+    <nav class="reveal" style="font-size:.82rem;color:var(--text-soft);" aria-label="Fil d'Ariane">
+      <a href="/" style="color:var(--amber);text-decoration:none;">Accueil</a> <span>&rsaquo;</span>
+      <a href="/zone-intervention" style="color:var(--amber);text-decoration:none;">Zone d'intervention</a> <span>&rsaquo;</span>
+      <span>Peintre Charly</span>
+    </nav>
+  </div></div>
+
+  <!-- ══ CONTENU PRINCIPAL ══ -->
+  <section id="a-propos" class="about-section" aria-labelledby="content-title"><div class="container">
+    <div class="centered"><p class="section-label reveal">Votre artisan à Charly</p><h2 id="content-title" class="section-title reveal">TD PEINTURE RENOVATION, Peintre intervenant à Charly</h2></div>
+    <div class="prose reveal">
+      <!-- CONTENT_PARAGRAPHS -->
+      <p>Vous cherchez un peintre fiable à <strong>Charly (69390)</strong> ? TD PEINTURE RENOVATION, dirigée par DETTINGER TONY, met son savoir-faire artisanal au service des particuliers et professionnels de Charly et alentours. Village résidentiel des Monts du Lyonnais. Pavillons et résidences principales. Notre approche : un travail soigné, des peintures de qualité professionnelle et le respect des engagements.</p>
+      <p>Nous intervenons à Charly pour tous types de projets de peinture en bâtiment : peinture intérieure (murs, plafonds, boiseries), peinture extérieure et ravalement de façade, rénovation de supports anciens (décollage de papier peint, ponçage, enduit), remise en état de logement (sortie de location, vente, sinistre) et décoration murale (papier peint, toile de verre, enduits décoratifs). Notre siège est situé à Saint-Genis-Laval, à seulement 5 km de Charly, ce qui nous permet d'intervenir rapidement et sans frais de déplacement supplémentaires.</p>
+      <p>Chaque chantier à Charly commence par une visite technique gratuite pour évaluer précisément l'état des supports, écouter vos attentes (couleurs, finitions, contraintes de planning) et établir un devis détaillé poste par poste. Nous vous remettons ce devis sous 24 heures et restons disponibles pour répondre à toutes vos questions. Une fois le devis accepté, l'intervention est généralement programmée sous une semaine.</p>
+      <p>Pour la qualité de nos prestations à Charly, nous travaillons exclusivement avec des marques professionnelles reconnues : <strong>Tollens, Zolpan, Sigma</strong>. Nous privilégions les peintures NF Environnement et Ecolabel pour limiter l'impact sur l'air intérieur (faible teneur en COV). Toutes nos interventions sont couvertes par notre garantie décennale et notre assurance responsabilité civile professionnelle.</p>
+      <p>N'hésitez pas à nous contacter pour discuter de votre projet de peinture à Charly. Que ce soit pour une simple pièce à rafraîchir, une rénovation complète d'appartement ou un ravalement de façade, nous sommes à votre écoute au <strong>07 86 50 23 64</strong> ou par email à <strong>td.peinture.renovation@outlook.fr</strong>. Faites confiance à TD PEINTURE RENOVATION, votre peintre de proximité dans le sud-ouest lyonnais.</p>
+    </div>
+  </div></section>
+
+
+  <!-- ══ SERVICES DISPONIBLES ══ -->
+  <section id="services" class="services-section" aria-labelledby="svc-city-title"><div class="container">
+    <div class="centered"><p class="section-label reveal">Services</p><h2 id="svc-city-title" class="section-title reveal">Nos services à Charly</h2></div>
+    <div class="svc-list">
+      <!-- SERVICE_CARDS -->
+      <div class="svc-item reveal"><div class="svc-item-num">01</div><h3>Peinture intérieure à Charly</h3><p>Murs, plafonds, boiseries. Préparation des supports et finitions soignées. Idéal pour un rafraîchissement ou une rénovation complète à Charly.</p><a href="/contact" class="svc-link">Détails <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
+      <div class="svc-item reveal"><div class="svc-item-num">02</div><h3>Peinture extérieure à Charly</h3><p>Façades, volets, balcons. Diagnostic, traitement et application de peintures résistantes aux UV et intempéries pour les bâtiments de Charly.</p><a href="/contact" class="svc-link">Détails <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
+      <div class="svc-item reveal"><div class="svc-item-num">03</div><h3>Rénovation à Charly</h3><p>Remise en état complète de logement (sortie de location, sinistre, vente), pose de revêtements muraux, enduits décoratifs à Charly.</p><a href="/contact" class="svc-link">Détails <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
+    </div>
+  </div></section>
+
+  <!-- ══ NOS ENGAGEMENTS ══ -->
+  <section id="engagements" class="why-section" aria-labelledby="why-city-title"><div class="container">
+    <div class="centered"><p class="section-label reveal">Nos engagements</p><h2 id="why-city-title" class="section-title reveal">Pourquoi nous faire confiance à Charly ?</h2></div>
+    <div class="why-grid">
+      <div class="why-card reveal"><h3>Déplacement inclus</h3><p>Nous nous déplaçons à Charly sans frais supplémentaires. Le tarif annoncé dans le devis est le tarif final, sans surprise ni surcoût de déplacement.</p></div>
+      <div class="why-card reveal"><h3>Réactivité</h3><p>Votre demande de devis est traitée sous 24 heures. En cas d'urgence à Charly, nous priorisons votre dépannage pour limiter les désagréments.</p></div>
+      <div class="why-card reveal"><h3>Travail soigné</h3><p>Nous accordons une attention particulière aux finitions et à la propreté du chantier. Nous ne quittons les lieux qu'une fois le travail parfaitement achevé.</p></div>
+      <div class="why-card reveal"><h3>Garantie décennale</h3><p>Toutes nos interventions à Charly sont couvertes par une garantie décennale et une assurance responsabilité civile professionnelle.</p></div>
+    </div>
+  </div></section>
+
+  <!-- ══ FAQ ══ -->
+  <section id="faq" class="faq-section" aria-labelledby="faq-title"><div class="container">
+    <div class="faq-grid">
+      <div><p class="section-label reveal">FAQ</p><h2 id="faq-title" class="section-title reveal">Questions fréquentes</h2><p class="section-desc reveal">Tout savoir sur nos interventions à Charly.</p></div>
+      <div class="faq-list">
+        <!-- FAQ_ITEMS -->
+        <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Intervenez-vous rapidement à Charly ?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Charly se situe à proximité de notre siège. Nous pouvons généralement intervenir sous 48 à 72 heures pour un devis et sous une semaine pour le début des travaux.</div></div>
+        <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Le déplacement à Charly est-il facturé ?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Non, le déplacement à Charly est inclus dans nos tarifs. Nous ne facturons aucun supplément pour les communes situées dans notre zone d'intervention.</div></div>
+        <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Quelles prestations proposez-vous à Charly ?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Nous proposons l'ensemble de nos services à Charly. Chaque prestation bénéficie de la même qualité que nos interventions à Saint-Genis-Laval.</div></div>
+        <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Comment obtenir un devis pour Charly ?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Appelez-nous au 07 86 50 23 64 ou remplissez notre formulaire en ligne. Nous organisons une visite technique gratuite à Charly et vous envoyons un devis détaillé sous 48 heures.</div></div>
+        <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Êtes-vous assuré pour vos interventions à Charly ?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Absolument. Toutes nos interventions sont couvertes par notre garantie décennale et notre assurance responsabilité civile professionnelle, que ce soit à Saint-Genis-Laval ou à Charly.</div></div>
       </div>
-      <div class="stat">
-        <div class="stat-value">29 min</div>
-        <div class="stat-label">Temps de déplacement</div>
+    </div>
+  </div></section>
+
+  <!-- ══ GOOGLE MAP VILLE ══ -->
+  <section class="zone-section" aria-labelledby="map-city-title"><div class="container">
+    <div class="zone-grid reveal">
+      <div>
+        <p class="section-label">Localisation</p>
+        <h2 id="map-city-title" class="section-title">Peintre à Charly</h2>
+        <div class="zone-location"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none" width="14" height="14"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3" fill="#fff"/></svg>Charly et alentours</div>
+        <p class="zone-radius">Nous intervenons à Charly, situé dans notre zone de couverture autour de Saint-Genis-Laval.</p>
+        <a href="/contact" class="btn btn-amber" style="margin-top:1.5rem;">Demander un devis</a>
       </div>
-      <div class="stat">
-        <div class="stat-value">18+</div>
-        <div class="stat-label">Chantiers réalisés à Charly</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value">8 ans</div>
-        <div class="stat-label">D'expérience peintre</div>
+      <div class="zone-map">
+        <!-- GOOGLE_MAP_CITY -->
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50000!2d2.3522!3d48.8566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z!5e0!3m2!1sfr!2sfr!4v1" allowfullscreen="" loading="lazy" title="Localisation à Charly"></iframe>
       </div>
     </div>
-  </div>
-</section>
+  </div></section>
 
-<!-- Présentation localisée -->
-<section>
-  <div class="container container--content">
-    <h2 class="mb-lg">TD PEINTURE RENOVATION, votre peintre à Charly</h2>
-    <p class="mb-md">Située dans le département du Rhône (69), Charly compte de nombreux logements pavillonnaires, appartements en copropriété et résidences de standing. Les bâtiments anciens demandent souvent une préparation rigoureuse des supports avant peinture, tandis que les constructions plus récentes nécessitent des finitions impeccables.</p>
-    <p>Nous intervenons sur l'ensemble des secteurs résidentiels et professionnels à Charly, des intérieurs particuliers aux locaux commerciaux. Notre expertise couvre toutes les techniques modernes (peinture intérieure mate, satin, velours) ainsi que les finitions traditionnelles (enduits décoratifs, béton ciré).</p>
-  </div>
-</section>
-
-<!-- TOUS les services du partenaire (grille 3x2) -->
-<section class="section-bg-secondary">
-  <div class="container">
-    <div class="section-title">
-      <h2>Nos services à Charly</h2>
-      <p>L'ensemble de nos prestations peintre, disponibles pour tous les habitants et professionnels de Charly et ses environs.</p>
+  <!-- ══ VILLES VOISINES ══ -->
+  <section class="services-section" aria-labelledby="nearby-title"><div class="container">
+    <div class="centered"><p class="section-label reveal">Couverture</p><h2 id="nearby-title" class="section-title reveal">Peintre dans les villes voisines</h2></div>
+    <div class="zone-list reveal" style="max-width:700px;margin:0 auto;">
+      <!-- NEARBY_CITIES -->
+      <div class="zone-list-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><a href="/peintre-saint-genis-laval" style="color:var(--text);text-decoration:none;">Saint-Genis-Laval</a></div>
+      <div class="zone-list-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><a href="/peintre-oullins" style="color:var(--text);text-decoration:none;">Oullins</a></div>
+      <div class="zone-list-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><a href="/peintre-pierre-benite" style="color:var(--text);text-decoration:none;">Pierre-Bénite</a></div>
+      <div class="zone-list-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><a href="/peintre-brignais" style="color:var(--text);text-decoration:none;">Brignais</a></div>
+      <div class="zone-list-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><a href="/peintre-vourles" style="color:var(--text);text-decoration:none;">Vourles</a></div>
+      <div class="zone-list-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><a href="/peintre-chaponost" style="color:var(--text);text-decoration:none;">Chaponost</a></div>
+      <div class="zone-list-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><a href="/peintre-francheville" style="color:var(--text);text-decoration:none;">Francheville</a></div>
+      <div class="zone-list-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><a href="/peintre-venissieux" style="color:var(--text);text-decoration:none;">Vénissieux</a></div>
     </div>
+    <div style="text-align:center;margin-top:2rem;"><a href="/zone-intervention" class="btn btn-amber">Toutes nos zones d'intervention</a></div>
+  </div></section>
 
-    <div class="grid grid-3">
-      <a href="/peinture-interieure" class="card" style="text-decoration: none;">
-        <img class="card-image card-image--wide" src="/img/service-peinture-interieure.jpg?v=202604251704" alt="Peinture intérieure à Charly" loading="lazy">
-        <h3 class="card-title">Peinture intérieure</h3>
-        <p class="card-description">Peinture des murs et plafonds, finitions soignées, techniques modernes (mat, satin, velours).</p>
-        <span class="card-link">En savoir plus →</span>
-      </a>
-
-      <a href="/peinture-exterieure" class="card" style="text-decoration: none;">
-        <img class="card-image card-image--wide" src="/img/service-peinture-exterieure.jpg?v=202604251704" alt="Peinture extérieure à Charly" loading="lazy">
-        <h3 class="card-title">Peinture extérieure</h3>
-        <p class="card-description">Peinture des façades, volets, portails, terrasses. Produits résistants intempéries.</p>
-        <span class="card-link">En savoir plus →</span>
-      </a>
-
-      <a href="/ravalement-facade" class="card" style="text-decoration: none;">
-        <img class="card-image card-image--wide" src="/img/service-ravalement-facade.jpg?v=202604251704" alt="Ravalement de façade à Charly" loading="lazy">
-        <h3 class="card-title">Ravalement de façade</h3>
-        <p class="card-description">Nettoyage, traitement, enduit et peinture de façade. Conforme aux exigences municipales.</p>
-        <span class="card-link">En savoir plus →</span>
-      </a>
-
-      <a href="/enduit-decoratif" class="card" style="text-decoration: none;">
-        <img class="card-image card-image--wide" src="/img/service-enduit-decoratif.jpg?v=202604251704" alt="Enduit décoratif à Charly" loading="lazy">
-        <h3 class="card-title">Enduit décoratif</h3>
-        <p class="card-description">Enduits à la chaux, béton ciré, tadelakt, stuc vénitien. Effets décoratifs uniques.</p>
-        <span class="card-link">En savoir plus →</span>
-      </a>
-
-      <a href="/pose-papier-peint" class="card" style="text-decoration: none;">
-        <img class="card-image card-image--wide" src="/img/service-pose-papier-peint.jpg?v=202604251704" alt="Pose de papier peint à Charly" loading="lazy">
-        <h3 class="card-title">Pose de papier peint</h3>
-        <p class="card-description">Pose de papier peint classique, intissé, panoramique. Préparation, raccords, finition.</p>
-        <span class="card-link">En savoir plus →</span>
-      </a>
-
-      <a href="/renovation-supports" class="card" style="text-decoration: none;">
-        <img class="card-image card-image--wide" src="/img/service-renovation-supports.jpg?v=202604251704" alt="Rénovation des supports à Charly" loading="lazy">
-        <h3 class="card-title">Rénovation des supports</h3>
-        <p class="card-description">Préparation, ponçage, rebouchage, traitement humidité, lissage. Indispensable avant peinture.</p>
-        <span class="card-link">En savoir plus →</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- Carte Google Maps centrée sur la ville -->
-<section>
-  <div class="container">
-    <div class="section-title">
-      <h2>Notre zone d'intervention à Charly</h2>
-      <p>Centre-ville de Charly et tous les quartiers — intervention rapide depuis notre siège (29 min).</p>
-    </div>
-    <div style="border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); margin-bottom: var(--space-xl);">
-      <iframe
-        src="https://maps.google.com/maps?q=Charly+69390+France&t=&z=13&ie=UTF8&iwloc=&output=embed"
-        width="100%"
-        height="400"
-        style="border: 0; display: block;"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        allowfullscreen
-        title="Carte de Charly">
-      </iframe>
-    </div>
-
-    <h3 class="text-center mb-lg">Quartiers de Charly où nous intervenons</h3>
-    <div class="cities-grid">
-      <a href="/devis?ville=charly">Centre-Bourg</a>
-      <a href="/devis?ville=charly">Le Châtelard</a>
-      <a href="/devis?ville=charly">Les Côtières</a>
-      <a href="/devis?ville=charly">La Côte</a>
-      <a href="/devis?ville=charly">Le Plat</a>
-      <a href="/devis?ville=charly">La Madone</a>
-      <a href="/devis?ville=charly">Les Allagniers</a>
-      <a href="/devis?ville=charly">Le Bourg</a>
-    </div>
-    <p class="text-center mt-lg text-muted" style="font-size: 14px;">
-      Repères locaux : proche du centre de Charly, autour des secteurs résidentiels et commerciaux
-    </p>
-  </div>
-</section>
-
-<!-- Chantiers récents dans la ville -->
-<section class="section-bg-secondary">
-  <div class="container">
-    <div class="section-title">
-      <h2>Nos derniers chantiers à Charly</h2>
-      <p>Quelques interventions récentes pour vous donner une idée concrète de notre travail dans votre commune.</p>
-    </div>
-
-    <div class="grid grid-3">
-      <a href="/realisations/peinture-salon-saint-genis-laval-mars-2026" class="card" style="text-decoration: none;">
-        <img class="card-image" src="/img/realisation-saint-genis-laval.jpg?v=202604251704" alt="Peinture complète d'un salon à Saint-Genis-Laval" loading="lazy">
-        <h3 class="card-title">Peinture complète d'un salon à Saint-Genis-Laval</h3>
-        <p class="card-description">Salon de 30 m² dans une maison des années 1970, murs marqués par d'anciens papiers peints retirés et plafond avec traces d'humidité légères dans les a...</p>
-        <span class="card-link">Voir le chantier →</span>
-      </a>
-      <a href="/realisations/ravalement-facade-oullins-fevrier-2026" class="card" style="text-decoration: none;">
-        <img class="card-image" src="/img/realisation-oullins.jpg?v=202604251704" alt="Ravalement de façade d'une maison à Oullins" loading="lazy">
-        <h3 class="card-title">Ravalement de façade d'une maison à Oullins</h3>
-        <p class="card-description">Maison individuelle de 130 m² au sol, façade en enduit traditionnel datant de 1985, présentant des traces de mousse, d'écaillage par endroits et des m...</p>
-        <span class="card-link">Voir le chantier →</span>
-      </a>
-      <a href="/realisations/enduit-decoratif-francheville-octobre-2025" class="card" style="text-decoration: none;">
-        <img class="card-image" src="/img/realisation-francheville.jpg?v=202604251704" alt="Enduit décoratif béton ciré à Francheville" loading="lazy">
-        <h3 class="card-title">Enduit décoratif béton ciré à Francheville</h3>
-        <p class="card-description">Salle de bain de 12 m² dans une maison rénovée, demande pour un enduit béton ciré sur murs et sol pour un effet contemporain. Support : carrelage exis...</p>
-        <span class="card-link">Voir le chantier →</span>
-      </a>
-    </div>
-
-    <div class="text-center mt-xl">
-      <a href="/realisations" class="btn btn-outline">Voir toutes nos réalisations →</a>
-    </div>
-  </div>
-</section>
-
-<!-- Villes voisines (maillage latéral important) -->
-<section>
-  <div class="container">
-    <div class="section-title">
-      <h2>Nous intervenons aussi dans les villes voisines</h2>
-    </div>
-    <div class="cities-grid">
-      <a href="/peintre-sainte-foy-les-lyon">Peintre à Sainte-Foy-lès-Lyon</a>
-<a href="/peintre-brignais">Peintre à Brignais</a>
-<a href="/peintre-vourles">Peintre à Vourles</a>
-<a href="/peintre-irigny">Peintre à Irigny</a>
-<a href="/peintre-chaponost">Peintre à Chaponost</a>
-<a href="/peintre-lyon">Peintre à Lyon</a>
-<a href="/peintre-la-mulatiere">Peintre à La Mulatière</a>
-<a href="/peintre-francheville">Peintre à Francheville</a>
-      <!-- Ex de contenu :
-      <a href="/elagueur-colomiers">Élagueur à Colomiers</a>
-      <a href="/elagueur-blagnac">Élagueur à Blagnac</a>
-      ...
-      -->
-    </div>
-  </div>
-</section>
-
-<!-- CTA final -->
-<section class="section-bg-secondary">
-  <div class="container">
-    <div class="cta-banner">
-      <h2>Un projet peintre à Charly ?</h2>
-      <p>Devis gratuit sous 48h. Intervention depuis Saint-Genis-Laval (7 km, 29 min). 8 ans d'expérience à votre service.</p>
-      <a href="/devis?ville=charly" class="btn btn-primary btn-lg">Obtenir mon devis gratuit</a>
-      <a href="tel:+33786502364" style="color: white; text-decoration: underline; margin-top: 8px; font-size: 14px;">ou appelez au 07 86 50 23 64</a>
-    </div>
-  </div>
-</section>
-
-</main>
-
-<!-- Footer standard (à recopier par l'agent) -->
-<footer class="footer">
-  <div class="container">
+  <!-- ══ FOOTER ══ -->
+  <footer role="contentinfo"><div class="container">
     <div class="footer-grid">
-      <div>
-        <div class="logo mb-md">
-          <span class="logo-letter" aria-hidden="true">D</span>
-          <span>TD PEINTURE RENOVATION</span>
-        </div>
-        <p style="font-size: 14px;">TD PEINTURE RENOVATION — Artisan peintre & Rénovation intérieure — Artisan peintre à Saint-Genis-Laval, Lyon et alentours. Peinture intérieure, extérieure, ravalement, enduit décoratif. Devis gratuit sous 48h.</p>
-        <p class="mt-md" style="font-size: 13px; color: var(--color-text-muted);">
-          <strong style="color: var(--color-primary-dark);">SIRET :</strong> 987 356 284 00016
-        </p>
-      </div>
-      <div>
-        <h3 class="footer-title">Services</h3>
-        <ul class="footer-list"><li><a href="/services/peinture-interieure">Peinture intérieure</a></li><li><a href="/services/peinture-exterieure">Peinture extérieure</a></li><li><a href="/services/ravalement-facade">Ravalement de façade</a></li><li><a href="/services/enduit-decoratif">Enduit décoratif</a></li><li><a href="/services/pose-papier-peint">Pose de papier peint</a></li><li><a href="/services/renovation-supports">Rénovation des supports</a></li></ul>
-      </div>
-      <div>
-        <h3 class="footer-title">Entreprise</h3>
-        <ul class="footer-list">
-          <li><a href="/a-propos">À propos</a></li>
-          <li><a href="/realisations">Nos réalisations</a></li>
-          <li><a href="/avis">Avis clients</a></li>
-          <li><a href="/faq">FAQ</a></li>
-          <li><a href="/zone-intervention">Zone d'intervention</a></li>
-          <li><a href="/contact">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="footer-title">Contact</h3>
-        <ul class="footer-list">
-          <li><a href="tel:+33786502364">📞 07 86 50 23 64</a></li>
-          <li><a href="mailto:td.peinture.renovation@outlook.fr">✉️ td.peinture.renovation@outlook.fr</a></li>
-          <li style="padding-top: 8px;">📍 88 Chemin des Collines<br>69230 Saint-Genis-Laval</li>
-          <li style="padding-top: 8px;">Lun-Ven : 8h-18h</li>
-        </ul>
-      </div>
+      <div class="footer-col"><div class="footer-logo"><div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><span class="logo-name">TD PEINTURE</span></div><p class="footer-nap">TD PEINTURE RENOVATION<br>88 Chemin des Collines<br>69230 Saint-Genis-Laval</p><p class="footer-nap"><a href="tel:+33786502364">07 86 50 23 64</a><br><a href="mailto:td.peinture.renovation@outlook.fr">td.peinture.renovation@outlook.fr</a></p></div>
+      <div class="footer-col"><h4>Services</h4><ul><li><a href="/prestations">Peinture intérieure</a></li><li><a href="/prestations">Peinture extérieure</a></li><li><a href="/prestations">Rénovation</a></li></ul></div>
+      <div class="footer-col"><h4>Infos</h4><ul><li><a href="/apropos">À propos</a></li><li><a href="/avis">Avis</a></li><li><a href="/realisations">Réalisations</a></li><li><a href="/contact">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Zones</h4><p>Interventions à Saint-Genis-Laval, Oullins, Brignais et alentours.</p><a href="/zone-intervention" class="zlink">Voir nos zones <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg></a></div>
     </div>
-    <div class="footer-bottom">
-      <div>© 2026 TD PEINTURE RENOVATION · Tous droits réservés</div>
-      <div>
-        <a href="/mentions-legales">Mentions légales</a> ·
-        <a href="/cgv">CGV</a> ·
-        <a href="/confidentialite">Confidentialité</a> ·
-        <a href="/plan-du-site">Plan du site</a>
-      </div>
-    </div>
-  </div>
-</footer>
+    <div class="footer-bottom"><span>&copy; TD PEINTURE RENOVATION — Peintre à Saint-Genis-Laval — Site par <a href="https://atlinker.com" target="_blank" rel="noopener">atlinker</a></span><div class="footer-legal"><a href="/plan-du-site">Plan du site</a><span>&bull;</span><a href="/mentions-legales">Mentions légales</a><span>&bull;</span><a href="/politique-confidentialite">Confidentialité</a></div></div>
+  </div></footer>
 
-<!-- Sticky CTA bar mobile : appel + devis toujours visibles -->
-<div class="sticky-cta-bar">
-  <a href="tel:+33786502364" class="btn btn-outline" aria-label="Appeler le 07 86 50 23 64">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-    </svg>
-    Appeler
-  </a>
-  <a href="/devis" class="btn btn-primary">Devis gratuit</a>
-</div>
+  <div class="mobile-cta-bar"><div class="mobile-cta-buttons">
+    <a href="tel:+33786502364" class="mobile-cta-call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>Appeler</a>
+    <a href="/contact" class="mobile-cta-devis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Devis</a>
+  </div></div>
+  <a href="tel:+33786502364" class="desktop-phone-btn" aria-label="Appeler"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg><span class="phone-label">07 86 50 23 64</span></a>
 
-<script src="/js/main.js" defer></script>
+  <script>
+    const h=document.querySelector('.hamburger'),nl=document.querySelector('.nav-links');
+    h.addEventListener('click',()=>{h.classList.toggle('active');document.querySelector('.nav-group').classList.toggle('open');h.setAttribute('aria-expanded',h.classList.contains('active'))});
+    const obs=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}})});
+    document.querySelectorAll('.faq-q').forEach(btn=>{btn.addEventListener('click',()=>{const a=btn.nextElementSibling;const open=a.classList.contains('open');document.querySelectorAll('.faq-a.open').forEach(el=>{el.classList.remove('open');el.previousElementSibling.classList.remove('open');el.previousElementSibling.setAttribute('aria-expanded','false')});if(!open){a.classList.add('open');btn.classList.add('open');btn.setAttribute('aria-expanded','true')}})});
+    document.querySelectorAll('form').forEach(f=>{f.addEventListener('submit',function(e){e.preventDefault();const msg=document.createElement('div');msg.className='form-success';msg.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="24" height="24"><polyline points="20 6 9 17 4 12"/></svg> Merci ! Réponse sous 24h.';f.style.display='none';f.parentNode.insertBefore(msg,f.nextSibling)})});
+  </script>
+<script src="/js/contact-form.js" defer></script>
 </body>
 </html>

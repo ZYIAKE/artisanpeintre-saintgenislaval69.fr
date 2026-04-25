@@ -1,357 +1,155 @@
 <!DOCTYPE html>
-<!--
-  ═══════════════════════════════════════════════════════════════════
-  PAGE — /realisations (liste des chantiers réalisés)
-  ═══════════════════════════════════════════════════════════════════
-  Contenu alimenté par l'agent lors de l'onboarding (15-20 fiches projet
-  initiales) puis enrichi par le partenaire via le CRM.
-
-  Logique d'affichage :
-  - Grid de cards avec photo + titre + ville + date
-  - Filtres par type de service + par ville
-  - Pagination si > 12 projets
-  - Chaque card link vers /realisations/
-
-  PLACEHOLDERS :
-  -   données JSON des projets (pour le JS de filtrage)
-  - {{PROJECT_N_*}}    données de chaque projet
-  ═══════════════════════════════════════════════════════════════════
--->
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Nos 150+ chantiers peintre à Saint-Genis-Laval et région. Photos avant/après, détails techniques, témoignages clients.">
+  <meta name="description" content="Découvrez nos réalisations et chantiers de peintre à Saint-Genis-Laval et alentours. Photos et détails de nos interventions.">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://artisanpeintre-saintgenislaval69.fr/realisations">
-
-  <title>Nos réalisations — peintre à Saint-Genis-Laval | TD PEINTURE RENOVATION</title>
-
+  <meta property="og:title" content="Nos Réalisations | TD PEINTURE RENOVATION Saint-Genis-Laval">
+  <meta property="og:description" content="Découvrez nos chantiers et réalisations de peintre à Saint-Genis-Laval.">
   <meta property="og:type" content="website">
-  <meta property="og:locale" content="fr_FR">
-  <meta property="og:url" content="https://artisanpeintre-saintgenislaval69.fr/realisations">
-  <meta property="og:title" content="Nos réalisations — TD PEINTURE RENOVATION">
-  <meta property="og:description" content="Découvrez nos chantiers réalisés à Saint-Genis-Laval et dans la région.">
-
+  <title>Nos Réalisations | TD PEINTURE RENOVATION Saint-Genis-Laval</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="/css/tokens.css">
-  <link rel="stylesheet" href="/css/palette-peintre.css">
-  <link rel="stylesheet" href="/css/base.css">
-  <link rel="stylesheet" href="/css/components.css">
-
-  <link rel="icon" type="image/svg+xml" href="/img/favicon.svg?v=202604251704">
-
-  <!-- Schema.org CollectionPage -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "name": "Nos réalisations",
-    "description": "150+ chantiers réalisés par TD PEINTURE RENOVATION à Saint-Genis-Laval.",
-    "url": "https://artisanpeintre-saintgenislaval69.fr/realisations",
-    "mainEntity": {
-      "@type": "ItemList",
-      "numberOfItems": "150"
-    }
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://artisanpeintre-saintgenislaval69.fr/" },
-      { "@type": "ListItem", "position": 2, "name": "Réalisations", "item": "https://artisanpeintre-saintgenislaval69.fr/realisations" }
-    ]
-  }
-  </script>
-
-  <style>
-    /* Styles spécifiques à la page réalisations */
-    .filter-bar {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-md);
-      align-items: end;
-      margin-bottom: var(--space-xl);
-      padding: var(--space-lg);
-      background: var(--color-bg-secondary);
-      border-radius: var(--radius-lg);
-    }
-    .filter-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .filter-group label {
-      font-size: var(--font-size-xs);
-      font-weight: var(--font-weight-bold);
-      color: var(--color-primary-dark);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .filter-group select {
-      width: 100%;
-      padding: 12px 16px;
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-sm);
-      background: white;
-      font-family: var(--font-body);
-      font-size: var(--font-size-body);
-      color: var(--color-text-body);
-      min-height: 48px;
-      cursor: pointer;
-      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
-    }
-    .filter-group select:focus {
-      outline: none;
-      border-color: var(--color-primary);
-      box-shadow: 0 0 0 3px rgba(43, 163, 26, 0.1);
-    }
-    @media (max-width: 480px) {
-      .filter-bar { grid-template-columns: 1fr; padding: var(--space-md); }
-    }
-    .project-card {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-sm);
-      text-decoration: none;
-      color: inherit;
-      background: var(--color-bg-primary);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      transition: transform var(--transition-base), box-shadow var(--transition-base);
-    }
-    .project-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-    }
-    .project-card img {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
-    }
-    .project-card-body {
-      padding: var(--space-md);
-    }
-    .project-card-meta {
-      display: flex;
-      gap: var(--space-sm);
-      font-size: var(--font-size-xs);
-      color: var(--color-text-muted);
-      margin-top: var(--space-xs);
-    }
-  </style>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="canonical" href="https://artisanpeintre-saintgenislaval69.fr/realisations">
+  <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"TD PEINTURE RENOVATION","telephone":"+33786502364","email":"td.peinture.renovation@outlook.fr","address":{"@type":"PostalAddress","streetAddress":"88 Chemin des Collines","addressLocality":"Saint-Genis-Laval","postalCode":"69230","addressCountry":"FR"},"priceRange":"€€"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://artisanpeintre-saintgenislaval69.fr/"},{"@type":"ListItem","position":2,"name":"Réalisations","item":"https://artisanpeintre-saintgenislaval69.fr/realisations"}]}</script>
 </head>
 <body>
 
-<a href="#main" class="skip-to-main">Aller au contenu principal</a>
-
-<div class="topbar">
-  ⭐ <strong>Noté 4.8/5</strong> · <strong>8 ans d'expérience</strong> · <strong>150+ chantiers réalisés</strong>
-</div>
-
-<header class="header">
-  <div class="container header-inner">
-    <a href="/" class="logo" aria-label="Accueil TD PEINTURE RENOVATION">
-      <span class="logo-letter" aria-hidden="true">D</span>
-      <span>TD PEINTURE RENOVATION</span>
-    </a>
-    <nav class="nav" aria-label="Navigation principale">
-      <ul class="nav-list" id="navList">
-        <li><a href="/#services" class="nav-link">Services</a></li>
-        <li><a href="/realisations" class="nav-link active">Réalisations</a></li>
-        <li><a href="/avis" class="nav-link">Avis</a></li>
-        <li><a href="/a-propos" class="nav-link">À propos</a></li>
-        <li><a href="/faq" class="nav-link">FAQ</a></li>
-        <li><a href="/contact" class="nav-link">Contact</a></li>
-        <li><a href="/devis" class="btn btn-primary btn-sm">Devis gratuit</a></li>
+  <!-- ══ NAV ══ -->
+  <nav role="navigation" aria-label="Navigation principale"><div class="container"><div class="nav-inner">
+    <a href="/" class="logo" aria-label="Accueil"><div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><span class="logo-name">TD PEINTURE</span></a>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <div class="nav-group">
+      <ul class="nav-links">
+        <li><a href="/prestations">Prestations</a></li>
+        <li><a href="/realisations">Réalisations</a></li>
+        <li><a href="/avis">Avis</a></li>
+        <li><a href="/zone-intervention">Zones</a></li>
+        <li><a href="/#faq">FAQ</a></li>
       </ul>
-      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-controls="navList" aria-expanded="false">
-        
-      </button>
+      <a href="tel:+33786502364" class="nav-phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>07 86 50 23 64</a>
+      <a href="/contact" class="nav-cta">Devis gratuit</a>
+    </div>
+  </div></div></nav>
+
+  <!-- ══ HERO ══ -->
+  <header class="hero" role="banner"><div class="container">
+    <div class="hero-tag reveal">Portfolio</div>
+    <h1 class="reveal">Nos réalisations de peintre à Saint-Genis-Laval</h1>
+    <p class="hero-desc reveal">Découvrez nos chantiers récents et jugez par vous-même de la qualité de notre travail.</p>
+    <div class="hero-btns reveal">
+      <a href="tel:+33786502364" class="btn btn-outline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="15" height="15"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>07 86 50 23 64</a>
+      <a href="/contact" class="btn btn-amber">Demander un devis gratuit</a>
+    </div>
+  </div></header>
+
+  <!-- ══ BREADCRUMBS ══ -->
+  <div style="padding:0.8rem 0;border-bottom:1px solid var(--border-light);"><div class="container">
+    <nav class="reveal" style="font-size:.82rem;color:var(--text-soft);" aria-label="Fil d'Ariane">
+      <a href="/" style="color:var(--amber);text-decoration:none;">Accueil</a> <span>&rsaquo;</span>
+      <span>Réalisations</span>
     </nav>
-  </div>
-</header>
+  </div></div>
 
-<main id="main">
-
-<div class="container">
-  <nav class="breadcrumb" aria-label="Fil d'Ariane">
-    <a href="/">Accueil</a>
-    <span class="breadcrumb-separator">/</span>
-    <span class="current">Nos réalisations</span>
-  </nav>
-</div>
-
-<section style="padding-top: var(--space-lg);">
-  <div class="container">
-    <div class="section-title">
-      <h1>Nos réalisations</h1>
-      <p>150+ chantiers peintre menés à Saint-Genis-Laval et dans la région. Photos avant/après, détails techniques, retours clients.</p>
+  <!-- ══ INTRO ══ -->
+  <section class="about-section" aria-labelledby="intro-title"><div class="container">
+    <div class="centered"><p class="section-label reveal">Portfolio</p><h2 id="intro-title" class="section-title reveal">Des chantiers réalisés avec soin</h2></div>
+    <div class="prose reveal">
+      <!-- INTRO_PARAGRAPHS -->
+      <p>Chaque chantier est une occasion de démontrer notre savoir-faire et notre engagement envers la qualité. Que ce soit pour une rénovation complète, une installation neuve ou un dépannage urgent, nous apportons le même niveau d'exigence et de soin à chaque intervention à Saint-Genis-Laval et dans toute la région.</p>
+      <p>Découvrez ci-dessous une sélection de nos réalisations récentes. Ces projets illustrent la diversité de nos compétences et la qualité de nos finitions. N'hésitez pas à nous contacter pour discuter de votre propre projet.</p>
     </div>
+  </div></section>
 
-    <!-- Filtres (selects déroulants pour simplicité UX) -->
-    <div class="filter-bar">
-      <div class="filter-group">
-        <label for="filterService">Type de service</label>
-        <select id="filterService" data-filter-type="service">
-          <option value="all">Tous les services</option>
-          <option value="peinture-interieure">Peinture intérieure</option><option value="peinture-exterieure">Peinture extérieure</option><option value="ravalement-facade">Ravalement de façade</option><option value="enduit-decoratif">Enduit décoratif</option><option value="pose-papier-peint">Pose de papier peint</option><option value="renovation-supports">Rénovation des supports</option>
-          <!-- Format option par service :
-          <option value="elagage">Élagage d'arbre</option>
-          <option value="abattage">Abattage d'arbre</option>
-          -->
-        </select>
+  <!-- ══ REALISATIONS GRID ══ -->
+  <section id="realisations" class="real-section" aria-labelledby="real-title"><div class="container">
+    <div class="centered"><p class="section-label reveal">Nos chantiers</p><h2 id="real-title" class="section-title reveal">Réalisations récentes</h2></div>
+    <div class="bento-grid">
+      <div class="bento-card large reveal">
+        <div class="bento-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Photo chantier</span></div>
+        <div class="bento-body"><h3>Rénovation complète appartement 75m² — Saint-Genis-Laval</h3><div class="bento-tags"><span class="bento-tag">Peinture intérieure</span><span class="bento-tag">Saint-Genis-Laval</span></div><p>Rénovation totale d'un T3 : préparation des supports (ponçage, enduit), peinture des murs et plafonds dans toutes les pièces, peinture des boiseries et plinthes. Chantier réalisé en 7 jours.</p></div>
       </div>
-      <div class="filter-group">
-        <label for="filterCity">Ville d'intervention</label>
-        <select id="filterCity" data-filter-type="city">
-          <option value="all">Toutes les villes</option>
-          <option value="saint-genis-laval">Saint-Genis-Laval</option><option value="oullins">Oullins</option><option value="pierre-benite">Pierre-Bénite</option><option value="la-mulatiere">La Mulatière</option><option value="francheville">Francheville</option><option value="sainte-foy-les-lyon">Sainte-Foy-lès-Lyon</option><option value="brignais">Brignais</option><option value="charly">Charly</option><option value="vourles">Vourles</option><option value="irigny">Irigny</option><option value="chaponost">Chaponost</option><option value="lyon">Lyon</option>
-          <!-- Format option par ville :
-          <option value="toulouse">Toulouse</option>
-          <option value="blagnac">Blagnac</option>
-          -->
-        </select>
+      <div class="bento-card reveal">
+        <div class="bento-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Photo chantier</span></div>
+        <div class="bento-body"><h3>Ravalement façade maison — Brignais</h3><div class="bento-tags"><span class="bento-tag">Peinture extérieure</span></div><p>Diagnostic complet, traitement des fissures, nettoyage haute pression et application d'une peinture façade siloxane résistante aux UV. Maison rénovée et protégée pour 10 ans.</p></div>
+      </div>
+      <div class="bento-card reveal">
+        <div class="bento-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Photo chantier</span></div>
+        <div class="bento-body"><h3>Décoration salon avec papier peint design — Oullins</h3><div class="bento-tags"><span class="bento-tag">Décoration</span></div><p>Pose de papier peint panoramique sur mur d'accent et peinture des autres murs en teinte coordonnée. Effet wahou garanti pour ce salon contemporain.</p></div>
+      </div>
+      <div class="bento-card reveal">
+        <div class="bento-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Photo chantier</span></div>
+        <div class="bento-body"><h3>Peinture cuisine après dégraissage — Pierre-Bénite</h3><div class="bento-tags"><span class="bento-tag">Peinture intérieure</span></div><p>Lessivage dégraissant, sous-couche bloquante, peinture spéciale pièces humides résistante aux taches et lavable. Cuisine remise à neuf en 2 jours.</p></div>
+      </div>
+      <div class="bento-card reveal">
+        <div class="bento-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Photo chantier</span></div>
+        <div class="bento-body"><h3>Remise en état studio sortie location — Vénissieux</h3><div class="bento-tags"><span class="bento-tag">Rénovation</span></div><p>Studio de 25 m² remis en état complet : reboucharge des trous, ponçage, peinture des murs et plafonds en blanc, peinture des boiseries. Logement prêt à relouer en 3 jours.</p></div>
+      </div>
+      <div class="bento-card reveal">
+        <div class="bento-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Photo chantier</span></div>
+        <div class="bento-body"><h3>Peinture chambre enfant — Chaponost</h3><div class="bento-tags"><span class="bento-tag">Décoration</span></div><p>Peinture murale en deux teintes pastel coordonnées, frise décorative et peinture du plafond. Chambre douillette créée sur-mesure pour la nouvelle naissance de la famille.</p></div>
       </div>
     </div>
+  </div></section>
 
-    <!-- Grid des projets (placeholders à répéter par l'agent) -->
-    <div class="grid grid-3" id="projectsGrid">
-      <a href="/realisations/peinture-salon-saint-genis-laval-mars-2026" class="project-card" data-service="peinture-interieure" data-city="saint-genis-laval"><img src="/img/realisation-saint-genis-laval.jpg?v=202604251704" alt="Peinture complète d'un salon à Saint-Genis-Laval" loading="lazy"><div class="project-card-body"><h3 class="card-title">Peinture complète d'un salon à Saint-Genis-Laval</h3><div class="project-card-meta"><span>📍 Saint-Genis-Laval</span><span>•</span><span>Mars 2026</span></div><p class="card-description mt-sm">Salon de 30 m² dans une maison des années 1970, murs marqués par d'anciens papiers peints retirés et plafond avec traces d'humidité légères dans les a...</p></div></a><a href="/realisations/ravalement-facade-oullins-fevrier-2026" class="project-card" data-service="ravalement-facade" data-city="oullins"><img src="/img/realisation-oullins.jpg?v=202604251704" alt="Ravalement de façade d'une maison à Oullins" loading="lazy"><div class="project-card-body"><h3 class="card-title">Ravalement de façade d'une maison à Oullins</h3><div class="project-card-meta"><span>📍 Oullins</span><span>•</span><span>Février 2026</span></div><p class="card-description mt-sm">Maison individuelle de 130 m² au sol, façade en enduit traditionnel datant de 1985, présentant des traces de mousse, d'écaillage par endroits et des m...</p></div></a><a href="/realisations/enduit-decoratif-francheville-octobre-2025" class="project-card" data-service="enduit-decoratif" data-city="francheville"><img src="/img/realisation-francheville.jpg?v=202604251704" alt="Enduit décoratif béton ciré à Francheville" loading="lazy"><div class="project-card-body"><h3 class="card-title">Enduit décoratif béton ciré à Francheville</h3><div class="project-card-meta"><span>📍 Francheville</span><span>•</span><span>Octobre 2025</span></div><p class="card-description mt-sm">Salle de bain de 12 m² dans une maison rénovée, demande pour un enduit béton ciré sur murs et sol pour un effet contemporain. Support : carrelage exis...</p></div></a><a href="/realisations/peinture-exterieure-brignais-novembre-2025" class="project-card" data-service="peinture-exterieure" data-city="brignais"><img src="/img/realisation-brignais.jpg?v=202604251704" alt="Peinture des volets et portails à Brignais" loading="lazy"><div class="project-card-body"><h3 class="card-title">Peinture des volets et portails à Brignais</h3><div class="project-card-meta"><span>📍 Brignais</span><span>•</span><span>Novembre 2025</span></div><p class="card-description mt-sm">Maison ancienne avec 12 fenêtres et volets bois, plus un grand portail métallique double vantail. Volets à repeindre en gris anthracite, portail en no...</p></div></a><a href="/realisations/remise-en-etat-irigny-septembre-2025" class="project-card" data-service="renovation-supports" data-city="irigny"><img src="/img/realisation-irigny.jpg?v=202604251704" alt="Remise en état complète d'un appartement à Irigny" loading="lazy"><div class="project-card-body"><h3 class="card-title">Remise en état complète d'un appartement à Irigny</h3><div class="project-card-meta"><span>📍 Irigny</span><span>•</span><span>Septembre 2025</span></div><p class="card-description mt-sm">Appartement T3 de 65 m² en location meublée, à remettre à neuf entre 2 locataires : murs marqués (trous de fixation, traces de meubles), plafonds jaun...</p></div></a><a href="/realisations/renovation-appartement-lyon-7-janvier-2026" class="project-card" data-service="peinture-interieure" data-city="lyon"><img src="/img/realisation-lyon.jpg?v=202604251704" alt="Rénovation complète d'un appartement à Lyon 7" loading="lazy"><div class="project-card-body"><h3 class="card-title">Rénovation complète d'un appartement à Lyon 7</h3><div class="project-card-meta"><span>📍 Lyon</span><span>•</span><span>Janvier 2026</span></div><p class="card-description mt-sm">Appartement T4 de 95 m² dans le quartier de Gerland, achat récent par un jeune couple souhaitant tout repeindre avant l'emménagement. Couleurs choisie...</p></div></a>
-      <!-- Template d'une card projet :
-      <a href="/realisations/" class="project-card" data-service="" data-city="">
-        <img src="" alt="" loading="lazy">
-        <div class="project-card-body">
-          <h3 class="card-title"></h3>
-          <div class="project-card-meta">
-            <span>📍 </span>
-            <span>•</span>
-            
-          </div>
-          <p class="card-description mt-sm"></p>
-        </div>
-      </a>
-      -->
+  <!-- ══ CTA ══ -->
+  <section class="why-section" aria-labelledby="cta-title"><div class="container">
+    <div class="centered">
+      <h2 id="cta-title" class="section-title reveal">Votre projet est le prochain ?</h2>
+      <p class="section-desc reveal">Contactez-nous pour discuter de votre projet et obtenir un devis gratuit et sans engagement.</p>
+      <div class="hero-btns reveal">
+        <a href="tel:+33786502364" class="btn btn-outline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="15" height="15"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>07 86 50 23 64</a>
+        <a href="/contact" class="btn btn-amber">Demander un devis gratuit</a>
+      </div>
     </div>
+  </div></section>
 
-    <!-- Pagination (à activer si >12 projets) -->
-    <div class="text-center mt-xl" id="pagination" style="display: none;">
-      <button class="btn btn-outline" id="loadMore">Voir plus de chantiers</button>
+  <!-- ══ FAQ ══ -->
+  <section id="faq" class="faq-section" aria-labelledby="faq-title"><div class="container">
+    <div class="faq-grid">
+      <div><p class="section-label reveal">FAQ</p><h2 id="faq-title" class="section-title reveal">Questions fréquentes</h2><p class="section-desc reveal">Tout savoir sur nos réalisations.</p></div>
+      <div class="faq-list">
+        <!-- FAQ_ITEMS -->
+        <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Puis-je voir des photos de vos chantiers avant de m'engager ?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Bien sûr ! Nous disposons d'un portfolio complet de nos réalisations que nous pouvons vous présenter lors de la visite technique. Nous pouvons également vous montrer des chantiers similaires au vôtre pour vous donner une idée précise du résultat attendu.</div></div>
+        <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Combien de temps dure un chantier en moyenne ?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">La durée varie selon l'ampleur du projet. Un dépannage prend généralement quelques heures, une installation standard 1 à 3 jours, et une rénovation complète peut nécessiter 1 à 3 semaines. Nous définissons un planning précis dans chaque devis.</div></div>
+        <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Travaillez-vous avec des sous-traitants ?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Non, tous nos chantiers sont réalisés par notre propre équipe d'artisans qualifiés. Cela nous permet de garantir une qualité constante et un suivi rigoureux de chaque projet du début à la fin.</div></div>
+        <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Le chantier sera-t-il propre à la fin des travaux ?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Absolument. Nous protégeons systématiquement les zones adjacentes au chantier et nous nettoyons intégralement à la fin des travaux. Nous ne quittons les lieux qu'une fois le chantier impeccable et votre satisfaction confirmée.</div></div>
+        <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Puis-je modifier le projet en cours de chantier ?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Oui, nous restons flexibles et à l'écoute tout au long du chantier. Si vous souhaitez ajuster certains détails, nous vous informerons de l'impact éventuel sur le délai et le budget avant de procéder à toute modification.</div></div>
+      </div>
     </div>
-  </div>
-</section>
+  </div></section>
 
-<!-- CTA -->
-<section class="section-bg-secondary">
-  <div class="container">
-    <div class="cta-banner">
-      <h2>Un projet similaire ? Parlons-en</h2>
-      <p>Chaque chantier est unique. Décrivez-nous le vôtre, nous vous proposons un devis adapté sous 48h.</p>
-      <a href="/devis" class="btn btn-primary btn-lg">Obtenir mon devis gratuit</a>
-    </div>
-  </div>
-</section>
-
-</main>
-
-<!-- Footer standard -->
-<footer class="footer">
-  <div class="container">
+  <!-- ══ FOOTER ══ -->
+  <footer role="contentinfo"><div class="container">
     <div class="footer-grid">
-      <div>
-        <div class="logo mb-md">
-          <span class="logo-letter" aria-hidden="true">D</span>
-          <span>TD PEINTURE RENOVATION</span>
-        </div>
-        <p style="font-size: 14px;">TD PEINTURE RENOVATION — Artisan peintre & Rénovation intérieure — Artisan peintre à Saint-Genis-Laval, Lyon et alentours. Peinture intérieure, extérieure, ravalement, enduit décoratif. Devis gratuit sous 48h.</p>
-        <p class="mt-md" style="font-size: 13px; color: var(--color-text-muted);">
-          <strong style="color: var(--color-primary-dark);">SIRET :</strong> 987 356 284 00016
-        </p>
-      </div>
-      <div>
-        <h3 class="footer-title">Services</h3>
-        <ul class="footer-list"><li><a href="/services/peinture-interieure">Peinture intérieure</a></li><li><a href="/services/peinture-exterieure">Peinture extérieure</a></li><li><a href="/services/ravalement-facade">Ravalement de façade</a></li><li><a href="/services/enduit-decoratif">Enduit décoratif</a></li><li><a href="/services/pose-papier-peint">Pose de papier peint</a></li><li><a href="/services/renovation-supports">Rénovation des supports</a></li></ul>
-      </div>
-      <div>
-        <h3 class="footer-title">Entreprise</h3>
-        <ul class="footer-list">
-          <li><a href="/a-propos">À propos</a></li>
-          <li><a href="/realisations">Nos réalisations</a></li>
-          <li><a href="/avis">Avis clients</a></li>
-          <li><a href="/faq">FAQ</a></li>
-          <li><a href="/zone-intervention">Zone d'intervention</a></li>
-          <li><a href="/contact">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="footer-title">Contact</h3>
-        <ul class="footer-list">
-          <li><a href="tel:+33786502364">📞 07 86 50 23 64</a></li>
-          <li><a href="mailto:td.peinture.renovation@outlook.fr">✉️ td.peinture.renovation@outlook.fr</a></li>
-          <li style="padding-top: 8px;">📍 88 Chemin des Collines<br>69230 Saint-Genis-Laval</li>
-          <li style="padding-top: 8px;">Lun-Ven : 8h-18h</li>
-        </ul>
-      </div>
+      <div class="footer-col"><div class="footer-logo"><div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><span class="logo-name">TD PEINTURE</span></div><p class="footer-nap">TD PEINTURE RENOVATION<br>88 Chemin des Collines<br>69230 Saint-Genis-Laval</p><p class="footer-nap"><a href="tel:+33786502364">07 86 50 23 64</a><br><a href="mailto:td.peinture.renovation@outlook.fr">td.peinture.renovation@outlook.fr</a></p></div>
+      <div class="footer-col"><h4>Services</h4><ul><li><a href="/prestations">Peinture intérieure</a></li><li><a href="/prestations">Peinture extérieure</a></li><li><a href="/prestations">Rénovation</a></li></ul></div>
+      <div class="footer-col"><h4>Infos</h4><ul><li><a href="/apropos">À propos</a></li><li><a href="/avis">Avis</a></li><li><a href="/realisations">Réalisations</a></li><li><a href="/contact">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Zones</h4><p>Interventions à Saint-Genis-Laval, Oullins, Brignais et alentours.</p><a href="/zone-intervention" class="zlink">Voir nos zones <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg></a></div>
     </div>
-    <div class="footer-bottom">
-      <div>© 2026 TD PEINTURE RENOVATION · Tous droits réservés</div>
-      <div>
-        <a href="/mentions-legales">Mentions légales</a> ·
-        <a href="/cgv">CGV</a> ·
-        <a href="/confidentialite">Confidentialité</a> ·
-        <a href="/plan-du-site">Plan du site</a>
-      </div>
-    </div>
-  </div>
-</footer>
+    <div class="footer-bottom"><span>&copy; TD PEINTURE RENOVATION — Peintre à Saint-Genis-Laval — Site par <a href="https://atlinker.com" target="_blank" rel="noopener">atlinker</a></span><div class="footer-legal"><a href="/plan-du-site">Plan du site</a><span>&bull;</span><a href="/mentions-legales">Mentions légales</a><span>&bull;</span><a href="/politique-confidentialite">Confidentialité</a></div></div>
+  </div></footer>
 
-<!-- Sticky CTA bar mobile : appel + devis toujours visibles -->
-<div class="sticky-cta-bar">
-  <a href="tel:+33786502364" class="btn btn-outline" aria-label="Appeler le 07 86 50 23 64">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-    </svg>
-    Appeler
-  </a>
-  <a href="/devis" class="btn btn-primary">Devis gratuit</a>
-</div>
+  <div class="mobile-cta-bar"><div class="mobile-cta-buttons">
+    <a href="tel:+33786502364" class="mobile-cta-call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>Appeler</a>
+    <a href="/contact" class="mobile-cta-devis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Devis</a>
+  </div></div>
+  <a href="tel:+33786502364" class="desktop-phone-btn" aria-label="Appeler"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg><span class="phone-label">07 86 50 23 64</span></a>
 
-<script src="/js/main.js" defer></script>
-<script>
-// Filtrage projets via selects (service + ville)
-(function() {
-  const grid = document.getElementById('projectsGrid');
-  if (!grid) return;
-  const selectService = document.getElementById('filterService');
-  const selectCity = document.getElementById('filterCity');
-
-  function applyFilters() {
-    const service = selectService ? selectService.value : 'all';
-    const city = selectCity ? selectCity.value : 'all';
-    let visibleCount = 0;
-    grid.querySelectorAll('.project-card').forEach(card => {
-      const matchService = service === 'all' || card.dataset.service === service;
-      const matchCity = city === 'all' || card.dataset.city === city;
-      const visible = matchService && matchCity;
-      card.style.display = visible ? '' : 'none';
-      if (visible) visibleCount++;
-    });
-    // Track GA4
-    if (typeof gtag === 'function' && (service !== 'all' || city !== 'all')) {
-      gtag('event', 'filter_projects', { service, city, results: visibleCount });
-    }
-  }
-
-  if (selectService) selectService.addEventListener('change', applyFilters);
-  if (selectCity) selectCity.addEventListener('change', applyFilters);
-})();
-</script>
+  <script>
+    const h=document.querySelector('.hamburger'),nl=document.querySelector('.nav-links');
+    h.addEventListener('click',()=>{h.classList.toggle('active');document.querySelector('.nav-group').classList.toggle('open');h.setAttribute('aria-expanded',h.classList.contains('active'))});
+    const obs=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}})});
+    document.querySelectorAll('.faq-q').forEach(btn=>{btn.addEventListener('click',()=>{const a=btn.nextElementSibling;const open=a.classList.contains('open');document.querySelectorAll('.faq-a.open').forEach(el=>{el.classList.remove('open');el.previousElementSibling.classList.remove('open');el.previousElementSibling.setAttribute('aria-expanded','false')});if(!open){a.classList.add('open');btn.classList.add('open');btn.setAttribute('aria-expanded','true')}})});
+    document.querySelectorAll('form').forEach(f=>{f.addEventListener('submit',function(e){e.preventDefault();const msg=document.createElement('div');msg.className='form-success';msg.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="24" height="24"><polyline points="20 6 9 17 4 12"/></svg> Merci ! Réponse sous 24h.';f.style.display='none';f.parentNode.insertBefore(msg,f.nextSibling)})});
+  </script>
+<script src="/js/contact-form.js" defer></script>
 </body>
 </html>

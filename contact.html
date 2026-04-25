@@ -1,382 +1,122 @@
 <!DOCTYPE html>
-<!--
-  ═══════════════════════════════════════════════════════════════════
-  PAGE — /contact (form classique + coordonnées + map)
-  ═══════════════════════════════════════════════════════════════════
-  Contact simple (5 champs). Pour un devis détaillé multi-étapes → /devis.
-
-  PLACEHOLDERS :
-  - https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11150.0!2d4.7944!3d45.6964!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zU2FpbnQtR2VuaXMtTGF2YWw!5e0!3m2!1sfr!2sfr!4v1700000000000   iframe src Google Maps
-  - {{OPENING_HOURS_*}}     horaires par jour
-  ═══════════════════════════════════════════════════════════════════
--->
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Contactez TD PEINTURE RENOVATION, peintre à Saint-Genis-Laval. Téléphone, email, formulaire. Devis gratuit sous 48h.">
+  <meta name="description" content="Contactez TD PEINTURE RENOVATION, peintre à Saint-Genis-Laval. Demandez votre devis gratuit. Tél : 07 86 50 23 64. Réponse sous 24h.">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://artisanpeintre-saintgenislaval69.fr/contact">
-
-  <title>Contact — TD PEINTURE RENOVATION | peintre à Saint-Genis-Laval</title>
-
+  <meta property="og:title" content="Contact | TD PEINTURE RENOVATION Saint-Genis-Laval — Devis Gratuit">
+  <meta property="og:description" content="Demandez votre devis gratuit. Réponse sous 24h.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://artisanpeintre-saintgenislaval69.fr/contact">
-  <meta property="og:title" content="Contact — TD PEINTURE RENOVATION">
-
+  <title>Contact | TD PEINTURE RENOVATION Peintre Saint-Genis-Laval — Devis Gratuit</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="/css/tokens.css">
-  <link rel="stylesheet" href="/css/palette-peintre.css">
-  <link rel="stylesheet" href="/css/base.css">
-  <link rel="stylesheet" href="/css/components.css">
-
-  <link rel="icon" type="image/svg+xml" href="/img/favicon.svg?v=202604251704">
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ContactPage",
-    "name": "Contact TD PEINTURE RENOVATION",
-    "url": "https://artisanpeintre-saintgenislaval69.fr/contact",
-    "mainEntity": {
-      "@type": "LocalBusiness",
-      "name": "TD PEINTURE RENOVATION",
-      "telephone": "+33786502364",
-      "email": "td.peinture.renovation@outlook.fr",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "88 Chemin des Collines",
-        "addressLocality": "Saint-Genis-Laval",
-        "postalCode": "69230",
-        "addressCountry": "FR"
-      },
-      "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "18:00"}]
-    }
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://artisanpeintre-saintgenislaval69.fr/" },
-      { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://artisanpeintre-saintgenislaval69.fr/contact" }
-    ]
-  }
-  </script>
-
-  <style>
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: var(--space-2xl);
-      align-items: start;
-    }
-    @media (max-width: 768px) {
-      .contact-grid { grid-template-columns: 1fr; }
-    }
-    .contact-info-card {
-      background: white;
-      padding: var(--space-xl);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-md);
-      border: 1px solid var(--color-border);
-      position: sticky;
-      top: calc(var(--header-height) + var(--space-md));
-    }
-    .contact-info-item {
-      display: flex;
-      gap: var(--space-md);
-      padding: var(--space-md) 0;
-      border-bottom: 1px solid var(--color-border);
-    }
-    .contact-info-item:last-child { border-bottom: none; }
-    .contact-info-icon {
-      width: 40px;
-      height: 40px;
-      flex-shrink: 0;
-      background: var(--color-primary-light);
-      border-radius: var(--radius-round);
-      display: grid;
-      place-items: center;
-      font-size: 18px;
-    }
-    .map-container {
-      margin-top: var(--space-xl);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-md);
-    }
-    .map-container iframe {
-      width: 100%;
-      height: 400px;
-      border: 0;
-    }
-    .hours-list {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-xs);
-      font-size: var(--font-size-small);
-    }
-    .hours-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 6px 0;
-      border-bottom: 1px dotted var(--color-border);
-    }
-    .hours-row:last-child { border-bottom: none; }
-    .hours-day { font-weight: var(--font-weight-semibold); }
-    .hours-time { color: var(--color-text-muted); }
-  </style>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="canonical" href="https://artisanpeintre-saintgenislaval69.fr/contact">
+  <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"TD PEINTURE RENOVATION","telephone":"+33786502364","email":"td.peinture.renovation@outlook.fr","address":{"@type":"PostalAddress","streetAddress":"88 Chemin des Collines","addressLocality":"Saint-Genis-Laval","postalCode":"69230","addressCountry":"FR"},"priceRange":"€€"}</script>
 </head>
 <body>
 
-<a href="#main" class="skip-to-main">Aller au contenu principal</a>
-
-<div class="topbar">
-  ⭐ <strong>Noté 4.8/5</strong> · <strong>8 ans d'expérience</strong>
-</div>
-
-<header class="header">
-  <div class="container header-inner">
-    <a href="/" class="logo" aria-label="Accueil TD PEINTURE RENOVATION">
-      <span class="logo-letter" aria-hidden="true">D</span>
-      <span>TD PEINTURE RENOVATION</span>
-    </a>
-    <nav class="nav" aria-label="Navigation principale">
-      <ul class="nav-list" id="navList">
-        <li><a href="/#services" class="nav-link">Services</a></li>
-        <li><a href="/realisations" class="nav-link">Réalisations</a></li>
-        <li><a href="/avis" class="nav-link">Avis</a></li>
-        <li><a href="/a-propos" class="nav-link">À propos</a></li>
-        <li><a href="/faq" class="nav-link">FAQ</a></li>
-        <li><a href="/contact" class="nav-link active">Contact</a></li>
-        <li><a href="/devis" class="btn btn-primary btn-sm">Devis gratuit</a></li>
+  <!-- ══ NAV ══ -->
+  <nav role="navigation" aria-label="Navigation principale"><div class="container"><div class="nav-inner">
+    <a href="/" class="logo" aria-label="Accueil"><div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><span class="logo-name">TD PEINTURE</span></a>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <div class="nav-group">
+      <ul class="nav-links">
+        <li><a href="/prestations">Prestations</a></li>
+        <li><a href="/realisations">Réalisations</a></li>
+        <li><a href="/avis">Avis</a></li>
+        <li><a href="/zone-intervention">Zones</a></li>
+        <li><a href="/#faq">FAQ</a></li>
       </ul>
-      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-controls="navList" aria-expanded="false">
-        
-      </button>
-    </nav>
-  </div>
-</header>
-
-<main id="main">
-
-<div class="container">
-  <nav class="breadcrumb" aria-label="Fil d'Ariane">
-    <a href="/">Accueil</a>
-    <span class="breadcrumb-separator">/</span>
-    <span class="current">Contact</span>
-  </nav>
-</div>
-
-<section style="padding-top: var(--space-lg);">
-  <div class="container">
-    <div class="section-title">
-      <h1>Contactez-nous</h1>
-      <p>Une question, une demande d'intervention ? On vous répond sous 48h max, ou tout de suite par téléphone.</p>
+      <a href="tel:+33786502364" class="nav-phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>07 86 50 23 64</a>
+      <a href="/contact" class="nav-cta">Devis gratuit</a>
     </div>
+  </div></div></nav>
 
-    <div class="contact-grid">
-      <!-- Formulaire contact -->
-      <div>
-        <form class="form" id="contactForm" data-form="contact" action="https://slcksfqbsbcmvqupbhox.supabase.co/functions/v1/partner-site-lead-submit" method="POST" novalidate>
-          <input type="hidden" name="_form_type" value="contact">
-          <input type="hidden" name="_client_id" value="2083e3b1-b6f1-49d9-a45b-619054f26429">
+  <!-- ══ HERO ══ -->
+  <header class="hero" role="banner"><div class="container">
+    <div class="hero-tag reveal">Contact</div>
+    <h1 class="reveal">Contactez TD PEINTURE RENOVATION — Devis gratuit</h1>
+    <p class="hero-desc reveal">Demandez votre devis gratuit en ligne ou par téléphone. Réponse garantie sous 24h, sans engagement.</p>
+    <div class="hero-btns reveal">
+      <a href="tel:+33786502364" class="btn btn-outline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="15" height="15"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>07 86 50 23 64</a>
+      <a href="#contact" class="btn btn-amber">Remplir le formulaire</a>
+    </div>
+  </div></header>
 
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" for="firstname">Prénom <span class="required">*</span></label>
-              <input type="text" id="firstname" name="firstname" class="form-input" required autocomplete="given-name">
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="lastname">Nom <span class="required">*</span></label>
-              <input type="text" id="lastname" name="lastname" class="form-input" required autocomplete="family-name">
-            </div>
-          </div>
 
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" for="email">Email <span class="required">*</span></label>
-              <input type="email" id="email" name="email" class="form-input" required autocomplete="email" inputmode="email">
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="phone">Téléphone <span class="required">*</span></label>
-              <input type="tel" id="phone" name="phone" class="form-input" required autocomplete="tel" inputmode="tel" pattern="[0-9\s()+\-\.]{10,}">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="subject">Sujet</label>
-            <select id="subject" name="subject" class="form-select">
-              <option value="demande_info">Demande d'informations</option>
-              <option value="demande_devis">Demande de devis</option>
-              <option value="urgence">Intervention urgente</option>
-              <option value="autre">Autre</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="message">Votre message <span class="required">*</span></label>
-            <textarea id="message" name="message" class="form-textarea" required minlength="10" placeholder="Décrivez brièvement votre besoin..."></textarea>
-          </div>
-
-          <div class="form-group">
-            <label style="display: flex; gap: 8px; align-items: flex-start; font-size: var(--font-size-small); color: var(--color-text-muted);">
-              <input type="checkbox" id="rgpd" name="rgpd" required style="margin-top: 4px;">
-              <span>
-                J'accepte que mes données soient utilisées pour me recontacter. Voir notre
-                <a href="/confidentialite" style="color: var(--color-primary); text-decoration: underline;">politique de confidentialité</a>. <span class="required">*</span>
-              </span>
-            </label>
-          </div>
-
-          <!-- Honeypot anti-spam -->
-          <div style="position: absolute; left: -9999px;" aria-hidden="true">
-            <label>Ne pas remplir</label>
-            <input type="text" name="website" tabindex="-1" autocomplete="off">
-          </div>
-
-          <button type="submit" class="btn btn-primary btn-lg">Envoyer mon message</button>
-
-          <div id="formStatus" style="display: none; padding: var(--space-md); border-radius: var(--radius-sm); margin-top: var(--space-md);"></div>
+  <!-- ══ CONTACT SPLIT ══ -->
+  <section id="contact" aria-labelledby="contact-title"><div class="container">
+    <div class="centered"><p class="section-label reveal">Contact</p><h2 id="contact-title" class="section-title reveal">Demande de devis gratuit</h2></div><br>
+    <div class="contact-split">
+      <div class="contact-form-card reveal">
+        <h3>Décrivez votre projet</h3>
+        <form class="contact-form" action="https://slcksfqbsbcmvqupbhox.supabase.co/functions/v1/partner-site-lead-submit?source=tdpeinture-saintgenislaval" method="POST" data-contact-form>
+          <input type="text" name="nom" placeholder="Votre nom" required>
+          <input type="email" name="email" placeholder="Votre email" required>
+          <input type="tel" name="telephone" placeholder="Votre téléphone" required>
+          <select name="besoin"><option value="">Type de besoin</option><option value="peinture-interieure">Peinture intérieure</option><option value="peinture-exterieure">Peinture extérieure</option><option value="renovation">Rénovation</option><option value="decoration">Décoration</option><option value="autre">Autre</option></select>
+          <textarea name="description" placeholder="Décrivez votre projet..."></textarea>
+          <div class="submit-row"><button type="submit" class="btn-submit">Envoyer ma demande</button></div>
         </form>
       </div>
-
-      <!-- Informations contact (sticky desktop) -->
-      <aside class="contact-info-card">
-        <h3 style="margin-bottom: var(--space-md);">Nos coordonnées</h3>
-
-        <div class="contact-info-item">
-          <div class="contact-info-icon">📞</div>
-          <div>
-            <div style="font-size: var(--font-size-xs); color: var(--color-text-muted); text-transform: uppercase;">Téléphone</div>
-            <a href="tel:+33786502364" style="font-weight: var(--font-weight-semibold); color: var(--color-primary-dark); font-size: var(--font-size-h4);">07 86 50 23 64</a>
-          </div>
-        </div>
-
-        <div class="contact-info-item">
-          <div class="contact-info-icon">✉️</div>
-          <div>
-            <div style="font-size: var(--font-size-xs); color: var(--color-text-muted); text-transform: uppercase;">Email</div>
-            <a href="mailto:td.peinture.renovation@outlook.fr" style="font-weight: var(--font-weight-semibold); color: var(--color-primary-dark);">td.peinture.renovation@outlook.fr</a>
-          </div>
-        </div>
-
-        <div class="contact-info-item">
-          <div class="contact-info-icon">📍</div>
-          <div>
-            <div style="font-size: var(--font-size-xs); color: var(--color-text-muted); text-transform: uppercase;">Adresse</div>
-            <div style="font-weight: var(--font-weight-semibold); color: var(--color-primary-dark);">
-              88 Chemin des Collines<br>
-              69230 Saint-Genis-Laval
-            </div>
-          </div>
-        </div>
-
-        <div class="contact-info-item">
-          <div class="contact-info-icon">🕐</div>
-          <div style="flex: 1;">
-            <div style="font-size: var(--font-size-xs); color: var(--color-text-muted); text-transform: uppercase; margin-bottom: var(--space-xs);">Horaires</div>
-            <div class="hours-list">
-              <div class="hours-row"><span class="hours-day">Lundi</span><span class="hours-time">8h-18h</span></div>
-              <div class="hours-row"><span class="hours-day">Mardi</span><span class="hours-time">8h-18h</span></div>
-              <div class="hours-row"><span class="hours-day">Mercredi</span><span class="hours-time">8h-18h</span></div>
-              <div class="hours-row"><span class="hours-day">Jeudi</span><span class="hours-time">8h-18h</span></div>
-              <div class="hours-row"><span class="hours-day">Vendredi</span><span class="hours-time">8h-18h</span></div>
-              <div class="hours-row"><span class="hours-day">Samedi</span><span class="hours-time">Fermé</span></div>
-              <div class="hours-row"><span class="hours-day">Dimanche</span><span class="hours-time">Fermé</span></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-lg">
-          <a href="/devis" class="btn btn-primary" style="width: 100%;">Demande de devis détaillée →</a>
-        </div>
-      </aside>
+      <div class="contact-info reveal">
+        <h3>Coordonnées</h3>
+        <div class="c-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><div class="c-item-text"><strong>TD PEINTURE RENOVATION</strong></div></div>
+        <div class="c-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg><div class="c-item-text"><a href="tel:+33786502364">07 86 50 23 64</a></div></div>
+        <div class="c-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><div class="c-item-text"><a href="mailto:td.peinture.renovation@outlook.fr">td.peinture.renovation@outlook.fr</a></div></div>
+        <div class="c-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><div class="c-item-text">88 Chemin des Collines<br>69230 Saint-Genis-Laval</div></div>
+        <div class="c-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><div class="c-item-text">Lun – Sam : 8h – 19h<br>Dim : Fermé</div></div>
+      </div>
     </div>
+  </div></section>
 
-    <!-- Carte Google Maps -->
-    <div class="map-container">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11150.0!2d4.7944!3d45.6964!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zU2FpbnQtR2VuaXMtTGF2YWw!5e0!3m2!1sfr!2sfr!4v1700000000000"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        allowfullscreen
-        title="Localisation de TD PEINTURE RENOVATION">
-      </iframe>
+  <!-- ══ GOOGLE MAP GMB ══ -->
+  <section class="zone-section" aria-labelledby="map-title"><div class="container">
+    <div class="zone-grid reveal">
+      <div>
+        <p class="section-label">Localisation</p>
+        <h2 id="map-title" class="section-title">Nous trouver</h2>
+        <div class="zone-location"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none" width="14" height="14"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3" fill="#fff"/></svg>Saint-Genis-Laval et alentours</div>
+        <p class="zone-radius">Intervention dans un rayon de 30 km autour de Saint-Genis-Laval.</p>
+        <a href="tel:+33786502364" class="btn btn-amber" style="margin-top:1.5rem;">Appeler maintenant</a>
+      </div>
+      <div class="zone-map">
+        <!-- GOOGLE_MAP_GMB -->
+        <iframe src="https://maps.google.com/maps?q=88+Chemin+des+Collines,69230+Saint-Genis-Laval&t=&z=12&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" title="Localisation TD PEINTURE RENOVATION" style="width:100%;height:100%;border:0;"></iframe>
+      </div>
     </div>
-  </div>
-</section>
+  </div></section>
 
-</main>
-
-<footer class="footer">
-  <div class="container">
+  <!-- ══ FOOTER ══ -->
+  <footer role="contentinfo"><div class="container">
     <div class="footer-grid">
-      <div>
-        <div class="logo mb-md">
-          <span class="logo-letter" aria-hidden="true">D</span>
-          <span>TD PEINTURE RENOVATION</span>
-        </div>
-        <p style="font-size: 14px;">TD PEINTURE RENOVATION — Artisan peintre & Rénovation intérieure — Artisan peintre à Saint-Genis-Laval, Lyon et alentours. Peinture intérieure, extérieure, ravalement, enduit décoratif. Devis gratuit sous 48h.</p>
-        <p class="mt-md" style="font-size: 13px; color: var(--color-text-muted);">
-          <strong style="color: var(--color-primary-dark);">SIRET :</strong> 987 356 284 00016
-        </p>
-      </div>
-      <div>
-        <h3 class="footer-title">Services</h3>
-        <ul class="footer-list"><li><a href="/services/peinture-interieure">Peinture intérieure</a></li><li><a href="/services/peinture-exterieure">Peinture extérieure</a></li><li><a href="/services/ravalement-facade">Ravalement de façade</a></li><li><a href="/services/enduit-decoratif">Enduit décoratif</a></li><li><a href="/services/pose-papier-peint">Pose de papier peint</a></li><li><a href="/services/renovation-supports">Rénovation des supports</a></li></ul>
-      </div>
-      <div>
-        <h3 class="footer-title">Entreprise</h3>
-        <ul class="footer-list">
-          <li><a href="/a-propos">À propos</a></li>
-          <li><a href="/realisations">Nos réalisations</a></li>
-          <li><a href="/avis">Avis clients</a></li>
-          <li><a href="/faq">FAQ</a></li>
-          <li><a href="/zone-intervention">Zone d'intervention</a></li>
-          <li><a href="/contact">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="footer-title">Contact</h3>
-        <ul class="footer-list">
-          <li><a href="tel:+33786502364">📞 07 86 50 23 64</a></li>
-          <li><a href="mailto:td.peinture.renovation@outlook.fr">✉️ td.peinture.renovation@outlook.fr</a></li>
-          <li style="padding-top: 8px;">📍 88 Chemin des Collines<br>69230 Saint-Genis-Laval</li>
-          <li style="padding-top: 8px;">Lun-Ven : 8h-18h</li>
-        </ul>
-      </div>
+      <div class="footer-col"><div class="footer-logo"><div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><span class="logo-name">TD PEINTURE</span></div><p class="footer-nap">TD PEINTURE RENOVATION<br>88 Chemin des Collines<br>69230 Saint-Genis-Laval</p><p class="footer-nap"><a href="tel:+33786502364">07 86 50 23 64</a><br><a href="mailto:td.peinture.renovation@outlook.fr">td.peinture.renovation@outlook.fr</a></p></div>
+      <div class="footer-col"><h4>Services</h4><ul><li><a href="/prestations">Peinture intérieure</a></li><li><a href="/prestations">Peinture extérieure</a></li><li><a href="/prestations">Rénovation</a></li></ul></div>
+      <div class="footer-col"><h4>Infos</h4><ul><li><a href="/apropos">À propos</a></li><li><a href="/avis">Avis</a></li><li><a href="/realisations">Réalisations</a></li><li><a href="/contact">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Zones</h4><p>Interventions à Saint-Genis-Laval, Oullins, Brignais et alentours.</p><a href="/zone-intervention" class="zlink">Voir nos zones <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg></a></div>
     </div>
-    <div class="footer-bottom">
-      <div>© 2026 TD PEINTURE RENOVATION · Tous droits réservés</div>
-      <div>
-        <a href="/mentions-legales">Mentions légales</a> ·
-        <a href="/cgv">CGV</a> ·
-        <a href="/confidentialite">Confidentialité</a> ·
-        <a href="/plan-du-site">Plan du site</a>
-      </div>
-    </div>
-  </div>
-</footer>
+    <div class="footer-bottom"><span>&copy; TD PEINTURE RENOVATION — Peintre à Saint-Genis-Laval — Site par <a href="https://atlinker.com" target="_blank" rel="noopener">atlinker</a></span><div class="footer-legal"><a href="/plan-du-site">Plan du site</a><span>&bull;</span><a href="/mentions-legales">Mentions légales</a><span>&bull;</span><a href="/politique-confidentialite">Confidentialité</a></div></div>
+  </div></footer>
 
-<!-- Sticky CTA bar mobile : appel + devis toujours visibles -->
-<div class="sticky-cta-bar">
-  <a href="tel:+33786502364" class="btn btn-outline" aria-label="Appeler le 07 86 50 23 64">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-    </svg>
-    Appeler
-  </a>
-  <a href="/devis" class="btn btn-primary">Devis gratuit</a>
-</div>
+  <div class="mobile-cta-bar"><div class="mobile-cta-buttons">
+    <a href="tel:+33786502364" class="mobile-cta-call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>Appeler</a>
+    <a href="/contact" class="mobile-cta-devis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Devis</a>
+  </div></div>
+  <a href="tel:+33786502364" class="desktop-phone-btn" aria-label="Appeler"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg><span class="phone-label">07 86 50 23 64</span></a>
 
-<script src="/js/main.js" defer></script>
-<script src="/js/forms.js" defer></script>
+  <script>
+    const h=document.querySelector('.hamburger'),nl=document.querySelector('.nav-links');
+    h.addEventListener('click',()=>{h.classList.toggle('active');document.querySelector('.nav-group').classList.toggle('open');h.setAttribute('aria-expanded',h.classList.contains('active'))});
+    const obs=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}})});
+    document.querySelectorAll('.faq-q').forEach(btn=>{btn.addEventListener('click',()=>{const a=btn.nextElementSibling;const open=a.classList.contains('open');document.querySelectorAll('.faq-a.open').forEach(el=>{el.classList.remove('open');el.previousElementSibling.classList.remove('open');el.previousElementSibling.setAttribute('aria-expanded','false')});if(!open){a.classList.add('open');btn.classList.add('open');btn.setAttribute('aria-expanded','true')}})});
+    document.querySelectorAll('form').forEach(f=>{f.addEventListener('submit',function(e){e.preventDefault();const msg=document.createElement('div');msg.className='form-success';msg.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="24" height="24"><polyline points="20 6 9 17 4 12"/></svg> Merci ! Réponse sous 24h.';f.style.display='none';f.parentNode.insertBefore(msg,f.nextSibling)})});
+  </script>
+<script src="/js/contact-form.js" defer></script>
 </body>
 </html>
