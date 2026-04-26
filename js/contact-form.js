@@ -1,52 +1,75 @@
 /**
- * Contact form handler — POST JSON vers Supabase edge function
+ * Contact form handler — MEGA-FIX
+ * Submits to Supabase edge function + shows REAL errors (no fake success)
  */
 (function() {
   const ENDPOINT = 'https://slcksfqbsbcmvqupbhox.supabase.co/functions/v1/partner-site-lead-submit?source=tdpeinture-saintgenislaval';
 
-  function attachHandler(form) {
-    if (form.dataset.handlerAttached) return;
-    form.dataset.handlerAttached = 'true';
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const data = {};
-      new FormData(form).forEach((v, k) => data[k] = v);
-      const submitBtn = form.querySelector('button[type=submit]');
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Envoi en cours…';
-      }
-      try {
-        const res = await fetch(ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        showSuccess(form);
-      } catch (err) {
-        console.error('Form submit error:', err);
-        showSuccess(form);
-      }
-    }, true);
+  function showError(form, msg) {
+    // Remove any previous error/success
+    form.parentNode.querySelectorAll('.form-error, .form-success').forEach(n => n.remove());
+    const errMsg = document.createElement('div');
+    errMsg.className = 'form-error';
+    errMsg.style.cssText = 'background:#fee;color:#c33;padding:1rem;border-radius:8px;margin-top:1rem;border-left:4px solid #c33;';
+    errMsg.innerHTML = msg || '<strong>Erreur de soumission.</strong><br>Réessayez ou appelez-nous directement au <a href="tel:+33214739816" style="color:#c33;font-weight:bold;">02 14 73 98 16</a>.';
+    form.parentNode.insertBefore(errMsg, form.nextSibling);
   }
 
   function showSuccess(form) {
-    const msg = document.createElement('div');
-    msg.className = 'form-success';
-    msg.style.cssText = 'background:#10B981;color:#fff;padding:1rem;border-radius:8px;text-align:center;display:flex;align-items:center;justify-content:center;gap:.5rem;';
-    msg.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="24" height="24"><polyline points="20 6 9 17 4 12"/></svg> Merci ! Votre demande a bien été envoyée. Nous vous répondrons sous 24h.';
+    form.parentNode.querySelectorAll('.form-error, .form-success').forEach(n => n.remove());
+    const ok = document.createElement('div');
+    ok.className = 'form-success';
+    ok.style.cssText = 'background:#e8f5e9;color:#2e7d32;padding:1.25rem;border-radius:8px;margin-top:1rem;border-left:4px solid #2e7d32;font-weight:600;';
+    ok.innerHTML = 'Merci ! Votre demande a bien été envoyée. Réponse sous 24h.';
     form.style.display = 'none';
-    form.parentNode.insertBefore(msg, form.nextSibling);
+    form.parentNode.insertBefore(ok, form.nextSibling);
   }
 
-  function init() {
-    document.querySelectorAll('form[data-contact-form], form.contact-form, form.form-card').forEach(attachHandler);
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.dataset.origText = submitBtn.textContent; submitBtn.textContent = 'Envoi en cours...'; }
+
+    // Build payload from form fields
+    const fd = new FormData(form);
+    const payload = {};
+    for (const [k, v] of fd.entries()) payload[k] = v;
+
+    // RGPD must be checked
+    if (!payload.rgpd) {
+      showError(form, '<strong>Veuillez accepter la politique de confidentialité.</strong>');
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = submitBtn.dataset.origText || 'Envoyer'; }
+      return;
+    }
+
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(r => {
+      if (!r.ok) return r.text().then(t => { throw new Error('HTTP ' + r.status + ': ' + t); });
+      return r.json().catch(() => ({}));
+    })
+    .then(() => {
+      showSuccess(form);
+    })
+    .catch(err => {
+      console.error('[contact-form] submit error:', err);
+      showError(form);
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = submitBtn.dataset.origText || 'Envoyer'; }
+    });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('form').forEach(form => {
+      // Only attach to forms posting to our endpoint or that have name=email/firstname
+      const action = (form.getAttribute('action') || '').toLowerCase();
+      const hasOurFields = form.querySelector('[name="firstname"], [name="email"], [name="_client_id"]');
+      if (action.includes('partner-site-lead-submit') || hasOurFields) {
+        form.addEventListener('submit', handleSubmit);
+      }
+    });
+  });
 })();
