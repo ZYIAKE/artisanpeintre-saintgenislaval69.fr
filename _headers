@@ -1,17 +1,38 @@
+# ═══════════════════════════════════════════════════════════════
+# _headers — Cloudflare Pages : security + cache headers (généré)
+# ═══════════════════════════════════════════════════════════════
+
 /*
-  X-Content-Type-Options: nosniff
-  Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: geolocation=(), microphone=(), camera=()
   X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  Permissions-Policy: camera=(), microphone=(), geolocation=(self), payment=()
 
-/*.html
-  Cache-Control: public, max-age=300, must-revalidate
-
-/style.css
-  Cache-Control: public, max-age=86400
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
 
 /js/*
-  Cache-Control: public, max-age=86400
+  Cache-Control: public, max-age=31536000, immutable
+
+/img/*
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/*.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/style.css
+  Cache-Control: public, max-age=31536000, immutable
 
 /sitemap.xml
-  Cache-Control: public, max-age=3600
+  Cache-Control: public, max-age=86400
+
+/robots.txt
+  Cache-Control: public, max-age=86400
+
+# P0-3 SEO — Page 404 propre (Cloudflare Pages sert /404.html avec status 404
+# pour toute URL inconnue automatiquement, MAIS on s'assure que le header
+# Cache-Control est court pour pouvoir l'updater rapidement).
+/404.html
+  Cache-Control: public, max-age=300, must-revalidate

@@ -1,0 +1,17 @@
+{
+  "name": "TD PEINTURE RENOVATION",
+  "short_name": "TD PEINTURE RENOVATION",
+  "description": "Peintre en bâtiment à Saint-Genis Laval",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#0F4C81",
+  "icons": [
+    {
+      "src": "/img/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

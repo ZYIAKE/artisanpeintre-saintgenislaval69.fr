@@ -1,3 +1,17 @@
 User-agent: *
 Allow: /
+
+Disallow: /merci
+Disallow: /merci?*
+Disallow: /devis?*
+Disallow: /*?service=
+Disallow: /*?ville=
+Disallow: /*?utm_*
+
+Allow: /css/
+Allow: /js/
+Allow: /img/
+Allow: /*.css
+Allow: /*.js
+
 Sitemap: https://artisanpeintre-saintgenislaval69.fr/sitemap.xml
