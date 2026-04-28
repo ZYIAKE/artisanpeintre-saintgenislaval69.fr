@@ -17,7 +17,7 @@
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" as="style">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="canonical" href="https://artisanpeintre-saintgenislaval69.fr/">
-  <link rel="stylesheet" href="style.css?v=00e8ef6">
+  <link rel="stylesheet" href="style.css?v=942fb42">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"HousePainter","name":"TD PEINTURE RENOVATION","description":"Peintre en bâtiment à Saint-Genis Laval. Peinture intérieure, Peinture extérieure, Renovation De Supports. Devis gratuit sous 24h.","telephone":"+33214739816","email":"contact@artisanpeintre-saintgenislaval69.fr","url":"https://artisanpeintre-saintgenislaval69.fr/","address":{"@type":"PostalAddress","streetAddress":"88 Chemin des Collines","addressLocality":"Saint-Genis Laval","postalCode":"69230","addressCountry":"FR"},"geo":{"@type":"GeoCoordinates","latitude":"45.685986299999996","longitude":"4.8105648"},"priceRange":"€€","openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"08:00","closes":"19:00"}],"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","reviewCount":"4","bestRating":"5","worstRating":"1"}}
   </script>
@@ -76,6 +76,7 @@
         <ul class="nav-links" role="menubar">
           <li role="none"><a href="/prestations" role="menuitem">Prestations</a></li>
           <li role="none"><a href="/realisations" role="menuitem">Réalisations</a></li>
+          <li role="none"><a href="/blog" role="menuitem">Blog</a></li>
           <li role="none"><a href="/avis" role="menuitem">Avis</a></li>
           <li role="none"><a href="/zone-intervention" role="menuitem">Zones</a></li>
           <li role="none"><a href="/a-propos" role="menuitem">À propos</a></li>
@@ -256,7 +257,7 @@
           </div>
           <p class="zone-radius">Déplacement possible dans un rayon de 20 à 30 km selon le type de chantier.</p>
           <!-- RULES_TOM #4 : Top 10 villes en boutons CSS (cliquables vers pages villes dédiées). -->
-          <div class="zone-buttons-grid"><a href="/peintre-lyon" class="zone-btn">Lyon</a><a href="/peintre-villeurbanne" class="zone-btn">Villeurbanne</a><a href="/peintre-venissieux" class="zone-btn">Vénissieux</a><a href="/peintre-vaulx-en-velin" class="zone-btn">Vaulx-en-Velin</a><a href="/peintre-saint-priest" class="zone-btn">Saint-Priest</a><a href="/peintre-caluire-et-cuire" class="zone-btn">Caluire-et-Cuire</a><a href="/peintre-bron" class="zone-btn">Bron</a><a href="/peintre-oullins-pierre-benite" class="zone-btn">Oullins-Pierre-Bénite</a><a href="/peintre-meyzieu" class="zone-btn">Meyzieu</a><a href="/peintre-vienne" class="zone-btn">Vienne</a></div>
+          <div class="zone-buttons-grid"><span class="zone-btn">Lyon</span><span class="zone-btn">Villeurbanne</span><span class="zone-btn">Vénissieux</span><span class="zone-btn">Vaulx-en-Velin</span><span class="zone-btn">Saint-Priest</span><span class="zone-btn">Caluire-et-Cuire</span><span class="zone-btn">Bron</span><span class="zone-btn">Oullins-Pierre-Bénite</span><span class="zone-btn">Meyzieu</span><span class="zone-btn">Vienne</span></div>
           <a href="/zone-intervention" class="btn btn-ghost" style="margin-top:1rem;">Voir les 40 communes</a>
           <a href="/contact" class="btn btn-orange" style="margin-top:.5rem;">Demander un devis</a>
         </div>
@@ -342,7 +343,7 @@
           <ul>
             <li><a href="/">Accueil</a></li>
             <li><a href="/prestations">Toutes nos prestations</a></li>
-            <li><a href="/realisations">Réalisations</a></li>
+            <li><a href="/realisations">Réalisations</a></li><li><a href="/blog">Blog &amp; conseils</a></li>
             <li><a href="/avis">Avis Google</a></li>
             <li><a href="/a-propos">À propos</a></li>
             <li><a href="/contact">Contact</a></li>
@@ -351,12 +352,12 @@
         <div class="footer-col">
           <h4>Zones d'intervention</h4>
           <ul>
-            <li><a href="/peintre-lyon">Lyon</a></li>
-            <li><a href="/peintre-villeurbanne">Villeurbanne</a></li>
-            <li><a href="/peintre-venissieux">Vénissieux</a></li>
-            <li><a href="/peintre-vaulx-en-velin">Vaulx-en-Velin</a></li>
-            <li><a href="/peintre-saint-priest">Saint-Priest</a></li>
-            <li><a href="/peintre-caluire-et-cuire">Caluire-et-Cuire</a></li>
+            <li><a href="/zone-intervention">Lyon</a></li>
+            <li><a href="/zone-intervention">Villeurbanne</a></li>
+            <li><a href="/zone-intervention">Vénissieux</a></li>
+            <li><a href="/zone-intervention">Vaulx-en-Velin</a></li>
+            <li><a href="/zone-intervention">Saint-Priest</a></li>
+            <li><a href="/zone-intervention">Caluire-et-Cuire</a></li>
           </ul>
           <a href="/zone-intervention" class="footer-zone-link">Voir les 40 communes <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg></a>
         </div>
@@ -391,7 +392,7 @@
     document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}})});
     document.querySelectorAll('.faq-q').forEach(btn=>{btn.addEventListener('click',()=>{const a=btn.nextElementSibling;const open=a.classList.contains('open');document.querySelectorAll('.faq-a.open').forEach(el=>{el.classList.remove('open');el.previousElementSibling.classList.remove('open');el.previousElementSibling.setAttribute('aria-expanded','false')});if(!open){a.classList.add('open');btn.classList.add('open');btn.setAttribute('aria-expanded','true')}})});
   </script>
-  <script src="/js/contact-form.js?v=00e8ef6" defer></script>
-  <script src="/js/google-reviews.js?v=00e8ef6" defer></script>
+  <script src="/js/contact-form.js?v=942fb42" defer></script>
+  <script src="/js/google-reviews.js?v=942fb42" defer></script>
 </body>
 </html>
