@@ -1084,3 +1084,136 @@ iframe { display: block; }
 @media (max-width: 480px) {
   .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
 }
+
+/* ─── Refonte page chantier (Tom 2026-05-04) ────────────────────── */
+/* Article enrichi : H3 + listes + FAQ (dl/dt/dd) */
+.realisation-content h3 {
+  font-size: 1.1rem; font-weight: 600; color: var(--navy);
+  margin: 1.4rem 0 0.6rem;
+}
+.realisation-content ul,
+.realisation-content ol {
+  margin: 0.8rem 0 1.4rem 1.5rem;
+  padding-left: 0.5rem;
+}
+.realisation-content ul li,
+.realisation-content ol li {
+  font-size: 0.95rem; color: var(--text-mid); line-height: 1.7;
+  margin-bottom: 0.5rem;
+}
+.realisation-content ol li::marker {
+  color: var(--orange); font-weight: 700;
+}
+.realisation-content dl {
+  margin: 1.5rem 0;
+  padding: 1.5rem 1.8rem;
+  background: var(--orange-light, #fff5ee);
+  border-left: 4px solid var(--orange);
+  border-radius: var(--radius);
+}
+.realisation-content dt {
+  font-weight: 700; color: var(--navy);
+  font-size: 1rem; line-height: 1.4;
+  margin-bottom: 0.5rem;
+  margin-top: 1.2rem;
+}
+.realisation-content dt:first-child { margin-top: 0; }
+.realisation-content dd {
+  font-size: 0.93rem; color: var(--text-mid); line-height: 1.7;
+  margin: 0 0 0.4rem 0;
+  padding-left: 0;
+}
+
+/* Fiche technique du chantier (encart structuré, Section C) */
+.realisation-fact-box {
+  margin: 0 0 2rem 0;
+  padding: 1.4rem 1.6rem;
+  background: var(--navy);
+  color: #fff;
+  border-radius: var(--radius-lg, 12px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.realisation-fact-box .fact-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+.realisation-fact-box .fact-item {
+  display: flex; flex-direction: column; gap: 0.25rem;
+  border-left: 2px solid rgba(255, 138, 0, 0.6);
+  padding-left: 0.9rem;
+}
+.realisation-fact-box .fact-item:first-child { border-left: none; padding-left: 0; }
+.realisation-fact-box .fact-label {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--orange);
+}
+.realisation-fact-box .fact-value {
+  font-size: 0.95rem; font-weight: 600; color: #fff;
+  line-height: 1.3;
+}
+@media (max-width: 768px) {
+  .realisation-fact-box .fact-row { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .realisation-fact-box .fact-item:nth-child(3) { border-left: none; padding-left: 0; }
+}
+@media (max-width: 480px) {
+  .realisation-fact-box { padding: 1.1rem 1.2rem; }
+  .realisation-fact-box .fact-row { grid-template-columns: 1fr; gap: 0.8rem; }
+  .realisation-fact-box .fact-item { border-left: none; padding-left: 0; }
+}
+
+/* Section "Nous intervenons aussi à proximité" (Section D) */
+.realisation-nearby {
+  margin: 2.5rem 0 1.5rem;
+  padding: 1.8rem;
+  background: var(--bg, #f7f9fc);
+  border-radius: var(--radius-lg, 12px);
+  border: 1px solid var(--border-light);
+}
+.realisation-nearby h2 {
+  font-size: 1.2rem; font-weight: 700; color: var(--navy);
+  margin: 0 0 0.8rem 0;
+}
+.realisation-nearby .nearby-intro {
+  font-size: 0.93rem; color: var(--text-mid); line-height: 1.65;
+  margin-bottom: 1.2rem;
+}
+.realisation-nearby .nearby-villes {
+  display: flex; flex-wrap: wrap; gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+.realisation-nearby .nearby-tag {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.55rem 0.95rem;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  text-decoration: none; color: var(--navy);
+  font-size: 0.85rem; font-weight: 500;
+  transition: all 0.18s ease;
+}
+.realisation-nearby .nearby-tag:hover {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(255, 138, 0, 0.3);
+}
+.realisation-nearby .nearby-name { font-weight: 600; }
+.realisation-nearby .nearby-dist {
+  font-size: 0.75rem; opacity: 0.7; font-weight: 400;
+}
+.realisation-nearby .nearby-tag:hover .nearby-dist { opacity: 0.9; }
+.realisation-nearby .nearby-cta {
+  margin: 0; padding-top: 0.5rem;
+  border-top: 1px dashed var(--border);
+}
+.realisation-nearby .nearby-link {
+  font-size: 0.9rem; font-weight: 600;
+  color: var(--orange); text-decoration: none;
+}
+.realisation-nearby .nearby-link:hover { text-decoration: underline; }
+@media (max-width: 480px) {
+  .realisation-nearby { padding: 1.3rem; }
+  .realisation-nearby .nearby-tag { padding: 0.5rem 0.8rem; font-size: 0.8rem; }
+}

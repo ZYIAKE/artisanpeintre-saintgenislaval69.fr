@@ -143,10 +143,6 @@
 /villes/anse  /zone-intervention  301
 /villes/peintre-anse  /zone-intervention  301
 /villes/anse-69480  /zone-intervention  301
-/peintre-tignieu-jameyzieu  /zone-intervention  301
-/villes/tignieu-jameyzieu  /zone-intervention  301
-/villes/peintre-tignieu-jameyzieu  /zone-intervention  301
-/villes/tignieu-jameyzieu-38230  /zone-intervention  301
 /peintre-neuville-sur-saone  /zone-intervention  301
 /villes/neuville-sur-saone  /zone-intervention  301
 /villes/peintre-neuville-sur-saone  /zone-intervention  301
@@ -167,6 +163,10 @@
 /villes/trevoux  /zone-intervention  301
 /villes/peintre-trevoux  /zone-intervention  301
 /villes/trevoux-01600  /zone-intervention  301
+/peintre-saint-bonnet-de-mure  /zone-intervention  301
+/villes/saint-bonnet-de-mure  /zone-intervention  301
+/villes/peintre-saint-bonnet-de-mure  /zone-intervention  301
+/villes/saint-bonnet-de-mure-69720  /zone-intervention  301
 
 # Alias slugs (compat anciens liens / typos / EN→FR)
 /apropos  /a-propos  301
