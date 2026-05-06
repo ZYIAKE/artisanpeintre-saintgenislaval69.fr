@@ -52,7 +52,7 @@
   }
 
   function starsSvg(n) {
-    var html = '<span class="gr-stars" aria-label="' + n + ' étoiles sur 5">';
+    var html = '<span class="gr-stars" role="img" aria-label="' + n + ' étoiles sur 5">';
     for (var i = 1; i <= 5; i++) {
       var filled = i <= n;
       html += '<svg viewBox="0 0 24 24" class="gr-star ' + (filled ? 'filled' : 'empty') + '" aria-hidden="true">' +
