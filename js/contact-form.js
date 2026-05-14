@@ -8,7 +8,7 @@
   const ENDPOINT = 'https://slcksfqbsbcmvqupbhox.supabase.co/functions/v1/partner-site-lead-submit?source={{PARTNER_SLUG}}';
 
   function showError(form, msg) {
-    form.parentNode.querySelectorAll('.form-error, .form-success').forEach(n => n.remove());
+    form.parentNode.querySelectorAll('.form-error, .cneayq0').forEach(n => n.remove());
     const errMsg = document.createElement('div');
     errMsg.className = 'form-error';
     errMsg.style.cssText = 'background:#fee;color:#c33;padding:1rem;border-radius:8px;margin-top:1rem;border-left:4px solid #c33;';
@@ -17,9 +17,9 @@
   }
 
   function showSuccess(form) {
-    form.parentNode.querySelectorAll('.form-error, .form-success').forEach(n => n.remove());
+    form.parentNode.querySelectorAll('.form-error, .cneayq0').forEach(n => n.remove());
     const ok = document.createElement('div');
-    ok.className = 'form-success';
+    ok.className = 'cneayq0';
     ok.style.cssText = 'background:#e8f5e9;color:#2e7d32;padding:1.25rem;border-radius:8px;margin-top:1rem;border-left:4px solid #2e7d32;font-weight:600;';
     ok.innerHTML = 'Merci ! Votre demande a bien été envoyée. Réponse sous 24h.';
     form.style.display = 'none';
